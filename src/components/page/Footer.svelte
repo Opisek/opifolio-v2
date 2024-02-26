@@ -10,6 +10,7 @@
     background-color: $darkerBackground;
     color: $darkerForeground;
     padding: $padding $paddingSmall;
+    margin-top: $padding;
     display: flex;
     flex-direction: row;
     gap: $gapSmall;
