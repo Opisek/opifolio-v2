@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
   import InlineButton from "./InlineButton.svelte";
 
   export let src: string;

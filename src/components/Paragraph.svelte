@@ -7,9 +7,7 @@
       hyphens: auto;
       text-justify: inter-word;
       margin: 0;
-      padding: 0;
       line-height: $fontSize * 1.4;
-
       @media screen and (max-width: $screenNarrow) {
         text-align: left;
       }

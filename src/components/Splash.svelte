@@ -1,9 +1,10 @@
-<script lang="typescript">
+<script lang="ts">
   //import Image from "../components/Image.svelte";
   import Column from "./Column.svelte";
 
   export let src: string;
   export let alt: string = "Image";
+  export let style: string = "circle";
 </script>
 
 <style lang="scss">
@@ -12,19 +13,25 @@
 
   div.outer {
     width: 100%;
-    min-height: calc(100vh - #{$navbarHeight});
     display: grid;
     gap: $gap;
+    height: max-content;
 
     grid-template-columns: 1fr 2fr;
     grid-template-rows: auto;
-    padding-bottom: $padding;
+
+    @media screen and (min-width: $screenNarrow) {
+      min-height: calc(100vh - #{$navbarHeight} - 2 * #{$paddingLarge} - #{$padding});
+      margin-bottom: $paddingLarge;
+      margin-top: $padding;
+    }
 
     @media screen and (max-width: $screenNarrow) {
+      margin-bottom: $padding;
+      min-height: calc(100vh - #{$navbarHeight} - #{$padding});
       grid-template-columns: 1fr;
       grid-template-rows: auto auto;
       gap: $gapSmall;
-      padding-bottom: 0;
     }
   }
 
@@ -39,8 +46,6 @@
   }
 
   img {
-    border-radius: 50%;
-
     @media screen and (min-width: $screenNarrow) {
       max-width: 20vw;
       width: 100%;
@@ -54,11 +59,15 @@
       height: calc(min(40vw, 10em));
     }
   }
+
+  img.circle {
+    border-radius: 50%;
+  }
 </style>
 
 <div class="outer">
   <div class="imageContainer">
-    <img src={src} alt={alt}/>
+    <img src={src} alt={alt} class:circle={style === "circle"}/>
   </div>
   <Column>
     <slot>

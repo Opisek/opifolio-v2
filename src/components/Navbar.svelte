@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
   import Column from "./Column.svelte";
   import InlineIconButton from "./InlineIconButton.svelte";
 

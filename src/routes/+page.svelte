@@ -2,7 +2,6 @@
   import portrait from "$lib/assets/portrait.png";
 
   import Button from "../components/Button.svelte";
-  import Column from "../components/Column.svelte";
   import Link from "../components/Link.svelte";
   import Paragraph from "../components/Paragraph.svelte";
   import Row from "../components/Row.svelte";

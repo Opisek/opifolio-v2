@@ -39,13 +39,13 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    padding: $paddingSmall $paddingLarger; 
-    gap: gap;
-    align-items: center;
+    padding: $paddingSmall $paddingLarger;
+    gap: $gapSmall;
+    align-items: left;
     justify-content: center;
 
     @media(max-width: $screenNarrow) {
-      padding: $paddingSmall;
+      padding: 0 $paddingSmall $paddingSmall $paddingSmall;
     }
   }
 </style>

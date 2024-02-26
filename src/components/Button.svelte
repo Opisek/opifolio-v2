@@ -1,3 +1,7 @@
+<script lang="ts">
+  export let href: string | null = null;
+</script>
+
 <style lang="scss">
   @import "../styles/colors.scss";
   @import "../styles/dimensions.scss";
@@ -23,9 +27,22 @@
       color: $secondaryBackground;
       transform: scale(110%);
   }
+
+  a {
+    text-decoration: inherit;
+  }
 </style>
 
-<button>
-  <slot>
-  </slot>
-</button>
+{#if href}
+  <a href={href}>
+    <button>
+      <slot>
+      </slot>
+    </button>
+  </a>
+{:else}
+  <button on:click>
+    <slot>
+    </slot>
+  </button>
+{/if}

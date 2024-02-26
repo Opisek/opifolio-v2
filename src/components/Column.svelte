@@ -1,3 +1,7 @@
+<script lang="ts">
+  export let gap: string | null = null;
+</script>
+
 <style lang="scss">
   @import "../styles/dimensions.scss";
   @import "../styles/media.scss";
@@ -7,7 +11,6 @@
     flex-direction: column;
     justify-content: center;
     gap: $gapSmall;
-    //padding: $paddingLarge 0;
     text-align: left;
 
     @media screen and (max-width: $screenNarrow) {
@@ -16,7 +19,14 @@
   }
 </style>
 
-<div>
-  <slot>
-  </slot>
-</div>
+{#if gap}
+  <div style:gap={gap}>
+    <slot>
+    </slot>
+  </div>
+{:else}
+  <div>
+    <slot>
+    </slot>
+  </div>
+{/if}

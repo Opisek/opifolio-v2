@@ -1,6 +1,8 @@
-<script lang="typescript">
+<script lang="ts">
   export let src: string;
   export let alt: string = "Image";
+  
+  export let style: string = "circle";
 </script>
 
 <style lang="scss">
@@ -17,11 +19,14 @@
     top: 50%;
     transform: translateY(-50%);
 
-    border-radius: 50%;
     max-width: 20vw;
+  }
+
+  img.circle {
+    border-radius: 50%;
   }
 </style>
 
 <div>
-  <img src={src} alt={alt}/>
+  <img src={src} alt={alt} class:circle={style == "circle"}/>
 </div>
