@@ -1,6 +1,6 @@
 <script lang="ts">
-  import Column from "./Column.svelte";
-  import InlineIconButton from "./InlineIconButton.svelte";
+  import Column from "../layout/Column.svelte";
+  import InlineIconButton from "../interactive/InlineIconButton.svelte";
 
   import iconClose from "$lib/assets/icons/close.png";
   import iconOpen from "$lib/assets/icons/menu.png";
@@ -20,8 +20,8 @@
 </script>
 
 <style lang="scss">
-  @import "../styles/colors.scss";
-  @import "../styles/dimensions.scss";
+  @import "../../styles/colors.scss";
+  @import "../../styles/dimensions.scss";
 
   nav {
     height: $navbarHeight;

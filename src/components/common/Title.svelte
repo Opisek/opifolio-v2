@@ -1,6 +1,6 @@
 <style lang="scss">
-  @import "../styles/dimensions.scss";
-  @import "../styles/media.scss";
+  @import "../../styles/dimensions.scss";
+  @import "../../styles/media.scss";
 
   h1 {
     font-family: 'Crete round', serif;

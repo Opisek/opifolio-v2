@@ -1,7 +1,7 @@
 <script>
-  import Link from "../components/Link.svelte";
-  import Navbar from "../components/Navbar.svelte";
-  import Search from "../components/Search.svelte";
+  import Link from "../components/interactive/Link.svelte";
+  import Navbar from "../components/page/Navbar.svelte";
+  import Search from "../components/interactive/Search.svelte";
 </script>
 
 <style lang="scss">

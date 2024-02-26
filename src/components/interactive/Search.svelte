@@ -2,8 +2,8 @@
 </script>
 
 <style lang="scss">
-  @import "../styles/colors.scss";
-  @import "../styles/dimensions.scss";
+  @import "../../styles/colors.scss";
+  @import "../../styles/dimensions.scss";
 
   input {
     border: 0;

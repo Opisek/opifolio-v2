@@ -1,6 +1,6 @@
 <script lang="ts">
   //import Image from "../components/Image.svelte";
-  import Column from "./Column.svelte";
+  import Column from "../layout/Column.svelte";
 
   export let src: string;
   export let alt: string = "Image";
@@ -8,8 +8,8 @@
 </script>
 
 <style lang="scss">
-  @import "../styles/dimensions.scss";
-  @import "../styles/media.scss";
+  @import "../../styles/dimensions.scss";
+  @import "../../styles/media.scss";
 
   div.outer {
     width: 100%;

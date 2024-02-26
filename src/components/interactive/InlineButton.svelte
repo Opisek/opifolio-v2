@@ -1,6 +1,6 @@
 <style lang="scss">
-  @import "../styles/colors.scss";
-  @import "../styles/dimensions.scss";
+  @import "../../styles/colors.scss";
+  @import "../../styles/dimensions.scss";
 
   button {
     outline: 0;

@@ -1,11 +1,11 @@
 <script lang="ts">
   import error from "$lib/assets/icons/error.png";
   import { page } from "$app/stores";
-  import Splash from "../components/Splash.svelte";
+  import Splash from "../components/page/Splash.svelte";
   import Title from "../components/Title.svelte";
   import Paragraph from "../components/Paragraph.svelte";
-  import Row from "../components/Row.svelte";
-  import Button from "../components/Button.svelte";
+  import Row from "../components/layout/Row.svelte";
+  import Button from "../components/interactive/Button.svelte";
 
   import { browser } from "$app/environment";
 

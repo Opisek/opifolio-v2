@@ -3,8 +3,8 @@
 </script>
 
 <style lang="scss">
-  @import "../styles/dimensions.scss";
-  @import "../styles/media.scss";
+  @import "../../styles/dimensions.scss";
+  @import "../../styles/media.scss";
 
   div {
     display: flex;

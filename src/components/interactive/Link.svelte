@@ -5,7 +5,7 @@
 </script>
 
 <style lang="scss">
-  @import "../styles/dimensions.scss";
+  @import "../../styles/dimensions.scss";
 
   a {
     color: inherit;
