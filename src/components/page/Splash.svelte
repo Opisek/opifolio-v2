@@ -20,9 +20,11 @@
     grid-template-columns: 1fr 2fr;
     grid-template-rows: auto;
 
-    @media screen and (min-width: $screenNarrow) {
-      min-height: calc(100vh - #{$navbarHeight} - 2 * #{$paddingSmall} - #{$padding});
-      margin-bottom: $padding;
+    min-height: calc(100vh - #{$navbarHeight} - 2 * #{$paddingSmall} - #{$padding});
+    margin-bottom: $padding;
+
+    @media screen and (min-width: $screenNarrow) and (max-width: $screenNormal) {
+      gap: $gapSmall;  
     }
 
     @media screen and (max-width: $screenNarrow) {
@@ -30,7 +32,7 @@
       min-height: calc(100vh - #{$navbarHeight} - #{$padding});
       grid-template-columns: 1fr;
       grid-template-rows: auto auto;
-      gap: $gapSmall;
+      gap: $gapSmaller;  
     }
   }
 
@@ -50,7 +52,7 @@
 
   img {
     @media screen and (min-width: $screenNarrow) {
-      max-width: 20vw;
+      max-width: calc(min(25vw, 20em));
       width: 100%;
       height: max-content;
       position: relative;
@@ -59,7 +61,7 @@
     }
 
     @media screen and (max-width: $screenNarrow) {
-      height: calc(min(40vw, 10em));
+      height: calc(min(40vw, 15em));
     }
   }
 
