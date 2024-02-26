@@ -22,8 +22,8 @@
     On top of that, I love writing open-source code, like <Link href="git/opifolio-v2">this very website</Link>!
   </Paragraph>
   <Row>
-    <Button href="#social">Media Presence</Button>
-    <Button>Projects</Button>
+    <Button href="#social">See more</Button>
+    <!--<Button>Projects</Button>-->
   </Row>
 </Splash>
 
@@ -32,9 +32,3 @@
   <ImageLink src={linkedinLogo} site="LinkedIn" handle="Kacper Darowski" href="linkedin"/>
   <ImageLink src={youtubeLogo} site="YouTube" handle="Opisek" href="youtube"/>
 </Row>
-
-<Title>Hi</Title>
-<Paragraph/>
-
-<Title>Hi</Title>
-<Paragraph/>

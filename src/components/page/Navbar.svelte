@@ -37,8 +37,20 @@
     backdrop-filter: blur(0.5em);
   }
 
-  nav.top:not(.mobile) {
-    color: $fadedForeground;
+  div.overlay {
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    background-color: $primaryBackground;
+    pointer-events: none;
+  }
+
+  nav.top > div.overlay {
+    opacity: 0.3;
   }
   
   div.left {
@@ -85,6 +97,7 @@
       </Column>
     </div>
   {:else}
+    <div class="overlay"></div>
     <div class="left">
       <slot name="primary"></slot>
     </div>

@@ -1,4 +1,13 @@
 <script lang="ts">
+  import searchIcon from "$lib/assets/icons/search.png";
+
+  import InlineIconButton from "./InlineIconButton.svelte";
+
+  let inputElement: HTMLElement;
+
+  function focus() {
+    inputElement.focus();
+  }
 </script>
 
 <style lang="scss">
@@ -16,6 +25,16 @@
     height: auto;
     padding: $paddingSmaller;
   }
+
+  span {
+    width: max-content;
+    gap: $gapSmaller;
+    display: flex;
+    flex-direction: row;
+  }
 </style>
 
-<input type="text" placeholder="Search"/>
+<span>
+  <input type="text" placeholder="Search" bind:this={inputElement}/>
+  <InlineIconButton on:click={focus} src={searchIcon} alt="Search"/>
+</span>

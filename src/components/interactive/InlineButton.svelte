@@ -17,7 +17,7 @@
   }
 
   button:hover{
-    transform: rotate(180deg);
+    transform: rotate(360deg);
     transition: $animationSpeed ease-out;
   }
 </style>
