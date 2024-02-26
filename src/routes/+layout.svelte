@@ -44,7 +44,10 @@
     align-items: left;
     justify-content: center;
 
-    @media(max-width: $screenNarrow) {
+    @media screen and (max-width: $screenNormal) and (min-width: $screenNarrow) {
+      padding: $paddingSmall;
+    }
+    @media screen and (max-width: $screenNarrow) {
       padding: 0 $paddingSmall $paddingSmall $paddingSmall;
     }
   }
@@ -53,8 +56,8 @@
 <Navbar>
   <svelte:fragment slot="primary">
     <Link href="/">Home</Link>
-    <Link href="/blog">Tech Blog</Link>
-    <Link href="/projects">Projects</Link>
+    <Link href="blog">Tech Blog</Link>
+    <Link href="projects">Projects</Link>
   </svelte:fragment>
   <svelte:fragment slot="secondary">
     <Search/>

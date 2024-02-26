@@ -1,14 +1,20 @@
+<script lang="ts">
+  export let id: string | null = null;
+</script>
+
 <style lang="scss">
   @import "../../styles/dimensions.scss";
   @import "../../styles/media.scss";
 
   div {
-    display: flex;
+    display: inline-flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     gap: $gapSmaller;
     width: 100%;
+
+    flex-wrap: wrap;
 
     @media(max-width: $screenNarrow) {
       flex-direction: column;
@@ -17,7 +23,7 @@
   }
 </style>
 
-<div>
+<div id={id}>
   <slot>
   </slot>
 </div>

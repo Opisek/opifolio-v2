@@ -2,8 +2,8 @@
   import error from "$lib/assets/icons/error.png";
   import { page } from "$app/stores";
   import Splash from "../components/page/Splash.svelte";
-  import Title from "../components/Title.svelte";
-  import Paragraph from "../components/Paragraph.svelte";
+  import Title from "../components/common/Title.svelte";
+  import Paragraph from "../components/common/Paragraph.svelte";
   import Row from "../components/layout/Row.svelte";
   import Button from "../components/interactive/Button.svelte";
 
