@@ -1,4 +1,5 @@
 <script>
+  import Footer from "../components/page/Footer.svelte";
   import Link from "../components/interactive/Link.svelte";
   import Navbar from "../components/page/Navbar.svelte";
   import Search from "../components/interactive/Search.svelte";
@@ -12,6 +13,10 @@
   :global(*) { 
     box-sizing: border-box;
     transition: $animationSpeed ease-out;
+  }
+
+  :global(*:target) { 
+    scroll-margin-top: $navbarHeight;
   }
 
   :global(html) {
@@ -34,7 +39,6 @@
   }
 
   main {
-    margin-top: $navbarHeight;
     width: 100%;
     height: 100%;
     display: flex;
@@ -42,7 +46,7 @@
     padding: $paddingSmall $paddingLarger;
     gap: $gapSmall;
     align-items: left;
-    justify-content: center;
+    justify-content: start;
 
     @media screen and (max-width: $screenNormal) and (min-width: $screenNarrow) {
       padding: $paddingSmall;
@@ -50,6 +54,14 @@
     @media screen and (max-width: $screenNarrow) {
       padding: 0 $paddingSmall $paddingSmall $paddingSmall;
     }
+  }
+
+  div {
+    margin-top: $navbarHeight;
+    min-height: calc(100vh - #{$navbarHeight});
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 </style>
 
@@ -63,6 +75,12 @@
     <Search/>
   </svelte:fragment>
 </Navbar>
-<main>
-  <slot></slot>
-</main>
+<div>
+  <main>
+    <slot></slot>
+  </main>
+  <Footer>
+    <Link href="credits">Credits</Link>
+    © Kacper Darowski 2024
+  </Footer>
+</div>

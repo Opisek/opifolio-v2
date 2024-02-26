@@ -10,7 +10,7 @@
   import Row from "../components/layout/Row.svelte";
   import Splash from "../components/page/Splash.svelte";
   import Title from "../components/common/Title.svelte";
-    import ImageLink from "../components/interactive/ImageLink.svelte";
+  import ImageLink from "../components/interactive/ImageLink.svelte";
 </script>
 
 <Splash src={portraitImage} alt="Portrait Photo">

@@ -21,9 +21,8 @@
     grid-template-rows: auto;
 
     @media screen and (min-width: $screenNarrow) {
-      min-height: calc(100vh - #{$navbarHeight} - 2 * #{$paddingLarge} - #{$padding});
-      margin-bottom: $paddingLarge;
-      margin-top: $padding;
+      min-height: calc(100vh - #{$navbarHeight} - 2 * #{$paddingSmall} - #{$padding});
+      margin-bottom: $padding;
     }
 
     @media screen and (max-width: $screenNarrow) {
@@ -41,7 +40,11 @@
     text-align: center;
     
     @media screen and (max-width: $screenNarrow) {
-      height: max-content;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     } 
   }
 

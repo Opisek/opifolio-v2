@@ -2,7 +2,7 @@
   import Header from "./Header.svelte";
 </script>
 
-<Header level={1}>
+<Header level={2}>
   <slot>
   </slot>
 </Header>

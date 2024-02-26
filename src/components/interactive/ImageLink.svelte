@@ -21,6 +21,10 @@
     width: $contactHeight;
     height: $contactHeight;
     margin-bottom: .75 * $contactHeight;
+
+    @media screen and (max-width: $screenNarrow) {
+      margin-bottom: .5 * $contactHeight;
+    }
   }
 
   div {
