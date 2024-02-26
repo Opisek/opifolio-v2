@@ -28,7 +28,7 @@
   div.left {
     justify-content: left;
   }
-  div.center {
+  div.right {
     justify-content: right;
   }
 </style>
