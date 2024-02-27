@@ -47,7 +47,7 @@
   }
 </style>
 
-<a href={href} class:active={$page.url.pathname === href || $page.url.pathname === `/${href}`}>
+<a href={href} class:active={$page.url.pathname === href}>
   <slot>
     link
   </slot>

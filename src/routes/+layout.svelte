@@ -68,8 +68,8 @@
 <Navbar>
   <svelte:fragment slot="primary">
     <Link href="/">Home</Link>
-    <Link href="blog">Tech Blog</Link>
-    <Link href="projects">Projects</Link>
+    <Link href="/blog">Tech Blog</Link>
+    <Link href="/projects">Projects</Link>
   </svelte:fragment>
   <svelte:fragment slot="secondary">
     <Search/>
@@ -80,7 +80,7 @@
     <slot></slot>
   </main>
   <Footer>
-    <Link href="credits">Credits</Link>
+    <Link href="/credits">Credits</Link>
     © Kacper Darowski 2024
   </Footer>
 </div>

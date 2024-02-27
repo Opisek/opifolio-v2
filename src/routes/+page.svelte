@@ -19,7 +19,7 @@
     My name's Kacper Darowski, also known as Opisek.
     I'm a computer science student at the Technical University of Munich, who's been fascinated with programming ever since the age of nine!
     My areas of interest are theoretical computer science, algorithmics as well as low-level and embedded development.
-    On top of that, I love writing open-source code, like <Link href="git/opifolio-v2">this very website</Link>!
+    On top of that, I love writing open-source code, like <Link href="/git/opifolio-v2">this very website</Link>!
   </Paragraph>
   <Row>
     <Button href="#social">See more</Button>
