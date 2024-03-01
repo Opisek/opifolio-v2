@@ -32,7 +32,7 @@
     height: 100%;
     background-color: $primaryBackground;
     position: relative;
-    z-index: 1;
+    z-index: 20;
     display: flex;
     align-items: center;
   }
@@ -47,7 +47,7 @@
   }
 
   figcaption {
-    z-index: 2;
+    z-index: 21;
     width: 100%;
     transform: translateY(-100%);
     display: block;

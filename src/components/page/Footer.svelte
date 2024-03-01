@@ -21,6 +21,8 @@
       padding: $padding;
       flex-direction: column;
     }
+
+    z-index: 10;
   }
 </style>
 

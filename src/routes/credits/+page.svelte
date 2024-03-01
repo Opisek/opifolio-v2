@@ -20,6 +20,10 @@
   <Paragraph>Search Icon</Paragraph>
   <Link href="https://www.flaticon.com/authors/smashicons">Smashicons</Link>
 </DotRow>
+<DotRow>
+  <Paragraph>Table of Contents Icon</Paragraph>
+  <Link href="https://www.flaticon.com/authors/catalin-fertu">Catalin Fertu</Link>
+</DotRow>
 
 <Subtitle>Fonts</Subtitle>
 <DotRow>

@@ -5,6 +5,6 @@
   export let depth: number;
 </script>
 
-<Header level={depth + 1}>
+<Header level={depth + 1} id={text.toLowerCase().replace(" ", "-")}>
   {text}
 </Header>
