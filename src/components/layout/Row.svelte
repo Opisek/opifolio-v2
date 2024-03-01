@@ -10,7 +10,7 @@
   div {
     display: inline-flex;
     flex-direction: row;
-    gap: $gapSmaller;
+    gap: $gapSmall;
     width: 100%;
     align-items: center;
 
@@ -18,7 +18,7 @@
 
     @media(max-width: $screenNarrow) {
       flex-direction: column;
-      gap: $gapSmaller;
+      gap: $gapSmall;
     }
   }
 

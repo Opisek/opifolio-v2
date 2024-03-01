@@ -9,7 +9,7 @@ export const load: PageServerLoad = async ({ params }) => {
 
 	let redirects;
 	try {
-		redirects = await fs.readFile("/app/config/redirects.json").then(content => JSON.parse(content));
+		redirects = await fs.readFile("/app/config/redirects.json", "utf-8").then(content => JSON.parse(content));
 	} catch (_) {
 		error(404, 'Not found');
 	}

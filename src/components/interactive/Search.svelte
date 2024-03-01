@@ -28,7 +28,7 @@
 
   span {
     width: max-content;
-    gap: $gapSmaller;
+    gap: $gapSmall;
     display: flex;
     flex-direction: row;
   }

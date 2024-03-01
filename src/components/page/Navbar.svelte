@@ -67,14 +67,14 @@
   div.left {
     display: flex;
     flex-direction: row;
-    gap: $gapSmall;
+    gap: $gap;
     justify-items: left;
   }
 
   div.right {
     display: flex;
     flex-direction: row;
-    gap: $gapSmall;
+    gap: $gap;
     justify-items: right;
   }
 

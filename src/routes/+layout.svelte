@@ -73,7 +73,7 @@
     display: flex;
     flex-direction: column;
     padding: $paddingSmall $paddingLarger;
-    gap: $gapSmaller;
+    gap: $gapSmall;
     align-items: left;
     justify-content: start;
 

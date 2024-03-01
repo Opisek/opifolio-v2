@@ -13,7 +13,7 @@
     margin-top: $padding;
     display: flex;
     flex-direction: row;
-    gap: $gapSmall;
+    gap: $gap;
     justify-content: center;
     align-items: center;
 

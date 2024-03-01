@@ -14,7 +14,7 @@
   div.outer {
     width: 100%;
     display: grid;
-    gap: $gap;
+    gap: $gapLarge;
     height: max-content;
 
     grid-template-columns: 1fr 2fr;
@@ -24,7 +24,7 @@
     margin-bottom: $padding;
 
     @media screen and (min-width: $screenNarrow) and (max-width: $screenNormal) {
-      gap: $gapSmall;  
+      gap: $gap;  
     }
 
     @media screen and (max-width: $screenNarrow) {
@@ -32,7 +32,7 @@
       min-height: calc(100vh - #{$navbarHeightSmall} - #{$padding});
       grid-template-columns: 1fr;
       grid-template-rows: auto auto;
-      gap: $gapSmaller;  
+      gap: $gapSmall;  
     }
   }
 

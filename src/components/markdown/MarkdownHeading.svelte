@@ -5,6 +5,6 @@
   export let depth: number;
 </script>
 
-<Header level={depth}>
+<Header level={depth + 1}>
   {text}
 </Header>

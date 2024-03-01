@@ -1,25 +1,55 @@
 <script lang="ts">
-  import SvelteMarkdown from "svelte-markdown";
+  import Divider from "../../../components/common/Divider.svelte";
+  import MarkdownCode from "../../../components/markdown/MarkdownCode.svelte";
   import MarkdownHeading from "../../../components/markdown/MarkdownHeading.svelte";
   import MarkdownParagraph from "../../../components/markdown/MarkdownParagraph.svelte";
-  import Row from "../../../components/layout/Row.svelte";
   import Paragraph from "../../../components/common/Paragraph.svelte";
-  import MarkdownCode from "../../../components/markdown/MarkdownCode.svelte";
+  import Row from "../../../components/layout/Row.svelte";
+  import SvelteMarkdown from "svelte-markdown";
+  import Title from "../../../components/common/Title.svelte";
   
-  export let data: { post: { markdown: string, json: any } };
+  // TODO: create a type out of this
+  export let data: { post: { markdown: string, title: string, author: string, timestamp: Date } };
+  const post = data.post;
 </script>
 
-<Row>
-  <Paragraph>
-    {data.post.json.title}
-  </Paragraph>
-  <Paragraph>
-    Author Placeholder
-  </Paragraph>
-  <Paragraph>
-    Date Placeholder
-  </Paragraph>
-</Row>
+<style lang="scss">
+  @import "../../../styles/colors.scss";
+  @import "../../../styles/dimensions.scss";
+  
+  div.titlebar {
+    display: flex;
+    flex-direction: column;
+    gap: $gapSmall;
+  }
+
+  div.info {
+    color: $fadedForeground;
+  }
+
+  span {
+    width: 100%;
+    text-align: right;
+  }
+</style>
+
+<div class="titlebar">
+  <Title>
+    {post.title}
+  </Title>
+  <div class="info">
+    <span>
+      {post.author}
+    </span>
+    •
+    <span>
+      {post.timestamp.toLocaleDateString()}
+    </span>
+  </div>
+</div>
+
+<Divider/>
+
 <SvelteMarkdown source={data.post.markdown} 
   renderers={{
     heading: MarkdownHeading,

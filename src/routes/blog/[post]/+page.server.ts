@@ -10,16 +10,15 @@ export const load: PageServerLoad = async ({ params }) => {
 	let postMarkdown;
 	let postJson;
 	try {
+		postJson = await fs.readFile(`/app/posts/${postID}.json`, "utf-8").then(content => JSON.parse(content));
 		postMarkdown = sanitizeHtml(await fs.readFile(`/app/posts/${postID}.md`, "utf-8"), { disallowedTagsMode: "recursiveEscape" });
-		postJson = await fs.readFile(`/app/posts/${postID}.json`).then(content => JSON.parse(content));
+		postJson.markdown = postMarkdown;
+		postJson.timestamp = new Date(postJson.timestamp * 1000);
 	} catch (_) {
 		error(404, 'Not found');
 	}
 
 	return {
-		post: {
-			markdown: postMarkdown,
-			json: postJson
-		}
+		post: postJson
 	}
 };
