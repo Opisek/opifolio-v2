@@ -29,7 +29,7 @@
 
     @media screen and (max-width: $screenNarrow) {
       margin-bottom: $padding;
-      min-height: calc(100vh - #{$navbarHeight} - #{$padding});
+      min-height: calc(100vh - #{$navbarHeightSmall} - #{$padding});
       grid-template-columns: 1fr;
       grid-template-rows: auto auto;
       gap: $gapSmaller;  

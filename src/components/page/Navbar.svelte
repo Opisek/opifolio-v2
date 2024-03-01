@@ -4,24 +4,31 @@
 
   import iconClose from "$lib/assets/icons/close.png";
   import iconOpen from "$lib/assets/icons/menu.png";
+  import { afterNavigate } from "$app/navigation";
+  import { browser } from "$app/environment";
 
-  let visible = false;
+  export let visible = false;
 
   let scrollY: number;
   let width: number;
 
   function show() {
     visible = true;
+    if (browser) document.body.classList.add("noScroll");
   }
 
   function hide() {
     visible = false;
+    if (browser) document.body.classList.remove("noScroll");
   }
+
+  afterNavigate(hide);
 </script>
 
 <style lang="scss">
   @import "../../styles/colors.scss";
   @import "../../styles/dimensions.scss";
+  @import "../../styles/media.scss";
 
   nav {
     height: $navbarHeight;
@@ -35,6 +42,10 @@
 
     background-color: $navbarBackground;
     backdrop-filter: blur(0.5em);
+
+    @media screen and (max-width: $screenNarrow) {
+      height: $navbarHeightSmall;
+    }
   }
 
   div.overlay {
@@ -49,7 +60,7 @@
     pointer-events: none;
   }
 
-  nav.top > div.overlay {
+  nav.top:not(:hover) > div.overlay {
     opacity: 0.3;
   }
   
@@ -79,6 +90,7 @@
     padding: $padding;
     transform: translateX(-100%);
     transition: transform $animationSpeed ease-out;
+    overflow-y: auto;
   }
 
   div.mobile.active {
@@ -88,10 +100,10 @@
 
 <nav class:top={scrollY == 0} class:mobile={width < 1000}>
   {#if width < 1000}
-    <InlineIconButton on:click={show} src={iconOpen} alt="Show Navigation"/>
+    <InlineIconButton on:click={show} src={iconOpen} spin={180} alt="Show Navigation"/>
     <div class="mobile" class:active={visible}>
       <Column>
-        <InlineIconButton on:click={hide} src={iconClose} alt="Close"/>
+        <InlineIconButton on:click={hide} src={iconClose} spin={180} alt="Close"/>
         <slot name="secondary"></slot>
         <slot name="primary"></slot>
       </Column>
@@ -107,4 +119,7 @@
   {/if}
 </nav>
 
-<svelte:window bind:scrollY={scrollY} bind:innerWidth={width}/>
+<svelte:window bind:scrollY={scrollY} bind:innerWidth={width} on:wheel|nonpassive={e => {
+  // TODO: disable background scrolling, but not navbar scrolling
+  //if (visible) e.preventDefault();
+}}/>

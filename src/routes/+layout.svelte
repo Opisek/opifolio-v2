@@ -1,8 +1,23 @@
-<script>
+<script lang="ts">
   import Footer from "../components/page/Footer.svelte";
   import Link from "../components/interactive/Link.svelte";
   import Navbar from "../components/page/Navbar.svelte";
   import Search from "../components/interactive/Search.svelte";
+  import { beforeNavigate, afterNavigate } from "$app/navigation";
+  import { tick } from "svelte";
+
+  // Fix SvelteKit scrolling issue
+  import { browser } from "$app/environment";
+
+  beforeNavigate(async (nav) => {
+    if (!browser) return;
+    document.getElementsByTagName("html")[0].classList.add("pageSwitch");
+  })
+  afterNavigate(async (nav) => {
+    if (!browser) return;
+    await tick();
+    document.getElementsByTagName("html")[0].classList.remove("pageSwitch");
+  });
 </script>
 
 <style lang="scss">
@@ -17,13 +32,21 @@
 
   :global(*:target) { 
     scroll-margin-top: $navbarHeight;
+
+    @media screen and (max-width: $screenNarrow) {
+      scroll-margin-top: $navbarHeightSmall;
+    }
   }
 
   :global(html) {
     height: 100%;
-    scroll-behavior: smooth;
     margin: 0;
     padding: 0;
+    scroll-behavior: smooth;
+  }
+
+  :global(html.pageSwitch) {
+    scroll-behavior: auto;
   }
 
   :global(body) {
@@ -36,6 +59,12 @@
     color: $primaryForeground;
     display: grid;
     grid-template-rows: auto 1fr;
+    transition: none;
+  }
+
+  :global(body.noScroll) {
+    overflow-y: hidden;
+    margin-right: 16px; // TODO: no hard-coded margin
   }
 
   main {
@@ -62,6 +91,11 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    @media screen and (max-width: $screenNarrow) {
+      margin-top: $navbarHeightSmall;
+      min-height: calc(100vh - #{$navbarHeightSmall});
+    }
   }
 </style>
 
