@@ -10,7 +10,7 @@ RUN npm i
 
 COPY src src
 COPY static static
-COPY svelte.config.js .
+COPY svelte.config.ts .
 COPY tsconfig.json .
 COPY vite.config.ts .
 RUN ls
