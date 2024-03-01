@@ -32,7 +32,7 @@
     scroll-margin-top: $navbarHeight * 0.5;
 
     @media screen and (max-width: $screenNarrow) {
-      scroll-margin-top: $navbarHeightSmall * 0.5;
+      scroll-margin-top: $navbarHeightSmall * 0.75;
     }
   }
 
