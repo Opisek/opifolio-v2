@@ -58,14 +58,13 @@
   }
 
   a.active {
-    @media screen and (max-width: $screenNarrow) {
+    @media screen and (max-width: $screenNormal) {
       font-weight: $fontWeightBold;
-      text-decoration: underline;
     }
   }
 
   a.active:before {
-    @media screen and (min-width: $screenNarrow) {
+    @media screen and (min-width: $screenNormal) {
       content: "• ";
       position: absolute;
       left: -1em;
