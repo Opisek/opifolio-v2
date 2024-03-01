@@ -47,8 +47,10 @@
   }
 </style>
 
-<a href={href} class:active={$page.url.pathname === href}>
-  <slot>
-    link
-  </slot>
-</a>
+<span>
+  <a href={href} class:active={$page.url.pathname === href}>
+    <slot>
+      link
+    </slot>
+  </a>
+</span>

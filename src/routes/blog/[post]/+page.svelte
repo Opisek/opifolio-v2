@@ -3,14 +3,16 @@
   import MarkdownCode from "../../../components/markdown/MarkdownCode.svelte";
   import MarkdownHeading from "../../../components/markdown/MarkdownHeading.svelte";
   import MarkdownParagraph from "../../../components/markdown/MarkdownParagraph.svelte";
-  import Paragraph from "../../../components/common/Paragraph.svelte";
-  import Row from "../../../components/layout/Row.svelte";
+  import MarkdownQuote from "../../../components/markdown/MarkdownQuote.svelte";
   import SvelteMarkdown from "svelte-markdown";
   import Title from "../../../components/common/Title.svelte";
+    import DotRow from "../../../components/layout/DotRow.svelte";
   
   // TODO: create a type out of this
   export let data: { post: { markdown: string, title: string, author: string, timestamp: Date } };
   const post = data.post;
+
+  // TODO: add admonitions
 </script>
 
 <style lang="scss">
@@ -26,11 +28,6 @@
   div.info {
     color: $fadedForeground;
   }
-
-  span {
-    width: 100%;
-    text-align: right;
-  }
 </style>
 
 <div class="titlebar">
@@ -38,13 +35,10 @@
     {post.title}
   </Title>
   <div class="info">
-    <span>
-      {post.author}
-    </span>
-    •
-    <span>
-      {post.timestamp.toLocaleDateString()}
-    </span>
+    <DotRow>
+      <span>{post.author}</span>
+      <span>{post.timestamp.toLocaleDateString()}</span>
+    </DotRow>
   </div>
 </div>
 
@@ -55,5 +49,7 @@
     heading: MarkdownHeading,
     paragraph: MarkdownParagraph,
     code: MarkdownCode,
+    blockquote: MarkdownQuote,
+    hr: Divider
   }}
 />
