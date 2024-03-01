@@ -19,7 +19,7 @@
     outline: 0;
     color: $secondaryForeground;
     background-color: $secondaryBackground;
-    border-radius: $borderRadiusSmall;
+    border-radius: $borderRadius;
     min-width: 4em;
     font-size: $fontSizeSmall;
     height: auto;

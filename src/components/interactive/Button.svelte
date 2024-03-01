@@ -11,7 +11,7 @@
       background-color: $secondaryBackground;
       color: $secondaryForeground;
       padding: $paddingSmall;
-      border-radius: $borderRadius;
+      border-radius: $borderRadiusLarge;
       cursor: pointer;
       font-size: inherit;
       font-weight: inherit;

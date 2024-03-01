@@ -38,7 +38,7 @@
     background-color: $codeBackground;
     margin: 0 $paddingSmall;
     padding: $paddingSmall;
-    border-radius: $borderRadiusSmall;
+    border-radius: $borderRadius;
     position: relative;
   }
   
@@ -57,7 +57,7 @@
   }
 
   span.toast {
-    border-radius: $borderRadiusSmall;
+    border-radius: $borderRadius;
     position: relative;
     left: calc(100% + #{$paddingSmaller});
 
@@ -84,7 +84,7 @@
     @media screen and (max-width: $screenNarrow) {
       position: relative;
       background-color: $evenDarkerBackground;
-      border-radius: $borderRadiusSmall;
+      border-radius: $borderRadius;
       top: -$paddingSmall;
       width: calc(100% + #{2 * $paddingSmall});
       margin-bottom: -$paddingSmaller;

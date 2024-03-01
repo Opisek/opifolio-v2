@@ -6,7 +6,7 @@
     width: 100%;
     color: $secondaryBackground; 
     border: solid .1em;
-    border-radius: $borderRadiusSmall;
+    border-radius: $borderRadius;
   }
 </style>
 

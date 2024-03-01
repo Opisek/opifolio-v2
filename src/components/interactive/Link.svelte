@@ -26,7 +26,7 @@
       height: $borderWidth;
       transition: transform $animationSpeedFast ease-out;
       background-color: currentColor;
-      border-radius: $borderRadiusSmall; 
+      border-radius: $borderRadius; 
   }
 
   a:hover::after, a.active::after {
@@ -42,7 +42,7 @@
       background-color: currentColor;
       opacity: .1;
       bottom: $borderWidth * -1;
-      border-radius: $borderRadiusSmall;
+      border-radius: $borderRadius;
       left: 0;
   }
 </style>
