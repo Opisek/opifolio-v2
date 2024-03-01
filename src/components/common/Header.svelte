@@ -9,7 +9,7 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Crete round', serif;
-    font-weight: 700;
+    font-weight: $fontWeightTitle;
     margin: 0;
   }
 

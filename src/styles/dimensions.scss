@@ -19,7 +19,7 @@ $borderRadiusLarge: 1em;
 /* Timing */
 $animationSpeed: .25s;
 $animationSpeedSlow: .5s;
-$animationSpeedFast: .2s;
+$animationSpeedFast: .2sm;
 
 /* Specific */
 $welcomeHeight: 30em;
@@ -32,6 +32,9 @@ $fontSizeTitleSmaller: 2rem;
 $fontSize: 1.5rem;
 $fontSizeSmall: 1.2rem;
 $fontSizeCode: 1.3rem;
+$fontWeight: 400;
+$fontWeightBold: 600;
+$fontWeightTitle: 700;
 
 /* Navbar */
 $navbarHeight: 3em;

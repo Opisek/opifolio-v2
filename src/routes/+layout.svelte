@@ -54,6 +54,7 @@
     //font-family: 'Public Sans', serif;
     font-family: 'Karla', serif;
     font-size: $fontSize;
+    font-weight: $fontWeight;
     color: $primaryForeground;
     display: grid;
     grid-template-rows: auto 1fr;

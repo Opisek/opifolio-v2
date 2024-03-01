@@ -73,6 +73,10 @@
     padding-top: $navbarHeight + $paddingSmall;
     top: 0;
 
+    display: flex;
+    flex-direction: column;
+    gap: $gapSmaller;
+
     @media screen and (max-width: $screenNormal) {
       display: none;
     }
@@ -103,8 +107,8 @@
 
     padding: $paddingSmaller calc(#{$paddingSmaller} + 100vw - 100%) $paddingSmaller $paddingSmaller;
 
-    color: $darkerForeground;
-    background-color: $darkerBackground;
+    color: $evenDarkerForeground;
+    background-color: $evenDarkerBackground;
 
     bottom: 0;
     right: 0; 
@@ -116,6 +120,10 @@
     width: max-content;
 
     text-align: center;
+
+    @media screen and (min-width: $screenNormal) {
+      display: none;  
+    }
   }
 
   div.floater.active {
@@ -141,6 +149,7 @@
 <div class="grid">
   <!-- Outline -->
   <div class="outline">
+    <b>Contents</b>
     <Outline headings={headings}/>
   </div>
 
@@ -160,11 +169,9 @@
   </article>
 </div>
 
-{#if innerWidth < 1300}
-  <div class="floater" class:active={visible}>
-    <InlineIconButton src={outlineIcon} alt="Table of Contests" on:click={toggle}/>
-    <Outline headings={headings} clickCallback={close}/>
-  </div>
-{/if}
+<div class="floater" class:active={visible}>
+  <InlineIconButton src={outlineIcon} alt="Table of Contests" on:click={toggle}/>
+  <Outline headings={headings} clickCallback={close}/>
+</div>
 
 <svelte:window bind:innerWidth/>

@@ -80,6 +80,7 @@
     display: flex;
     flex-direction: row;
     gap: $gapSmall;
+    transition: none;
 
     @media screen and (max-width: $screenNarrow) {
       position: relative;
