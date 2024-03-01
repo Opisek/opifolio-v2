@@ -4,3 +4,5 @@ yarn.lock
 build
 config
 posts
+package-lock.json
+.env
