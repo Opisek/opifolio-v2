@@ -5,9 +5,10 @@ services:
     container_name: opifolio
     image: opisek/opifolio-v2:latest
     ports:
-      - 8093:3000
+      - 80:3000
     volumes:
       - ./config:/app/config
+      - ./posts:/app/config
       - /etc/localtime:/etc/localtime:ro
     environment:
       - NODE_ENV=production

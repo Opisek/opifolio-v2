@@ -15,7 +15,7 @@ import Subtitle from "../../components/common/Subtitle.svelte";
 </Row>
 
 <Row align="left">
-  <Paragraph>Error Icon</Paragraph>
+  <Paragraph>Error Icon, Copy Icon</Paragraph>
   •
   <Link href="https://www.flaticon.com/authors/freepik">Freepik</Link>
 </Row>
@@ -36,4 +36,16 @@ import Subtitle from "../../components/common/Subtitle.svelte";
   <Paragraph>Body Font</Paragraph>
   •
   <Link href="https://fonts.google.com/specimen/Karla">Karla by Jonny Pinhorn</Link>
+</Row>
+<Row align="left">
+  <Paragraph>Code Font</Paragraph>
+  •
+  <Link href="https://fonts.google.com/specimen/DM+Mono">DM Mono by Colophon Foundry</Link>
+</Row>
+
+<Subtitle>Others</Subtitle>
+<Row align="left">
+  <Paragraph>Code Highlighting</Paragraph>
+  •
+  <Link href="https://highlightjs.org/">highlight.js</Link>
 </Row>
