@@ -8,14 +8,19 @@
   @import "../../styles/dimensions.scss";
 
   a {
+    position: relative;
     color: inherit;
     text-decoration: inherit;
     cursor: pointer;
-    position: relative !important;
-    white-space: nowrap;
   }
 
-  a::after {
+  span {
+    position: static;
+    white-space: nowrap;
+    width: 100%;
+  }
+
+  span::after {
       content: "";
       display: block;
       position: absolute;
@@ -29,11 +34,11 @@
       border-radius: $borderRadius; 
   }
 
-  a:hover::after, a.active::after {
+  a:hover > span::after, span.active::after {
       transform: scaleX(100%);
   }
 
-  a::before {
+  span::before {
       content: "";
       display: block;
       position: absolute;
@@ -47,10 +52,10 @@
   }
 </style>
 
-<span>
-  <a href={href} class:active={$page.url.pathname === href}>
+<a href={href}>
+  <span class:active={$page.url.pathname === href}>
     <slot>
       link
     </slot>
-  </a>
-</span>
+  </span>
+</a>

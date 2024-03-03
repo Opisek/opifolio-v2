@@ -4,7 +4,7 @@
 
   import iconClose from "$lib/assets/icons/close.png";
   import iconOpen from "$lib/assets/icons/menu.png";
-  import { afterNavigate } from "$app/navigation";
+  import { afterNavigate, beforeNavigate } from "$app/navigation";
   import { browser } from "$app/environment";
 
   export let visible = false;
@@ -23,6 +23,12 @@
   }
 
   afterNavigate(hide);
+
+  beforeNavigate(event => {
+    if (!visible || ![ "popstate", "leave" ].includes(event.type)) return;
+    hide();
+    event.cancel();
+  });
 </script>
 
 <style lang="scss">

@@ -23,7 +23,15 @@
     margin-bottom: .75 * $contactHeight;
 
     @media screen and (max-width: $screenNarrow) {
-      margin-bottom: .5 * $contactHeight;
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+      width: 100%;
+      height: max-content;
+      gap: $gapSmall;
+      align-items: center;
+      align-items: center;
+      margin: 0;
+      padding: 0 $paddingSmall;
     }
   }
 
@@ -35,6 +43,12 @@
     z-index: 20;
     display: flex;
     align-items: center;
+
+    @media screen and (max-width: $screenNarrow) {
+      position: static;
+      background-color: transparent;
+      padding: $paddingSmaller;
+    }
   }
 
   img {
@@ -43,31 +57,34 @@
   }
 
   figure:hover > div {
-    transform: scale(110%);
+    @media screen and (min-width: $screenNarrow) {
+      transform: scale(110%);
+    }
   }
 
   figcaption {
     z-index: 21;
-    width: 100%;
-    transform: translateY(-100%);
     display: block;
     cursor: pointer;
     height: max-content;
     text-align: center;
+    width: fit-content;
 
-    @media screen and (max-width: $screenNarrow) {
-      transform: translateY(2em);
+    @media screen and (min-width: $screenNarrow) {
+      transform: translateY(-100%);
+      width: 100%;
     }
   }
 
   figure:hover > figcaption {
-    transform: translateY(2em);
+    @media screen and (min-width: $screenNarrow) {
+      transform: translateY(2em);
+    }
 
     @media screen and (max-width: $screenNarrow) {
-      transform: scale(110%);
-      transform: translateY(calc(2em * 1.1));
       color: $primaryBackground;
       background-color: $primaryForeground;
+      transform: scale(110%);
     }
   }
 

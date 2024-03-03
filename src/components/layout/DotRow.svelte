@@ -11,18 +11,18 @@
       align-items: center;
       flex-wrap: nowrap;
 
-      //@media screen and (max-width: $screenNarrow) {
-      //  flex-direction: column;
-      //  align-items: start;
-      //  gap: 0;
-      //}
+      @media screen and (max-width: $screenNarrow) {
+        flex-direction: row;
+        align-items: start;
+        flex-wrap: wrap;
+      }
     }
 
     span :global(> *:after) {
-      //@media screen and (min-width: $screenNarrow) {
+      @media screen and (min-width: $screenNarrow) {
         margin-left: $paddingSmaller;
         content: "•";
-      //}
+      }
     }
     span :global(> :last-child:after) {
       margin-left: 0;
