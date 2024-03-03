@@ -2,13 +2,8 @@
   import Divider from "../../../components/common/Divider.svelte";
   import DotRow from "../../../components/layout/DotRow.svelte";
   import InlineIconButton from "../../../components/interactive/InlineIconButton.svelte";
-  import MarkdownCode from "../../../components/markdown/MarkdownCode.svelte";
-  import MarkdownHeading from "../../../components/markdown/MarkdownHeading.svelte";
-  import MarkdownParagraph from "../../../components/markdown/MarkdownParagraph.svelte";
-  import MarkdownQuote from "../../../components/markdown/MarkdownQuote.svelte";
+  import Markdown from "../../../components/markdown/Markdown.svelte";
   import Outline from "../../../components/interactive/Outline.svelte";
-  import sanitizeHtml from "sanitize-html";
-  import SvelteMarkdown from "svelte-markdown";
   import Title from "../../../components/common/Title.svelte";
 
   import outlineIcon from "$lib/assets/icons/outline.png";
@@ -17,12 +12,6 @@
 
   export let data: PostData;
   const post = data.post;
-  const escaped = data.post.markdown.replaceAll("\\$", "&#92;&#36;") // to enable TeX escaping
-  const sanitized = sanitizeHtml(escaped, { disallowedTagsMode: "recursiveEscape" });
-  const parseable = sanitized
-    .replaceAll(/^&gt;/gm, ">") // sanitization breaks markdown quotes
-    .replaceAll("\\$", "&#92;&#36;") // to enable TeX escaping
-  console.log(parseable);
 
   let headings: HeadingData[] = [];
   function parsed(markdown: any) {
@@ -160,17 +149,7 @@
 
   <!-- Rendered Markdown -->
   <article on:touchend={close}>
-    <SvelteMarkdown
-      source={parseable} 
-      renderers={{
-        heading: MarkdownHeading,
-        paragraph: MarkdownParagraph,
-        code: MarkdownCode,
-        blockquote: MarkdownQuote,
-        hr: Divider
-      }}
-      on:parsed={parsed}
-    />
+    <Markdown markdown={post.markdown} parsed={parsed}/>
   </article>
 </div>
 
