@@ -15,7 +15,7 @@
   let toastTimeout: ReturnType<typeof setTimeout> | null = null;
 
   function copy() {
-    navigator.clipboard.writeText(text);
+    navigator.clipboard.writeText(unescaped);
 
     toastVisible = true;
     if (toastTimeout) clearTimeout(toastTimeout);
