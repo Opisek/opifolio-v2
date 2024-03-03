@@ -32,7 +32,9 @@
 
 {#if isAdmonition}
   <Admonition type={admonitionType} title={admonitionTitle}>
+    <span>
       {@html lines.join('\n')}
+    </span>
   </Admonition>
 {:else}
   <Quote>
