@@ -31,7 +31,11 @@
       align-items: center;
       align-items: center;
       margin: 0;
-      padding: 0 $paddingSmall;
+      padding: 0 $paddingSmaller;
+    }
+
+    @media screen and (max-width: $screenVeryNarrow) {
+      grid-template-columns: 1fr 2fr;
     }
   }
 
@@ -54,6 +58,11 @@
   img {
     max-height: 100%;
     max-width: 100%;
+
+
+    @media screen and (max-width: $screenNarrow) {
+      max-width: 20vw;
+    }
   }
 
   figure:hover > div {
@@ -89,10 +98,14 @@
   }
 
   figcaption {
-    padding: 1em;
+    padding: $paddingSmall;
     background-color: $secondaryBackground;
     color: $secondaryForeground;
     border-radius: 1em;
+
+    @media screen and (max-width: $screenVeryNarrow) {
+      font-size: $fontSizeSmall;
+    }
   }
 
   span {
