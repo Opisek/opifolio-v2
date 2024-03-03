@@ -6,5 +6,5 @@
 </script>
 
 <Header level={depth + 1} id={text.toLowerCase().replace(" ", "-")}>
-  {text}
+  {@html text}
 </Header>

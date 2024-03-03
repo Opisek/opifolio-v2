@@ -7,6 +7,7 @@
   import MarkdownParagraph from "../../../components/markdown/MarkdownParagraph.svelte";
   import MarkdownQuote from "../../../components/markdown/MarkdownQuote.svelte";
   import Outline from "../../../components/interactive/Outline.svelte";
+  import sanitizeHtml from "sanitize-html";
   import SvelteMarkdown from "svelte-markdown";
   import Title from "../../../components/common/Title.svelte";
 
@@ -154,7 +155,7 @@
   <!-- Rendered Markdown -->
   <article on:touchend={close}>
     <SvelteMarkdown
-      source={data.post.markdown} 
+      source={sanitizeHtml(data.post.markdown, { disallowedTagsMode: "recursiveEscape" })} 
       renderers={{
         heading: MarkdownHeading,
         paragraph: MarkdownParagraph,

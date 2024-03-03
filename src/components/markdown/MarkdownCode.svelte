@@ -8,7 +8,8 @@
   export let text: string;
   export let lang: string;
 
-  const highlighted = hljs.highlight(text, { language: lang }).value;
+  const unescaped = text.replaceAll("&lt;", "<").replaceAll("&gt;", ">"); 
+  const highlighted = hljs.highlight(unescaped, { language: lang }).value;
 
   let toastVisible: boolean = false;
   let toastTimeout: ReturnType<typeof setTimeout> | null = null;

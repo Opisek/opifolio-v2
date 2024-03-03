@@ -1,6 +1,4 @@
 <script lang="ts">
-  import sanitizeHtml from "sanitize-html";
-
   export let text: string;
 </script>
 
@@ -20,5 +18,5 @@
 </style>
 
 <div>
-  {@html sanitizeHtml(text, { disallowedTagsMode: "recursiveEscape" })}
+  {@html text}
 </div>
