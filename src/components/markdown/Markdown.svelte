@@ -14,7 +14,6 @@
   const parseable = sanitized
     .replaceAll(/^&gt;/gm, ">") // sanitization breaks markdown quotes
     .replaceAll("\\$", "&#92;&#36;") // to enable TeX escaping
-  console.log(parseable);
 
   export let parsed: ((result: any) => void) = (() => {});
 </script>
