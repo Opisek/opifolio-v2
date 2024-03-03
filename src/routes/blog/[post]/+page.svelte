@@ -14,12 +14,10 @@
   
   let innerWidth: number;
 
-  // TODO: create a type out of this
-  export let data: { post: { markdown: string, title: string, author: string, timestamp: Date } };
+  export let data: PostData;
   const post = data.post;
 
-  // TODO: create a type out of this
-  let headings: { title: string, tag: string, depth: number }[] = [];
+  let headings: HeadingData[] = [];
   function parsed(markdown: any) {
     headings = markdown.detail.tokens
       .filter((x: any) => x.type === "heading")

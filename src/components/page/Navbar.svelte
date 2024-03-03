@@ -124,8 +124,3 @@
     </div>
   {/if}
 </nav>
-
-<svelte:window bind:scrollY={scrollY} bind:innerWidth={width} on:wheel|nonpassive={e => {
-  // TODO: disable background scrolling, but not navbar scrolling
-  //if (visible) e.preventDefault();
-}}/>

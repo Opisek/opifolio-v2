@@ -1,5 +1,5 @@
 <script lang="ts">
-  export let headings: { title: string, tag: string, depth: number }[];
+  export let headings: HeadingData[];
   export let clickCallback = (() => {});
   
   let currentHeading: string = "";
