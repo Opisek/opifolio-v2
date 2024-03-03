@@ -32,7 +32,7 @@
       if (currentHeading != "") headingsMap[currentHeading].current = false;
     }
     currentHeading = closestHeading;
-    headingsMap[currentHeading].current = true;
+    if (currentHeading != "") headingsMap[currentHeading].current = true;
   }
 </script>
 
