@@ -7,7 +7,7 @@
   let parts: string[] = [];
   let equations: string[][] = [];
   if (hasMath) {
-    const equationRegex = /(?<!\\)(?:^\$)?\$([^(\$)]+)\$(?:\$$)?/gm;
+    const equationRegex = /(?:^\$)?\$([^\$]+)\$(?:\$$)?/gm;
     parts = text.split(equationRegex).map(part => part.replaceAll("&#92;&#36;", "$"));
     equations = [...text.matchAll(equationRegex)];
   }
