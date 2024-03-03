@@ -22,6 +22,7 @@
     display: flex;
     flex-direction: column;
     gap: $gapSmaller;
+    width: 100%;
   }
 
   @each $type in map-keys($colors) {

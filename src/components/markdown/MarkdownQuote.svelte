@@ -26,7 +26,7 @@
 
 <style lang="scss">
   span {
-    white-space: pre;
+    white-space: pre-wrap;
   }
 </style>
 
