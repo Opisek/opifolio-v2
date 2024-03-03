@@ -1,6 +1,7 @@
 <script lang="ts">
   import Admonition from "../common/Admonition.svelte";
   import Quote from "../common/Quote.svelte";
+    import MarkdownText from "./MarkdownText.svelte";
 
   export let text: string;
 
@@ -33,13 +34,13 @@
 {#if isAdmonition}
   <Admonition type={admonitionType} title={admonitionTitle}>
     <span>
-      {@html lines.join('\n')}
+      <MarkdownText text={lines.join("\n")}/>
     </span>
   </Admonition>
 {:else}
   <Quote>
     <span>
-      {@html text}
+      <MarkdownText text={text}/>
     </span>
   </Quote>
 {/if}

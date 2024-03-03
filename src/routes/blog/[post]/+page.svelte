@@ -17,8 +17,12 @@
 
   export let data: PostData;
   const post = data.post;
-  const sanitized = sanitizeHtml(data.post.markdown, { disallowedTagsMode: "recursiveEscape" });
-  const parseable = sanitized.replaceAll(/^&gt;/gm, ">"); // sanitization breaks markdown quotes
+  const escaped = data.post.markdown.replaceAll("\\$", "&#92;&#36;") // to enable TeX escaping
+  const sanitized = sanitizeHtml(escaped, { disallowedTagsMode: "recursiveEscape" });
+  const parseable = sanitized
+    .replaceAll(/^&gt;/gm, ">") // sanitization breaks markdown quotes
+    .replaceAll("\\$", "&#92;&#36;") // to enable TeX escaping
+  console.log(parseable);
 
   let headings: HeadingData[] = [];
   function parsed(markdown: any) {
