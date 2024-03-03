@@ -37,16 +37,27 @@
   div.codeBlock {
     color: $codeForeground;
     background-color: $codeBackground;
-    margin: 0 $paddingSmall;
     padding: $paddingSmall;
     border-radius: $borderRadius;
     position: relative;
+    width: 100%;
+
+    @media screen and (min-width: $screenNarrow) {
+      margin: 0 $paddingSmall;
+      width: calc(100% - 2 * #{$paddingSmall});
+    }
   }
   
   span.code {
-    white-space: pre-wrap;
+    white-space: pre;
     font-family: "DM Mono", monospace;
     font-size: $fontSizeCode;
+    width: 100%;
+    display: block;
+    overflow-x: auto;
+
+    padding-bottom: $paddingSmaller;
+    margin-bottom: -$paddingSmaller;
 
     @media screen and (min-width: $screenNarrow) {
       padding-right: 10%;

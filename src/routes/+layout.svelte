@@ -67,7 +67,6 @@
   }
 
   main {
-    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -90,6 +89,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    width: 100%;
+    overflow-x: hidden;
 
     @media screen and (max-width: $screenNarrow) {
       margin-top: $navbarHeightSmall;

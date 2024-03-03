@@ -17,7 +17,6 @@
   div {
     color: $secondaryForeground;
     background-color: $secondaryBackground;
-    margin: 0 $paddingSmall;
     padding: $paddingSmall;
     border-radius: $borderRadius;
     display: flex;
@@ -26,6 +25,7 @@
 
     @media screen and (min-width: $screenNarrow) {
       text-align: justify;
+      margin: 0 $paddingSmall;
     }
   }
 
