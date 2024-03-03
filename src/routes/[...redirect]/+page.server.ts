@@ -5,7 +5,6 @@ import fs from "node:fs/promises";
 
 export const load: PageServerLoad = async ({ params }) => {
 	const parts = params.redirect.split("/");
-	const firstPart = parts.shift();
 
 	let redirects;
 	try {
@@ -14,10 +13,14 @@ export const load: PageServerLoad = async ({ params }) => {
 		error(404, 'Not found');
 	}
 
-	for (const entry of redirects)
-		for (const match of entry.pages)
-			if (firstPart === match)
-				throw redirect(entry.code, `${entry.url}/${parts.join("/")}`);
+	for (const entry of redirects) {
+		for (const match of entry.pages) {
+			if (parts[0] === match) {
+				parts[0] = entry.url;
+				throw redirect(entry.code, `${parts.join("/")}`);
+			}
+		}
+	}
 
 	error(404, 'Not found');
 };
