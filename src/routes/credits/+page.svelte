@@ -24,6 +24,10 @@
   <Paragraph>Table of Contents Icon</Paragraph>
   <Link href="https://www.flaticon.com/authors/catalin-fertu">Catalin Fertu</Link>
 </DotRow>
+<DotRow>
+  <Paragraph>Markdown Admonition Icons</Paragraph>
+  <Link href="https://lucide.dev/">Lucide</Link>
+</DotRow>
 
 <Subtitle>Fonts</Subtitle>
 <DotRow>

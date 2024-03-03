@@ -16,3 +16,27 @@ $fadedForeground: rgb(185, 184, 184);
 
 $codeBackground: #222022;
 $codeForeground: #F0F8FF;
+
+// Admonitions
+$colors: (
+  "warning": (
+    "background": #ef9f15,
+    "foreground": #282528
+  ),
+  "error": (
+    "background": #c91d1a,
+    "foreground": #F0F8FF
+  ),
+  "success": (
+    "background": #36aa2e,
+    "foreground": #F0F8FF
+  ),
+  "example": (
+    "background": #911ac9,
+    "foreground": #F0F8FF
+  ),
+  "info": (
+    "background": #1a7dc9,
+    "foreground": #F0F8FF
+  )
+)
