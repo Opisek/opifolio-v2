@@ -113,6 +113,7 @@
     <slot></slot>
   </main>
   <Footer>
+    <Link href="/git/opifolio-v2">Source Code</Link>
     <Link href="/credits">Credits</Link>
     © Kacper Darowski 2024
   </Footer>
