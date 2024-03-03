@@ -13,7 +13,6 @@
 
       @media screen and (max-width: $screenNarrow) {
         flex-direction: row;
-        align-items: start;
         flex-wrap: wrap;
       }
     }
