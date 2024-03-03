@@ -17,6 +17,8 @@
 
   export let data: PostData;
   const post = data.post;
+  const sanitized = sanitizeHtml(data.post.markdown, { disallowedTagsMode: "recursiveEscape" });
+  const parseable = sanitized.replaceAll(/^&gt;/gm, ">"); // sanitization breaks markdown quotes
 
   let headings: HeadingData[] = [];
   function parsed(markdown: any) {
@@ -155,7 +157,7 @@
   <!-- Rendered Markdown -->
   <article on:touchend={close}>
     <SvelteMarkdown
-      source={sanitizeHtml(data.post.markdown, { disallowedTagsMode: "recursiveEscape" })} 
+      source={parseable} 
       renderers={{
         heading: MarkdownHeading,
         paragraph: MarkdownParagraph,
