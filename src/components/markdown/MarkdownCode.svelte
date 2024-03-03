@@ -55,6 +55,7 @@
 
   span.lang {
     color: $fadedForeground;
+    user-select: none;
   }
 
   span.toast {
