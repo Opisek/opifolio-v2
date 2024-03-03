@@ -12,6 +12,7 @@
 <style lang="scss">
   @import "../../styles/colors.scss";
   @import "../../styles/dimensions.scss";
+  @import "../../styles/media.scss";
 
   div {
     color: $secondaryForeground;
@@ -22,7 +23,10 @@
     display: flex;
     flex-direction: column;
     gap: $gapSmaller;
-    width: 100%;
+
+    @media screen and (min-width: $screenNarrow) {
+      text-align: justify;
+    }
   }
 
   @each $type in map-keys($colors) {

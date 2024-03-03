@@ -3,13 +3,13 @@
   @import "../../styles/media.scss";
 
   p {
-      text-align: justify;
       hyphens: auto;
       text-justify: inter-word;
       margin: 0;
       line-height: $fontSize * 1.4;
-      @media screen and (max-width: $screenNarrow) {
-        text-align: left;
+
+      @media screen and (min-width: $screenNarrow) {
+        text-align: justify;
       }
   }
 </style>
