@@ -27,7 +27,7 @@
   </Row>
 </Splash>
 
-<Row id="social">
+<Row id="social" mobileAlign="left">
   <ImageLink src={githubLogo} site="GitHub" handle="Opisek" href="github"/>
   <ImageLink src={linkedinLogo} site="LinkedIn" handle="Kacper Darowski" href="linkedin"/>
   <ImageLink src={youtubeLogo} site="YouTube" handle="Opisek" href="youtube"/>

@@ -24,18 +24,14 @@
 
     @media screen and (max-width: $screenNarrow) {
       display: grid;
-      grid-template-columns: 1fr 3fr;
-      width: 100%;
+      grid-template-columns: 1fr auto;
+      width: fit-content;
       height: max-content;
       gap: $gapSmall;
       align-items: center;
       align-items: center;
       margin: 0;
       padding: 0 $paddingSmaller;
-    }
-
-    @media screen and (max-width: $screenVeryNarrow) {
-      grid-template-columns: 1fr 2fr;
     }
   }
 
