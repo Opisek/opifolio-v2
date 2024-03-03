@@ -33,7 +33,7 @@
   afterNavigate(hide);
 
   beforeNavigate(event => {
-    if (!visible || ![ "popstate", "leave" ].includes(event.type)) return;
+    if (!visible || event.type == "link") return;
     hide();
     event.cancel();
   });
