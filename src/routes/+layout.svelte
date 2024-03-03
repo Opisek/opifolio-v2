@@ -61,11 +61,6 @@
     transition: none;
   }
 
-  :global(body.noScroll) {
-    overflow-y: hidden;
-    margin-right: 16px; // TODO: no hard-coded margin
-  }
-
   main {
     height: 100%;
     display: flex;

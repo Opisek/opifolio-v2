@@ -15,12 +15,19 @@
 
   function show() {
     visible = true;
-    if (browser) document.body.classList.add("noScroll");
+    if (browser) {
+      const scrollbar = window.innerWidth - document.body.clientWidth;
+      document.body.style.overflow = "hidden";
+      document.body.style.marginRight = `${scrollbar}px`;
+    }
   }
 
   function hide() {
     visible = false;
-    if (browser) document.body.classList.remove("noScroll");
+    if (browser) {
+      document.body.style.overflow = "";
+      document.body.style.marginRight = "";
+    }
   }
 
   afterNavigate(hide);
