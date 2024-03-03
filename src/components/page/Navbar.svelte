@@ -124,3 +124,5 @@
     </div>
   {/if}
 </nav>
+
+<svelte:window bind:scrollY={scrollY} bind:innerWidth={width}/>
