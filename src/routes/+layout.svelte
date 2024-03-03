@@ -9,11 +9,11 @@
   // Fix SvelteKit scrolling issue
   import { browser } from "$app/environment";
 
-  beforeNavigate(async (nav) => {
+  beforeNavigate(async () => {
     if (!browser) return;
     document.getElementsByTagName("html")[0].classList.add("pageSwitch");
   })
-  afterNavigate(async (nav) => {
+  afterNavigate(async () => {
     if (!browser) return;
     await tick();
     document.getElementsByTagName("html")[0].classList.remove("pageSwitch");

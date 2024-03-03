@@ -1,7 +1,6 @@
 <script lang="ts">
-  import searchIcon from "$lib/assets/icons/search.png";
-
-  import InlineIconButton from "./InlineIconButton.svelte";
+  import InlineButton from "./InlineButton.svelte";
+  import SearchIcon from "lucide-svelte/icons/search";
 
   let inputElement: HTMLElement;
 
@@ -36,5 +35,7 @@
 
 <span>
   <input type="text" placeholder="Search" bind:this={inputElement}/>
-  <InlineIconButton on:click={focus} src={searchIcon} alt="Search"/>
+  <InlineButton on:click={focus} spin={360}>
+    <SearchIcon/>
+  </InlineButton>
 </span>

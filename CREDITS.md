@@ -1,19 +1,10 @@
 # Credits
-## Icons
-Menu Icon, Close Icon
-[ariefstudio](https://www.flaticon.com/authors/ariefstudio)
-
-Error Icon, Copy Icon
-[Freepik](https://www.flaticon.com/authors/freepik)
-
-Search Icon
-[Smashicons](https://www.flaticon.com/authors/smashicons)
-
-Table of Contents Icon
-[Catalin Fertu](https://www.flaticon.com/authors/catalin-fertu)
-
-Markdown Admonition Icons
+## Graphics
+Icons
 [Lucide](https://lucide.dev/)
+
+Error Splash, Crane Slash
+[Freepik](https://www.flaticon.com/authors/freepik)
 
 ## Fonts
 Header Font

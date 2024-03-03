@@ -2,8 +2,8 @@
   // TODO: check if we can dynamically determine which languages we need to import
   import hljs from "highlight.js";
 
-  import copyIcon from "$lib/assets/icons/copy.png";
-  import InlineIconButton from "../interactive/InlineIconButton.svelte";
+  import CopyIcon from "lucide-svelte/icons/copy";
+  import InlineButton from "../interactive/InlineButton.svelte";
 
   export let text: string;
   export let lang: string;
@@ -107,7 +107,9 @@
     <span class="lang">
       {lang}
     </span>
-    <InlineIconButton src={copyIcon} alt="Copy" on:click={copy}/>
+    <InlineButton on:click={copy} spin={360}>
+      <CopyIcon/>
+    </InlineButton>
   </div>
   <span class="code">
     {@html highlighted}

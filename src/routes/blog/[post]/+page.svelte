@@ -1,12 +1,11 @@
 <script lang="ts">
   import Divider from "../../../components/common/Divider.svelte";
   import DotRow from "../../../components/layout/DotRow.svelte";
-  import InlineIconButton from "../../../components/interactive/InlineIconButton.svelte";
+  import OutlineIcon from "lucide-svelte/icons/list";
+  import InlineButton from "../../../components/interactive/InlineButton.svelte";
   import Markdown from "../../../components/markdown/Markdown.svelte";
   import Outline from "../../../components/interactive/Outline.svelte";
   import Title from "../../../components/common/Title.svelte";
-
-  import outlineIcon from "$lib/assets/icons/outline.png";
   
   let innerWidth: number;
 
@@ -154,7 +153,9 @@
 </div>
 
 <div class="floater" class:active={visible}>
-  <InlineIconButton src={outlineIcon} alt="Table of Contests" on:click={toggle}/>
+  <InlineButton on:click={toggle} spin={360}>
+    <OutlineIcon/>
+  </InlineButton>
   <Outline headings={headings} clickCallback={close}/>
 </div>
 

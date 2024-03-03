@@ -7,40 +7,28 @@
 </script>
 
 <Title>Credits</Title>
-<Subtitle>Icons</Subtitle>
+<Subtitle>Graphics</Subtitle>
 <DotRow>
-  <Paragraph>Menu Icon, Close Icon</Paragraph>
-  <Link href="https://www.flaticon.com/authors/ariefstudio">ariefstudio</Link>
-</DotRow>
-<DotRow>
-  <Paragraph>Error Icon, Copy Icon</Paragraph>
-  <Link href="https://www.flaticon.com/authors/freepik">Freepik</Link>
-</DotRow>
-<DotRow>
-  <Paragraph>Search Icon</Paragraph>
-  <Link href="https://www.flaticon.com/authors/smashicons">Smashicons</Link>
-</DotRow>
-<DotRow>
-  <Paragraph>Table of Contents Icon</Paragraph>
-  <Link href="https://www.flaticon.com/authors/catalin-fertu">Catalin Fertu</Link>
-</DotRow>
-<DotRow>
-  <Paragraph>Markdown Admonition Icons</Paragraph>
+  <Paragraph>Icons</Paragraph>
   <Link href="https://lucide.dev/">Lucide</Link>
+</DotRow>
+<DotRow>
+  <Paragraph>Error Splash, Crane Splash</Paragraph>
+  <Link href="https://www.flaticon.com/authors/freepik">Freepik</Link>
 </DotRow>
 
 <Subtitle>Fonts</Subtitle>
 <DotRow>
   <Paragraph>Header Font</Paragraph>
-  <Link href="https://fonts.google.com/specimen/Crete+Round">Crete Round by Typetogether</Link>
+  <Link href="https://fonts.google.com/specimen/Crete+Round">Crete Round</Link>
 </DotRow>
 <DotRow>
   <Paragraph>Body Font</Paragraph>
-  <Link href="https://fonts.google.com/specimen/Karla">Karla by Jonny Pinhorn</Link>
+  <Link href="https://fonts.google.com/specimen/Karla">Karla</Link>
 </DotRow>
 <DotRow>
   <Paragraph>Code Font</Paragraph>
-  <Link href="https://fonts.google.com/specimen/DM+Mono">DM Mono by Colophon Foundry</Link>
+  <Link href="https://fonts.google.com/specimen/DM+Mono">DM Mono</Link>
 </DotRow>
 
 <Subtitle>Code</Subtitle>

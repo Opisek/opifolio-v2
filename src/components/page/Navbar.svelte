@@ -1,9 +1,10 @@
 <script lang="ts">
   import Column from "../layout/Column.svelte";
-  import InlineIconButton from "../interactive/InlineIconButton.svelte";
+  import InlineButton from "../interactive/InlineButton.svelte";
 
-  import iconClose from "$lib/assets/icons/close.png";
-  import iconOpen from "$lib/assets/icons/menu.png";
+  import OpenIcon from "lucide-svelte/icons/menu";
+  import CloseIcon from "lucide-svelte/icons/x";
+
   import { afterNavigate, beforeNavigate } from "$app/navigation";
   import { browser } from "$app/environment";
 
@@ -106,10 +107,14 @@
 
 <nav class:top={scrollY == 0} class:mobile={width < 1000}>
   {#if width < 1000}
-    <InlineIconButton on:click={show} src={iconOpen} spin={180} alt="Show Navigation"/>
+    <InlineButton on:click={show} spin={180}>
+      <OpenIcon/>
+    </InlineButton>
     <div class="mobile" class:active={visible}>
       <Column>
-        <InlineIconButton on:click={hide} src={iconClose} spin={180} alt="Close"/>
+        <InlineButton on:click={hide} spin={180}>
+          <CloseIcon/>
+        </InlineButton>
         <slot name="secondary"></slot>
         <slot name="primary"></slot>
       </Column>
