@@ -34,3 +34,6 @@ Markdown Parsing
 
 Code Highlighting
 [highlight.js](https://highlightjs.org)
+
+TeX Rendering
+[KaTeX](https://katex.org)

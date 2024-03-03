@@ -56,3 +56,7 @@
   <Paragraph>Code Highlighting</Paragraph>
   <Link href="https://highlightjs.org">highlight.js</Link>
 </DotRow>
+<DotRow>
+  <Paragraph>TeX Rendering</Paragraph>
+  <Link href="https://katex.org">KaTeX</Link>
+</DotRow>
