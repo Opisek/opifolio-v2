@@ -49,7 +49,7 @@
     color: $fadedForeground;
   }
 
-  div.grid {
+  section {
     @media screen and (min-width: $screenNormal) {
       display: grid;
       grid-template-columns: 1fr auto; 
@@ -59,7 +59,7 @@
     }
   }
 
-  div.outline {
+  aside {
     grid-area: outline;
     position: sticky;
     margin-top: -$navbarHeight - $paddingSmall;
@@ -139,18 +139,18 @@
 
 <Divider/>
 
-<div class="grid">
+<section>
   <!-- Outline -->
-  <div class="outline">
+  <aside>
     <b>Contents</b>
     <Outline headings={headings}/>
-  </div>
+  </aside>
 
   <!-- Rendered Markdown -->
   <article on:touchend={close}>
     <Markdown markdown={post.markdown} parsed={parsed}/>
   </article>
-</div>
+</section>
 
 <div class="floater" class:active={visible}>
   <InlineButton on:click={toggle} spin={360}>

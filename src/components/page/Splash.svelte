@@ -11,7 +11,7 @@
   @import "../../styles/dimensions.scss";
   @import "../../styles/media.scss";
 
-  div.outer {
+  section {
     width: 100%;
     display: grid;
     gap: $gapLarge;
@@ -36,7 +36,7 @@
     }
   }
 
-  div.imageContainer {
+  div {
     height: 100%;
     width: 100%;
     text-align: center;
@@ -70,12 +70,12 @@
   }
 </style>
 
-<div class="outer">
-  <div class="imageContainer">
+<section>
+  <div>
     <img src={src} alt={alt} class:circle={style === "circle"}/>
   </div>
   <Column>
     <slot>
     </slot>
   </Column>
-</div>
+</section>

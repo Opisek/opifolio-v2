@@ -5,7 +5,7 @@
   @import "../../styles/dimensions.scss";
   @import "../../styles/media.scss";
 
-  div {
+  footer {
     width: 100%;
     background-color: $darkerBackground;
     color: $darkerForeground;
@@ -26,7 +26,7 @@
   }
 </style>
 
-<div>
+<footer>
   <slot>
   </slot>
-</div>
+</footer>
