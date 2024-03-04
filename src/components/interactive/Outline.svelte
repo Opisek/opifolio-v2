@@ -63,11 +63,16 @@
     }
   }
 
-  a.active:before {
-    @media screen and (min-width: $screenNormal) {
+  @media screen and (min-width: $screenNormal) {
+    a:before {
       content: "• ";
       position: absolute;
       left: -1em;
+      opacity: 0;
+      transition: $animationSpeedSlow opacity ease-out;
+    }
+    a.active:before {
+      opacity: 1;
     }
   }
 </style>
