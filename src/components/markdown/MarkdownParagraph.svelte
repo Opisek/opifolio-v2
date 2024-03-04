@@ -1,9 +1,10 @@
 <script lang="ts">
-  import SvelteMarkdown from "svelte-markdown";
-  import Paragraph from "../common/Paragraph.svelte";
   import Link from "../interactive/Link.svelte";
-  import MarkdownText from "./MarkdownText.svelte";
   import MarkdownCodeSpan from "./MarkdownCodeSpan.svelte";
+  import MarkdownImage from "./MarkdownImage.svelte";
+  import MarkdownText from "./MarkdownText.svelte";
+  import Paragraph from "../common/Paragraph.svelte";
+  import SvelteMarkdown from "svelte-markdown";
 
   export let text: string;
 </script>
@@ -20,7 +21,8 @@
       renderers={{
         link: Link,
         text: MarkdownText,
-        codespan: MarkdownCodeSpan
+        codespan: MarkdownCodeSpan,
+        image: MarkdownImage
       }}
     />
   </span>

@@ -5,8 +5,8 @@
   import MarkdownHeading from "./MarkdownHeading.svelte";
   import MarkdownParagraph from "./MarkdownParagraph.svelte";
   import MarkdownQuote from "./MarkdownQuote.svelte";
-  import sanitizeHtml from "sanitize-html";
   import SvelteMarkdown from "svelte-markdown";
+  import sanitizeHtml from "sanitize-html";
   
   export let markdown: string;
   const escaped = markdown.replaceAll("\\$", "&#92;&#36;") // to enable TeX escaping

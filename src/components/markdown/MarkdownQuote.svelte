@@ -1,7 +1,7 @@
 <script lang="ts">
   import Admonition from "../common/Admonition.svelte";
+  import MarkdownText from "./MarkdownText.svelte";
   import Quote from "../common/Quote.svelte";
-    import MarkdownText from "./MarkdownText.svelte";
 
   export let text: string;
 
