@@ -69,7 +69,7 @@
       position: absolute;
       left: -1em;
       opacity: 0;
-      transition: $animationSpeedSlow opacity ease-out;
+      transition: $animationSpeed opacity ease-out;
     }
     a.active:before {
       opacity: 1;
