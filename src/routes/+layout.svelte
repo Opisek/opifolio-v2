@@ -85,7 +85,7 @@
     flex-direction: column;
     justify-content: space-between;
     width: 100%;
-    overflow-x: hidden;
+    overflow-x: clip;
 
     @media screen and (max-width: $screenNarrow) {
       margin-top: $navbarHeightSmall;
