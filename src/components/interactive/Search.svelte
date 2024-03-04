@@ -35,7 +35,7 @@
 
 <span>
   <input type="text" placeholder="Search" bind:this={inputElement}/>
-  <InlineButton on:click={focus} spin={360}>
+  <InlineButton on:click={focus} spin={360} alt="Search">
     <SearchIcon/>
   </InlineButton>
 </span>

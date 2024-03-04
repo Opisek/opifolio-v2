@@ -118,7 +118,7 @@
     <span class="lang">
       {lang}
     </span>
-    <InlineButton on:click={copy} spin={360}>
+    <InlineButton on:click={copy} spin={360} alt="Copy">
       <CopyIcon/>
     </InlineButton>
   </div>

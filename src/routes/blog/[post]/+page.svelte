@@ -153,7 +153,7 @@
 </section>
 
 <div class="floater" class:active={visible}>
-  <InlineButton on:click={toggle} spin={360}>
+  <InlineButton on:click={toggle} spin={360} alt="Table of Contests">
     <OutlineIcon/>
   </InlineButton>
   <Outline headings={headings} clickCallback={close}/>

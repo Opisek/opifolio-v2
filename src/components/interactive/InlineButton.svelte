@@ -1,5 +1,6 @@
 <script lang="ts">
   export let spin: number = 0;
+  export let alt: string = "";
 </script>
 
 <style lang="scss">
@@ -31,7 +32,14 @@
   }
 </style>
 
-<button on:click class:spin180={spin==180} class:spin360={spin==360}>
-  <slot>
-  </slot>
-</button>
+{#if alt != ""}
+  <button on:click class:spin180={spin==180} class:spin360={spin==360} aria-label={alt}>
+    <slot>
+    </slot>
+  </button>
+{:else}
+  <button on:click class:spin180={spin==180} class:spin360={spin==360}>
+    <slot>
+    </slot>
+  </button>
+{/if}

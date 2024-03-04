@@ -1,5 +1,8 @@
 <script lang="ts">
   export let href: string | null = null;
+  export let alt: string = "Button";
+
+  const id = crypto.randomUUID();
 </script>
 
 <style lang="scss">
@@ -34,14 +37,14 @@
 </style>
 
 {#if href}
-  <a href={href}>
-    <button>
+  <a href={href} aria-label={alt} id={id}>
+    <button aria-labelledby={id}>
       <slot>
       </slot>
     </button>
   </a>
 {:else}
-  <button on:click>
+  <button aria-label={alt} on:click>
     <slot>
     </slot>
   </button>

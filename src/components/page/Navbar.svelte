@@ -114,12 +114,12 @@
 
 <nav class:top={scrollY == 0} class:mobile={width < 1000}>
   {#if width < 1000}
-    <InlineButton on:click={show} spin={180}>
+    <InlineButton on:click={show} spin={180} alt="Navigation Menu">
       <OpenIcon/>
     </InlineButton>
     <div class="mobile" class:active={visible}>
       <Column>
-        <InlineButton on:click={hide} spin={180}>
+        <InlineButton on:click={hide} spin={180} alt="Close Menu">
           <CloseIcon/>
         </InlineButton>
         <slot name="secondary"></slot>
