@@ -1,29 +1,41 @@
-# build
-FROM node:18-alpine as build
+# base
+FROM oven/bun:latest AS base
 
 WORKDIR /app
 
+# install
+FROM base AS install
+
+RUN mkdir -p /temp/dev
+COPY package.json bun.lockb /temp/dev
+RUN cd /temp/dev && bun install --frozen-lockfile
+
+RUN mkdir -p /temp/prod
+COPY package.json bun.lockb /temp/prod
+RUN cd /temp/prod && bun install --frozen-lockfile --production
+
+# build
+FROM base AS build
+
 COPY package.json .
-RUN npm i --production
-RUN cp -r node_modules /tmp/node_modules_prod
-RUN npm i
+
+COPY --from=install /temp/dev/node_modules node_modules
 
 COPY src src
 COPY static static
 COPY svelte.config.js .
 COPY tsconfig.json .
 COPY vite.config.ts .
-RUN ls
-RUN npm run build
+
+RUN bun run build
 
 # runtime
-FROM node:18-alpine as runtime
+FROM base AS runtime
 
-WORKDIR /app
-
-COPY --from=build /tmp/node_modules_prod ./node_modules
-COPY --from=build /app/build ./build
 COPY package.json .
 
-USER node:node
-CMD [ "node", "build/index.js" ]
+COPY --from=install /temp/prod/node_modules node_modules
+COPY --from=build /app/build ./build
+
+USER bun:bun 
+CMD [ "bun", "build/index.js" ]

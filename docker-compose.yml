@@ -16,4 +16,4 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    user: "node"
+    user: "bun"
