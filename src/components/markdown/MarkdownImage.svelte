@@ -1,6 +1,12 @@
 <script lang="ts">
+  import { page } from "$app/stores";
+
   export let href: string;
   export let text: string;
+
+  if (!href.startsWith("http")) {
+    href = `${$page.url.pathname.split("/").pop()}/images/${href}`;
+  }
 </script>
 
 <style lang="scss">

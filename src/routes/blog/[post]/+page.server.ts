@@ -9,8 +9,8 @@ export const load: PageServerLoad = async ({ params }) => {
 	let postMarkdown;
 	let postJson;
 	try {
-		postJson = await fs.readFile(`/app/posts/${postID}.json`, "utf-8").then(content => JSON.parse(content));
-		postMarkdown = await fs.readFile(`/app/posts/${postID}.md`, "utf-8");
+		postJson = await fs.readFile(`/app/posts/${postID}/post.json`, "utf-8").then(content => JSON.parse(content));
+		postMarkdown = await fs.readFile(`/app/posts/${postID}/post.md`, "utf-8");
 		postJson.markdown = postMarkdown;
 		postJson.timestamp = new Date(postJson.timestamp * 1000);
 	} catch (_) {
