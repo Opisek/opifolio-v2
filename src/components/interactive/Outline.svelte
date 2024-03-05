@@ -1,4 +1,8 @@
 <script lang="ts">
+    import { browser } from "$app/environment";
+  import { afterNavigate } from "$app/navigation";
+  import { tick } from "svelte";
+
   export let headings: HeadingData[];
   export let clickCallback = (() => {});
   
@@ -34,6 +38,12 @@
     currentHeading = closestHeading;
     if (currentHeading != "") headingsMap[currentHeading].current = true;
   }
+
+  afterNavigate(async () => {
+    if (!browser) return;
+    scrollY = window.scrollY;
+    scroll();
+  });
 </script>
 
 <style lang="scss">

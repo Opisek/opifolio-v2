@@ -2,6 +2,7 @@
   export let id: string | null = null;
   export let align: string = "center";
   export let mobileAlign: string = "center";
+  export let compact: boolean = false;
 </script>
 
 <style lang="scss">
@@ -22,6 +23,10 @@
       gap: $gapSmall;
       width: fit-content;
     }
+  }
+
+  div.inner.compact {
+    gap: $gapSmaller;
   }
 
   div.outer {
@@ -63,6 +68,7 @@
     class:mobileCenter={mobileAlign === "center"}
     class:mobileLeft={mobileAlign === "left"}
     class:mobileRight={mobileAlign === "right"}
+    class:compact={compact}
   >
     <slot>
     </slot>

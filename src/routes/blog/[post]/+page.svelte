@@ -9,7 +9,7 @@
   
   let innerWidth: number;
 
-  export let data: PostData;
+  export let data: { post: PostData };
   const post = data.post;
 
   let headings: HeadingData[] = [];
@@ -40,13 +40,46 @@
   @import "../../../styles/media.scss";
   
   div.titlebar {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+
+    grid-template-columns: 1fr $thumbnailWidth;
+    grid-template-rows: auto auto;
+    grid-template-areas: "title thumbnail" "info thumbnail";
+    
     gap: $gapSmall;
+
+    @media screen and (max-width: $screenNarrow) {
+      grid-template-columns: 1fr $thumbnailWidthSmall;
+      grid-template-areas: "title thumbnail" "info info";
+    }
+  }
+
+  div.title {
+    grid-area: title;
   }
 
   div.info {
+    grid-area: info;
     color: $fadedForeground;
+  }
+
+  div.thumbnail {
+    grid-area: thumbnail;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  img {
+    width: $thumbnailWidth;
+    height: $thumbnailWidth;
+    border-radius: 50%;
+    object-fit: cover;
+
+    @media screen and (max-width: $screenNarrow) {
+      width: $thumbnailWidthSmall;
+      height: $thumbnailWidthSmall;
+    }
   }
 
   section {
@@ -126,14 +159,19 @@
 
 <!-- Title, Author, Date -->
 <div class="titlebar">
-  <Title>
-    {post.title}
-  </Title>
+  <div class="title">
+    <Title>
+      {post.title}
+    </Title>
+  </div>
   <div class="info">
     <DotRow>
       <span>{post.author}</span>
       <span>{post.timestamp.toLocaleDateString()}</span>
     </DotRow>
+  </div>
+  <div class="thumbnail">
+    <img src={post.thumbnail} alt="Thumbnail"/>
   </div>
 </div>
 

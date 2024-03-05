@@ -3,11 +3,9 @@
     @import "../../styles/media.scss";
     
     span {
-      width: 100%;
-
       display: inline-flex;
       flex-direction: row;
-      gap: $paddingSmaller;
+      gap: $gapSmaller;
       align-items: center;
       flex-wrap: nowrap;
 

@@ -1,8 +1,10 @@
 type PostData = {
-  post: {
-    markdown: string,
-    title: string,
-    author: string,
-    timestamp: Date
-  }
+  markdown: string,
+  title: string,
+  summary: string,
+  thumbnail: string,
+  id: string,
+  author: string,
+  timestamp: Date,
+  public: boolean
 }

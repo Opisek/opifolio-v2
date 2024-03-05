@@ -1,16 +1,22 @@
-<script>
+<script lang="ts">
   import portraitImage from "$lib/assets/portrait.png";
   import githubLogo from "$lib/assets/logos/github.png";
   import linkedinLogo from "$lib/assets/logos/linkedin.png";
   import youtubeLogo from "$lib/assets/logos/youtube.png";
 
   import Button from "../components/interactive/Button.svelte";
+  import Card from "../components/common/Card.svelte";
+  import ImageLink from "../components/interactive/ImageLink.svelte";
   import Link from "../components/interactive/Link.svelte";
   import Paragraph from "../components/common/Paragraph.svelte";
   import Row from "../components/layout/Row.svelte";
   import Splash from "../components/page/Splash.svelte";
   import Title from "../components/common/Title.svelte";
-  import ImageLink from "../components/interactive/ImageLink.svelte";
+
+  import { browser } from "$app/environment";
+
+  let posts: PostData[] = [];
+  (async () => {if (browser) posts = await (await fetch("/api/posts")).json()})();
 </script>
 
 <Splash src={portraitImage} alt="Portrait Photo">
@@ -22,12 +28,25 @@
     On top of that, I love writing open-source code, like <Link href="/git/opifolio-v2">this very website</Link>!
   </Paragraph>
   <Row>
-    <Button href="#social">See more</Button>
-    <!--<Button>Projects</Button>-->
+    <Button href="#posts">Blog Posts</Button>
+    <Button href="#social">Social Media</Button>
   </Row>
 </Splash>
 
-<Row id="social" mobileAlign="left">
+<Title id="posts">Recent Posts</Title>
+<Row>
+  {#if posts.length == 0}
+    No posts yet
+  {:else}
+    {#each posts as post}
+      <Card post={post} compact={true}/>
+    {/each}
+    <Button href="/blog">See all posts</Button>
+  {/if}
+</Row>
+
+<Title id="social">Social Media</Title>
+<Row mobileAlign="left">
   <ImageLink src={githubLogo} site="GitHub" handle="Opisek" href="github"/>
   <ImageLink src={linkedinLogo} site="LinkedIn" handle="Kacper Darowski" href="linkedin"/>
   <ImageLink src={youtubeLogo} site="YouTube" handle="Opisek" href="youtube"/>

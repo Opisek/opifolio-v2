@@ -13,6 +13,7 @@ export const load: PageServerLoad = async ({ params }) => {
 		postMarkdown = await fs.readFile(`/app/posts/${postID}/post.md`, "utf-8");
 		postJson.markdown = postMarkdown;
 		postJson.timestamp = new Date(postJson.timestamp * 1000);
+		postJson.thumbnail = `/blog/${postID}/images/${postJson.thumbnail}`;
 	} catch (_) {
 		error(404, 'Not found');
 	}
