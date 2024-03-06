@@ -32,6 +32,7 @@
 		"highlight.js": "^11.9.0",
 		"katex": "^0.16.9",
 		"sanitize-html": "^2.12.1",
+		"sharp": "^0.33.2",
 		"svelte-markdown": "^0.4.1"
 	}
 }

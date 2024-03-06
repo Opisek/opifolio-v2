@@ -7,7 +7,7 @@ export default defineConfig({
 		sveltekit(),
 		imagetools({
 			defaultDirectives: () => {
-				return new URLSearchParams("format=webp&quality=70");
+				return new URLSearchParams("format=webp&quality=70&width=500withoutEnlargement");
 			}
 		})
 	],

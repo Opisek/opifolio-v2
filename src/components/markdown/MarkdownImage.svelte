@@ -5,7 +5,7 @@
   export let text: string;
 
   if (!href.startsWith("http")) {
-    href = `${$page.url.pathname.split("/").pop()}/images/${href}`;
+    href = `${$page.url.pathname.split("/").pop()}/images/${href}.webp`;
   }
 </script>
 

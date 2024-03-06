@@ -171,7 +171,7 @@
     </DotRow>
   </div>
   <div class="thumbnail">
-    <img src={post.thumbnail} alt="Thumbnail"/>
+    <img src={post.thumbnail + ".webp"} alt="Thumbnail"/>
   </div>
 </div>
 
