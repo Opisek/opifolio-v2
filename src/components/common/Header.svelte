@@ -35,14 +35,7 @@
   }
 </style>
 
-{#if id}
-  <svelte:element this={"h"+level.toString()} id={id}>
-    <slot>
-    </slot>
-  </svelte:element>
-{:else}
-  <svelte:element this={"h"+level.toString()}>
-    <slot>
-    </slot>
-  </svelte:element>
-{/if}
+<svelte:element this={"h"+level.toString()} id={id || null}>
+  <slot>
+  </slot>
+</svelte:element>
