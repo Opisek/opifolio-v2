@@ -18,6 +18,12 @@
     await tick();
     document.getElementsByTagName("html")[0].classList.remove("pageSwitch");
   });
+
+  function scroll() {
+    if (!browser) return;
+    if (window.scrollY <= 0) document.body.classList.add("top");
+    else document.body.classList.remove("top");
+  }
 </script>
 
 <style lang="scss">
@@ -48,10 +54,9 @@
   }
 
   :global(body) {
-    background-color: $primaryBackground;
+    background-color: $darkerBackground;
     margin: 0;
     padding: 0;
-    //font-family: 'Public Sans', serif;
     font-family: 'Karla', serif;
     font-size: $fontSize;
     font-weight: $fontWeight;
@@ -59,6 +64,10 @@
     display: grid;
     grid-template-rows: auto 1fr;
     transition: none;
+  }
+
+  :global(body.top) {
+    background-color: $primaryBackground;
   }
 
   main {
@@ -79,8 +88,9 @@
   }
 
   div {
-    margin-top: $navbarHeight;
-    min-height: calc(100vh - #{$navbarHeight});
+    background-color: $primaryBackground;
+    padding-top: $navbarHeight;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -88,8 +98,7 @@
     overflow-x: clip;
 
     @media screen and (max-width: $screenNarrow) {
-      margin-top: $navbarHeightSmall;
-      min-height: calc(100vh - #{$navbarHeightSmall});
+      padding-top: $navbarHeightSmall;
     }
   }
 </style>
@@ -114,3 +123,5 @@
     © Kacper Darowski 2024
   </Footer>
 </div>
+
+<svelte:window on:scroll={scroll}/>
