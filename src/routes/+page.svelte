@@ -51,3 +51,8 @@
   <ImageLink src={linkedinLogo} site="LinkedIn" handle="Kacper Darowski" href="linkedin"/>
   <ImageLink src={youtubeLogo} site="YouTube" handle="Opisek" href="youtube"/>
 </Row>
+
+<svelte:head>
+  <meta property="og:title" content="Kacper Darowski's Tech Blog and Portfolio"/>
+  <meta property="og:description" content="Tech blog about DIY IoT, self-hosting, open source and more"/>
+</svelte:head>

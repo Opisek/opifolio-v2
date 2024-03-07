@@ -6,6 +6,8 @@
   import Markdown from "../../../components/markdown/Markdown.svelte";
   import Outline from "../../../components/interactive/Outline.svelte";
   import Title from "../../../components/common/Title.svelte";
+
+  import { page } from "$app/stores";
   
   let innerWidth: number;
 
@@ -198,3 +200,9 @@
 </div>
 
 <svelte:window bind:innerWidth/>
+
+<svelte:head>
+  <meta property="og:title" content={post.title}/>
+  <meta property="og:description" content={post.summary}/>
+  <meta property="og:image" content={$page.url.host + post.thumbnail + ".webp"}/>
+</svelte:head>
