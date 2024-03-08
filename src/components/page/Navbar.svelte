@@ -37,6 +37,35 @@
     hide();
     event.cancel();
   });
+
+  let touchStartX: number;
+  let touchStartY: number;
+  let touchStartTimestamp: number;
+  let touchStartValid: boolean;
+
+  function touchStart(event: TouchEvent) {
+    touchStartValid = event.touches.length == 1;
+    if (!touchStartValid) return;
+    touchStartX = event.touches[0].clientX;
+    touchStartY = event.touches[0].clientY;
+    touchStartTimestamp = event.timeStamp;
+  }
+
+  function touchEnd(event: TouchEvent) {
+    if (!touchStartValid) return;
+    const touchDeltaX = event.changedTouches[0].clientX - touchStartX;
+    const touchDeltaY = event.changedTouches[0].clientY - touchStartY;
+    const touchDeltaT = event.timeStamp - touchStartTimestamp;
+
+    if (
+      touchDeltaT > 500
+      || Math.abs(touchDeltaY) > Math.abs(touchDeltaX) * 0.5
+      || Math.abs(touchDeltaX) < 100
+    ) return;
+
+    if (touchDeltaX > 0) show();
+    else hide();
+  }
 </script>
 
 <style lang="scss">
@@ -137,4 +166,9 @@
   {/if}
 </nav>
 
-<svelte:window bind:scrollY={scrollY} bind:innerWidth={width}/>
+<svelte:window
+  bind:scrollY={scrollY}
+  bind:innerWidth={width}
+  on:touchstart={touchStart}
+  on:touchend={touchEnd}
+/>
