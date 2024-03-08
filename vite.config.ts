@@ -11,7 +11,10 @@ export default defineConfig({
 					w: "500",
 					h: "500",
 					format: "webp",
-					quality: "70"
+					quality: "70",
+					withoutEnlargement: "true",
+					fit: "contain",
+					background: "transparent"
 				});
 			}
 		})
