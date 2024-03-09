@@ -23,6 +23,7 @@
     font-size: $fontSizeSmall;
     height: auto;
     padding: $paddingSmaller;
+    font-family: inherit;
   }
 
   span {
