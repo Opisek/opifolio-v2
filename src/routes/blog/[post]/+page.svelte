@@ -190,7 +190,7 @@
     {/each}
   </div>
   <div class="thumbnail">
-    <img src={post.thumbnail + ".webp"} alt="Thumbnail"/>
+    <img src={post.thumbnail} alt="Thumbnail"/>
   </div>
 </div>
 
@@ -221,5 +221,5 @@
 <svelte:head>
   <meta property="og:title" content={post.title}/>
   <meta property="og:description" content={post.summary}/>
-  <meta property="og:image" content={$page.url.host + post.thumbnail + ".webp"}/>
+  <meta property="og:image" content={$page.url.host + post.thumbnail}/>
 </svelte:head>

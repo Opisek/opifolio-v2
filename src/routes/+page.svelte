@@ -16,7 +16,7 @@
   import { browser } from "$app/environment";
 
   let posts: PostData[] = [];
-  (async () => {if (browser) posts = await (await fetch("/api/posts")).json()})();
+  (async () => {if (browser) posts = await (await fetch("/api/posts?limit=5")).json()})();
 </script>
 
 <Splash src={portraitImage} alt="Portrait Photo">
