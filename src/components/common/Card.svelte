@@ -1,7 +1,7 @@
 <script lang="ts">
   import DotRow from "../layout/DotRow.svelte";
-    import Row from "../layout/Row.svelte";
   import Header from "./Header.svelte";
+  import Row from "../layout/Row.svelte";
 
   export let post: PostData;
   export let compact: boolean = false;

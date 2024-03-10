@@ -1,8 +1,8 @@
 <script lang="ts">
   import portraitImage from "$lib/assets/portrait.png";
-  import githubLogo from "$lib/assets/logos/github.png";
-  import linkedinLogo from "$lib/assets/logos/linkedin.png";
-  import youtubeLogo from "$lib/assets/logos/youtube.png";
+  import githubLogo from "$lib/assets/logos/github.svg";
+  import linkedinLogo from "$lib/assets/logos/linkedin.svg";
+  import youtubeLogo from "$lib/assets/logos/youtube.svg";
 
   import Button from "../components/interactive/Button.svelte";
   import Card from "../components/common/Card.svelte";

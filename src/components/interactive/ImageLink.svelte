@@ -44,6 +44,7 @@
     display: flex;
     align-items: center;
 
+
     @media screen and (max-width: $screenNarrow) {
       position: static;
       background-color: transparent;
@@ -55,9 +56,9 @@
     max-height: 100%;
     max-width: 100%;
 
-
     @media screen and (max-width: $screenNarrow) {
       max-width: 20vw;
+      width: 20vw;
     }
   }
 
@@ -98,10 +99,6 @@
     background-color: $secondaryBackground;
     color: $secondaryForeground;
     border-radius: 1em;
-
-    @media screen and (max-width: $screenVeryNarrow) {
-      font-size: $fontSizeSmall;
-    }
   }
 
   span {
