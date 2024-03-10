@@ -1,7 +1,7 @@
 <script lang="ts">
   import DotRow from "../layout/DotRow.svelte";
   import Header from "./Header.svelte";
-  import Row from "../layout/Row.svelte";
+  import Tag from "../interactive/Tag.svelte";
 
   export let post: PostData;
   export let compact: boolean = false;
@@ -15,9 +15,9 @@
   a {
     display: grid;
 
-    grid-template-columns: $thumbnailWidth 1fr;
+    grid-template-columns: $thumbnailWidth 1fr auto;
     grid-template-rows: auto auto auto;
-    grid-template-areas: "thumbnail title" "thumbnail summary" "thumbnail details";
+    grid-template-areas: "thumbnail title tags" "thumbnail summary summary" "thumbnail details details";
 
     grid-column-gap: 2 * $gapSmaller;
     grid-row-gap: $gapSmaller;
@@ -27,6 +27,13 @@
     border-radius: $borderRadius;
     text-decoration: inherit;
     color: inherit;
+
+    @media screen and (max-width: $screenVeryNarrow) {
+      grid-template-columns: $thumbnailWidthSmall 1fr;
+      grid-template-rows: auto auto auto auto;
+      //grid-template-areas: "thumbnail title" "thumbnail summary" "details details" "tags tags";
+      grid-template-areas: "thumbnail title" "thumbnail tags" "summary summary" "details details";
+    }
   }
 
   a.compact {
@@ -63,6 +70,11 @@
     height: $thumbnailWidth;
     border-radius: 50%;
     object-fit: cover;
+
+    @media screen and (max-width: $screenVeryNarrow) {
+      width: $thumbnailWidthSmall;
+      height: $thumbnailWidthSmall;
+    }
   }
 
   img.compact {
@@ -74,6 +86,15 @@
     grid-area: title;
     display: flex;
     align-items: center;
+  }
+
+  div.tags {
+    grid-area: tags;
+    display: flex;
+    gap: $gapSmaller;
+    justify-content: start;
+    flex-wrap: wrap;
+    background-color: inherit;
   }
 
   summary {
@@ -97,6 +118,10 @@
     display: flex;
     justify-content: end;
     width: 100%;
+
+    @media screen and (max-width: $screenNarrow) {
+      font-size: $fontSizeSmall;
+    }
   }
 </style>
 
@@ -109,6 +134,13 @@
       {post.title}
     </Header>
   </div>
+  {#if !compact}
+    <div class="tags">
+      {#each post.tags as tag}
+        <Tag tag={tag} />
+      {/each}
+    </div>
+  {/if}
   <summary class:compact={compact}>
     {post.summary}
   </summary>

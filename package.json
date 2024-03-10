@@ -29,6 +29,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"hash.js": "^1.1.7",
 		"highlight.js": "^11.9.0",
 		"katex": "^0.16.9",
 		"sanitize-html": "^2.12.1",

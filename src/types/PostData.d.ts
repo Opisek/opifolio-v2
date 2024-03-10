@@ -6,5 +6,6 @@ type PostData = {
   id: string,
   author: string,
   timestamp: Date,
-  public: boolean
+  public: boolean,
+  tags: string[]
 }

@@ -1,10 +1,11 @@
 <script lang="ts">
   import Divider from "../../../components/common/Divider.svelte";
   import DotRow from "../../../components/layout/DotRow.svelte";
-  import OutlineIcon from "lucide-svelte/icons/list";
   import InlineButton from "../../../components/interactive/InlineButton.svelte";
   import Markdown from "../../../components/markdown/Markdown.svelte";
   import Outline from "../../../components/interactive/Outline.svelte";
+  import OutlineIcon from "lucide-svelte/icons/list";
+  import Tag from "../../../components/interactive/Tag.svelte";
   import Title from "../../../components/common/Title.svelte";
 
   import { page } from "$app/stores";
@@ -44,15 +45,17 @@
   div.titlebar {
     display: grid;
 
-    grid-template-columns: 1fr $thumbnailWidth;
+    grid-template-columns: auto 1fr $thumbnailWidth;
     grid-template-rows: auto auto;
-    grid-template-areas: "title thumbnail" "info thumbnail";
+    grid-template-areas: "title title thumbnail" "info tags thumbnail";
     
     gap: $gapSmall;
+    align-items: center;
 
     @media screen and (max-width: $screenNarrow) {
       grid-template-columns: 1fr $thumbnailWidthSmall;
-      grid-template-areas: "title thumbnail" "info info";
+      grid-template-rows: auto auto auto;
+      grid-template-areas: "title thumbnail" "info info" "tags tags";
     }
   }
 
@@ -63,6 +66,15 @@
   div.info {
     grid-area: info;
     color: $fadedForeground;
+  }
+
+  div.tags {
+    grid-area: tags;
+    display: flex;
+    gap: $gapSmaller;
+    justify-content: start;
+    flex-wrap: wrap;
+    background-color: $primaryBackground;
   }
 
   div.thumbnail {
@@ -171,6 +183,11 @@
       <span>{post.author}</span>
       <span>{post.timestamp.toLocaleDateString()}</span>
     </DotRow>
+  </div>
+  <div class="tags">
+    {#each post.tags as tag}
+      <Tag tag={tag} />
+    {/each}
   </div>
   <div class="thumbnail">
     <img src={post.thumbnail + ".webp"} alt="Thumbnail"/>
