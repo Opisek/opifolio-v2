@@ -36,6 +36,7 @@
     position: relative;
     z-index: 10;
     background-color: inherit;
+    margin: 1.5 * $borderWidth 0;
   }
 
   a:hover {
