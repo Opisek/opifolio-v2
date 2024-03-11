@@ -89,13 +89,13 @@ export function insertPost(post: PostData) {
     thumbnail: post.thumbnail,
     author: post.author,
     timestamp: post.timestamp,
-    public: post ? 1 : 0,
+    public: post.public ? 1 : 0,
     markdown: post.markdown
   };
 
   let replace = "";
   Object.entries(fields).forEach(([key, value]) => {
-    if (value == null) return;
+    if (value === null || value === undefined) return;
     if (replace == "") replace = "SET ";
     else replace += ", ";
     replace += `${key} = @${key}`;
@@ -221,7 +221,8 @@ export function searchPosts(query: string | null, tag: string | null) {
     FROM (
       ${subclause}
     ) ids
-    JOIN posts ON posts.dbid = ids.dbid;
+    JOIN posts ON posts.dbid = ids.dbid
+    WHERE public = true;
   `;
 
   const result = db.prepare(sql).all({ query, tag });
@@ -233,6 +234,8 @@ export function getTags() {
   return db.prepare(`
     SELECT DISTINCT tag
     FROM tags
+    JOIN posts ON posts.dbid = tags.dbid
+    WHERE public = true
     ORDER BY tag;
   `).all().map((tag) => (tag as { tag: string }).tag);
 }
