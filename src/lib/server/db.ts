@@ -82,12 +82,7 @@ export function initialize() {
 }
 
 export function insertPost(post: PostData) {
-  db.prepare(`
-    INSERT INTO posts (humanid, title, summary, thumbnail, author, timestamp, public, markdown)
-    VALUES (@humanid, @title, @summary, @thumbnail, @author, @timestamp, @public, @markdown)
-    ON CONFLICT(humanid) DO UPDATE
-    SET title = @title, summary = @summary, thumbnail = @thumbnail, author = @author, timestamp = @timestamp, public = @public, markdown = @markdown;
-  `).run({
+  const fields = {
     humanid: post.id,
     title: post.title,
     summary: post.summary,
@@ -96,7 +91,24 @@ export function insertPost(post: PostData) {
     timestamp: post.timestamp,
     public: post ? 1 : 0,
     markdown: post.markdown
+  };
+
+  let replace = "";
+  Object.entries(fields).forEach(([key, value]) => {
+    if (value == null) return;
+    if (replace == "") replace = "SET ";
+    else replace += ", ";
+    replace += `${key} = @${key}`;
   });
+
+  const sql = `
+    INSERT INTO posts (humanid, title, summary, thumbnail, author, timestamp, public, markdown)
+    VALUES (@humanid, @title, @summary, @thumbnail, @author, @timestamp, @public, @markdown)
+    ON CONFLICT(humanid) DO UPDATE
+    ${replace};
+  `;
+
+  db.prepare(sql).run(fields);
 
   const dbid = getID(post.id);
   post.tags.forEach((tag) => {
