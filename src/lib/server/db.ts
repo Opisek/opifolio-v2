@@ -12,7 +12,8 @@ export function initialize() {
       thumbnail VARCHAR(64),
       author VARCHAR(64),
       timestamp DATETIME,
-      public BOOLEAN
+      public BOOLEAN,
+      markdown TEXT
     );
   `);
   db.exec(`
@@ -26,10 +27,10 @@ export function initialize() {
 
 export function insertPost(post: PostData) {
   db.prepare(`
-    INSERT INTO posts (id, title, summary, thumbnail, author, timestamp, public)
-    VALUES (@id, @title, @summary, @thumbnail, @author, @timestamp, @public)
+    INSERT INTO posts (id, title, summary, thumbnail, author, timestamp, public, markdown)
+    VALUES (@id, @title, @summary, @thumbnail, @author, @timestamp, @public, @markdown)
     ON CONFLICT(id) DO UPDATE
-    SET title = @title, summary = @summary, thumbnail = @thumbnail, author = @author, timestamp = @timestamp, public = @public;
+    SET title = @title, summary = @summary, thumbnail = @thumbnail, author = @author, timestamp = @timestamp, public = @public, markdown = @markdown;
   `).run({
     id: post.id,
     title: post.title,
@@ -37,7 +38,8 @@ export function insertPost(post: PostData) {
     thumbnail: post.thumbnail,
     author: post.author,
     timestamp: post.timestamp,
-    public: post ? 1 : 0
+    public: post ? 1 : 0,
+    markdown: post.markdown
   });
 
   post.tags.forEach((tag) => {
@@ -50,6 +52,14 @@ export function insertPost(post: PostData) {
       tag: tag
     });
   });
+}
+
+export function insertMarkdown(id: string, markdown: string) {
+  db.prepare(`
+    UPDATE posts
+    SET markdown = @markdown
+    WHERE id = @id;
+  `).run({ id, markdown });
 }
 
 export function deletePost(id: string) {
@@ -83,7 +93,7 @@ export function getPosts(amount: number, offset: number) {
   if (Number.isNaN(offset) || offset < 0) offset = 0;
 
   const result = db.prepare(`
-    SELECT * FROM posts
+    SELECT id, title, summary, thumbnail, author, timestamp FROM posts
     WHERE public = true
     ORDER BY timestamp DESC
     LIMIT @amount OFFSET @offset;
@@ -94,14 +104,10 @@ export function getPosts(amount: number, offset: number) {
 
 export function getPost(id: string) {
   const post = db.prepare(`
-    SELECT * FROM posts
+    SELECT id, title, summary, thumbnail, author, timestamp, markdown FROM posts
     WHERE id = @id;
   `).get({ id });
 
   if (!post) return null;
-
-  const parsedPost = parsePost(post as PostData);  
-  parsedPost.markdown = fs.readFileSync(`/app/posts/${id}/post.md`, "utf-8");
-
-  return parsedPost;
+  return parsePost(post as PostData);  
 }
