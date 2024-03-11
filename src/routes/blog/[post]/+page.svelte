@@ -176,5 +176,5 @@
 <svelte:head>
   <meta property="og:title" content={post.title}/>
   <meta property="og:description" content={post.summary}/>
-  <meta property="og:image" content={$page.url.host + post.thumbnail}/>
+  <meta property="og:image" content={$page.url.protocol + "//" + $page.url.host + post.thumbnail}/>
 </svelte:head>
