@@ -18,7 +18,8 @@
 
   afterNavigate(() => {
     const query = $page.url.searchParams.get('query');
-    if (query != null) inputElement.value = query;
+    if (query) inputElement.value = query;
+    else inputElement.value = "";
   })
 </script>
 
