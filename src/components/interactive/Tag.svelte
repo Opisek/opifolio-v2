@@ -68,7 +68,7 @@
 </style>
 
 <div>
-  <a href={`/search?tags=${encodeURIComponent(tag)}`} style={`border-color: ${colour};`}>
+  <a href={`/search?tag=${encodeURIComponent(tag)}`} style={`border-color: ${colour};`}>
     {tag}
   </a>
   <span style={`background-color: ${colour};`}/>
