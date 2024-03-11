@@ -2,6 +2,7 @@
   import DotRow from "../layout/DotRow.svelte";
   import Header from "./Header.svelte";
   import Tag from "../interactive/Tag.svelte";
+  import TagRow from "../layout/TagRow.svelte";
 
   export let post: PostData;
   export let compact: boolean = false;
@@ -88,15 +89,6 @@
     align-items: center;
   }
 
-  div.tags {
-    grid-area: tags;
-    display: flex;
-    gap: $gapSmaller;
-    justify-content: start;
-    flex-wrap: wrap;
-    background-color: inherit;
-  }
-
   summary {
     grid-area: summary;
   }
@@ -135,11 +127,11 @@
     </Header>
   </div>
   {#if !compact}
-    <div class="tags">
+    <TagRow>
       {#each post.tags as tag}
         <Tag tag={tag} />
       {/each}
-    </div>
+    </TagRow>
   {/if}
   <summary class:compact={compact}>
     {post.summary}

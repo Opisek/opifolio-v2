@@ -1,10 +1,22 @@
 <script lang="ts">
   import hash from "hash.js";
 
+  import { goto } from "$app/navigation";
+  import { page } from "$app/stores";
+
   export let tag: string;
+  export let active: boolean = false;
+  export let filtersPane: boolean = false;
 
   const hue = parseInt(hash.sha1().update(tag).digest("hex").slice(0, 2), 16) / 255 * 360;
   const colour = `hsl(${hue}, 10%, 22%)`;
+
+  function click(event: MouseEvent) {
+    if (!filtersPane) return;
+    event.preventDefault();
+    const query = $page.url.searchParams.get('query');
+    requestAnimationFrame(() => goto(`/search?tag=${encodeURIComponent(tag)}${query ? `&query=${encodeURIComponent(query)}` : ""}`));
+  }
 </script>
 
 <style lang="scss">
@@ -36,11 +48,7 @@
     position: relative;
     z-index: 10;
     background-color: inherit;
-    margin: 1.5 * $borderWidth 0;
-  }
-
-  a:hover {
-    transform: scale(110%);
+    margin: 2 * $borderWidth 0;
   }
 
   span {
@@ -59,7 +67,7 @@
     background-color: inherit;
   }
 
-  div:hover > span.deactivated {
+  div:hover > span.deactivated, span.active {
     width: 0;
     height: 0;
     left: 50%;
@@ -68,9 +76,9 @@
 </style>
 
 <div>
-  <a href={`/search?tag=${encodeURIComponent(tag)}`} style={`border-color: ${colour};`}>
+  <a href={`/search?tag=${encodeURIComponent(tag)}`} style={`border-color: ${colour};`} on:click={click}>
     {tag}
   </a>
   <span style={`background-color: ${colour};`}/>
-  <span class="deactivated"/>
+  <span class="deactivated" class:active={active}/>
 </div>

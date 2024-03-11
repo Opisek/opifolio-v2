@@ -6,9 +6,10 @@
   import { beforeNavigate, afterNavigate } from "$app/navigation";
   import { tick } from "svelte";
 
-  // Fix SvelteKit scrolling issue
   import { browser } from "$app/environment";
+  import { page } from "$app/stores";
 
+  // Fix SvelteKit scrolling issue
   beforeNavigate(async () => {
     if (!browser) return;
     document.getElementsByTagName("html")[0].classList.add("pageSwitch");
@@ -110,7 +111,9 @@
     <Link href="/projects">Projects</Link>
   </svelte:fragment>
   <svelte:fragment slot="secondary">
-    <Search/>
+    {#if $page.url.pathname != "/search"}
+        <Search/>
+    {/if}
   </svelte:fragment>
 </Navbar>
 <div>

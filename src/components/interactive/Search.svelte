@@ -2,11 +2,24 @@
   import InlineButton from "./InlineButton.svelte";
   import SearchIcon from "lucide-svelte/icons/search";
 
-  let inputElement: HTMLElement;
+  import { afterNavigate, goto } from "$app/navigation";
+  import { page } from "$app/stores";
 
-  function focus() {
-    inputElement.focus();
+  let inputElement: HTMLInputElement;
+
+  function sumbit() {
+    const query = (inputElement.value || "").trim();
+    if (query == "") requestAnimationFrame(() => inputElement.focus());
+    else {
+      const tag = $page.url.searchParams.get('tag');
+      requestAnimationFrame(() => goto(`/search?query=${encodeURIComponent(query)}${tag ? `&tag=${encodeURIComponent(tag)}` : ""}`));
+    }
   }
+
+  afterNavigate(() => {
+    const query = $page.url.searchParams.get('query');
+    if (query != null) inputElement.value = query;
+  })
 </script>
 
 <style lang="scss">
@@ -26,17 +39,17 @@
     font-family: inherit;
   }
 
-  span {
+  form {
     width: max-content;
-    gap: $gapSmall;
+    gap: $gapSmaller;
     display: flex;
     flex-direction: row;
   }
 </style>
 
-<span>
+<form on:submit={sumbit}>
   <input type="text" placeholder="Search" bind:this={inputElement}/>
-  <InlineButton on:click={focus} spin={360} alt="Search">
+  <InlineButton on:click={sumbit} spin={360} alt="Search">
     <SearchIcon/>
   </InlineButton>
-</span>
+</form>

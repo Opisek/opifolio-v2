@@ -1,10 +1,9 @@
 <script lang="ts">
   import Divider from "../../../components/common/Divider.svelte";
   import DotRow from "../../../components/layout/DotRow.svelte";
-  import InlineButton from "../../../components/interactive/InlineButton.svelte";
+  import Floater from "../../../components/interactive/Floater.svelte";
   import Markdown from "../../../components/markdown/Markdown.svelte";
   import Outline from "../../../components/interactive/Outline.svelte";
-  import OutlineIcon from "lucide-svelte/icons/list";
   import Tag from "../../../components/interactive/Tag.svelte";
   import Title from "../../../components/common/Title.svelte";
 
@@ -27,14 +26,9 @@
   }
 
   export let visible: boolean = false;
-  function toggle() {
-    visible = !visible;
-  }
   function close() {
     visible = false;
   }
-
-  // TODO: add admonitions
 </script>
 
 <style lang="scss">
@@ -133,42 +127,6 @@
     align-items: left;
     justify-content: start;
   }
-
-  div.floater {
-    display: flex;
-    flex-direction: column;
-    gap: $gapSmaller;
-    justify-content: center;
-    width: 100%;
-  
-    transform: translate(calc(100% - 2.1em), calc(100% - 2em));
-
-    position: fixed;
-
-    padding: $paddingSmaller calc(#{$paddingSmaller} + 100vw - 100%) $paddingSmaller $paddingSmaller;
-
-    color: $evenDarkerForeground;
-    background-color: $evenDarkerBackground;
-
-    bottom: 0;
-    right: 0; 
-
-    border-radius: $borderRadius 0 0 0;
-
-    z-index: 30;
-
-    width: max-content;
-
-    text-align: center;
-
-    @media screen and (min-width: $screenNormal) {
-      display: none;  
-    }
-  }
-
-  div.floater.active {
-    transform: translate(0);
-  }
 </style>
 
 <!-- Title, Author, Date -->
@@ -209,12 +167,9 @@
   </article>
 </section>
 
-<div class="floater" class:active={visible}>
-  <InlineButton on:click={toggle} spin={360} alt="Table of Contests">
-    <OutlineIcon/>
-  </InlineButton>
+<Floater alt="Table of Contents" bind:visible>
   <Outline headings={headings} clickCallback={close}/>
-</div>
+</Floater>
 
 <svelte:window bind:innerWidth/>
 

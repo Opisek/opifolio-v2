@@ -34,7 +34,7 @@ function handlePostAddMetadata(path: string) {
   post.thumbnail = `/blog/${post.id}/images/${post.thumbnail}.webp`;
 
   // Insert post metadata and potentially markdown
-  const isNewEntry = !db.getPost(id) && fs.existsSync(`/app/posts/${id}/post.md`);
+  const isNewEntry = !db.existsPost(id) && fs.existsSync(`/app/posts/${id}/post.md`);
   db.insertPost(post);
   if (isNewEntry) handlePostAddMarkdown(`/app/posts/${id}/post.md`);
 }
@@ -45,7 +45,7 @@ function handlePostAddMarkdown(path: string) {
   if (id == null) return;
   
   // Check if post exists
-  if (!db.getPost(id)) return;
+  if (!db.existsPost(id)) return;
 
   // Update post markdown
   db.insertMarkdown(id, fs.readFileSync(path, "utf-8"));

@@ -41,6 +41,9 @@ export function initialize() {
       FOREIGN KEY(dbid) REFERENCES posts(dbid) ON DELETE CASCADE ON UPDATE CASCADE
     );
   `)
+  db.exec(`
+    CREATE INDEX IF NOT EXISTS tags_index ON tags(tag);
+  `)
   
   // Search
   db.exec(`
@@ -134,7 +137,8 @@ function parsePost(post: PostData): PostData {
   parsedPost.tags = db.prepare(`
     SELECT tag
     FROM tags
-    WHERE dbid = @dbid;
+    WHERE dbid = @dbid
+    ORDER BY tag;
   `).all({ dbid: getID(post.id) }).map((tag) => (tag as { tag: string }).tag);
 
   parsedPost.timestamp = new Date(parsedPost.timestamp as unknown as number * 1000);
@@ -166,6 +170,14 @@ export function getPost(humanid: string) {
 
   if (!post) return null;
   return parsePost(post as PostData);  
+}
+
+export function existsPost(humanid: string) {
+  return (db.prepare(`
+    SELECT COUNT(*) as count
+    FROM posts
+    WHERE humanid = @humanid;
+  `).get({ humanid }) as { count: number }).count > 0;
 }
 
 export function searchPosts(query: string | null, tag: string | null) {
@@ -203,4 +215,12 @@ export function searchPosts(query: string | null, tag: string | null) {
   const result = db.prepare(sql).all({ query, tag });
 
   return result.map(post => parsePost(post as PostData));
+}
+
+export function getTags() {
+  return db.prepare(`
+    SELECT DISTINCT tag
+    FROM tags
+    ORDER BY tag;
+  `).all().map((tag) => (tag as { tag: string }).tag);
 }

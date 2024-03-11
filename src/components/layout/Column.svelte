@@ -1,5 +1,5 @@
 <script lang="ts">
-  export let gap: string | null = null;
+  export let narrow: boolean = false;
 </script>
 
 <style lang="scss">
@@ -17,16 +17,13 @@
       justify-content: start;
     }
   }
+
+  div.narrow {
+    gap: $gapSmaller;
+  }
 </style>
 
-{#if gap}
-  <div style:gap={gap}>
-    <slot>
-    </slot>
-  </div>
-{:else}
-  <div>
-    <slot>
-    </slot>
-  </div>
-{/if}
+<div class:narrow={narrow}>
+  <slot>
+  </slot>
+</div>
