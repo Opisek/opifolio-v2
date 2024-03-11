@@ -22,6 +22,7 @@
 </script>
 
 <style lang="scss">
+  @import "../../styles/colors.scss";
   @import "../../styles/dimensions.scss";
   @import "../../styles/media.scss";
 
@@ -50,6 +51,8 @@
     display: flex;
     flex-direction: column;
     gap: $gapSmaller;
+
+    background-color: $primaryBackground;
 
     @media screen and (max-width: $screenNormal) {
       display: none;

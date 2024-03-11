@@ -18,7 +18,7 @@
     display: flex;
     flex-direction: column;
     gap: $gapSmaller;
-    background-color: $primaryBackground;
+    background-color: inherit;
   }
 </style>
 

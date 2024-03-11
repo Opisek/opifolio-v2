@@ -16,7 +16,7 @@
   a {
     display: grid;
 
-    grid-template-columns: $thumbnailWidth 1fr auto;
+    grid-template-columns: $thumbnailWidth auto auto;
     grid-template-rows: auto auto auto;
     grid-template-areas: "thumbnail title tags" "thumbnail summary summary" "thumbnail details details";
 
@@ -32,7 +32,6 @@
     @media screen and (max-width: $screenVeryNarrow) {
       grid-template-columns: $thumbnailWidthSmall 1fr;
       grid-template-rows: auto auto auto auto;
-      //grid-template-areas: "thumbnail title" "thumbnail summary" "details details" "tags tags";
       grid-template-areas: "thumbnail title" "thumbnail tags" "summary summary" "details details";
     }
   }
@@ -127,7 +126,7 @@
     </Header>
   </div>
   {#if !compact}
-    <TagRow>
+    <TagRow right={true}>
       {#each post.tags as tag}
         <Tag tag={tag} />
       {/each}
