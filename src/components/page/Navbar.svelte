@@ -58,7 +58,7 @@
     const touchDeltaT = event.timeStamp - touchStartTimestamp;
 
     if (
-      touchDeltaT > 500
+      touchDeltaT > 300
       || Math.abs(touchDeltaY) > Math.abs(touchDeltaX) * 0.5
       || Math.abs(touchDeltaX) < 100
     ) return;
