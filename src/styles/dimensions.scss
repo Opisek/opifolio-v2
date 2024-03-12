@@ -35,8 +35,12 @@ $fontSize: 1.5rem;
 $fontSizeSmall: 1.2rem;
 $fontSizeCode: 1.3rem;
 $fontWeight: 400;
-$fontWeightBold: 600;
+$fontWeightBold: 800;
+$fontWeightEmphasis: 350;
 $fontWeightTitle: 700;
+$fontSpacingEmphasis: 0.1rem;
+
+$lineHeightParagraph: $fontSize * 1.4;
 
 /* Navbar */
 $navbarHeight: 3em;

@@ -3,6 +3,8 @@
   import Divider from "../common/Divider.svelte";
   import MarkdownCode from "./MarkdownCode.svelte";
   import MarkdownHeading from "./MarkdownHeading.svelte";
+  import MarkdownList from "./MarkdownList.svelte";
+  import MarkdownListItem from "./MarkdownListItem.svelte";
   import MarkdownParagraph from "./MarkdownParagraph.svelte";
   import MarkdownQuote from "./MarkdownQuote.svelte";
   import SvelteMarkdown from "svelte-markdown";
@@ -25,7 +27,9 @@
     paragraph: MarkdownParagraph,
     code: MarkdownCode,
     blockquote: MarkdownQuote,
-    hr: Divider
+    hr: Divider,
+    list: MarkdownList,
+    listitem: MarkdownListItem
   }}
   on:parsed={parsed}
 />

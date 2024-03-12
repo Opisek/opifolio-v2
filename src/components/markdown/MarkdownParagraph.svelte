@@ -1,6 +1,8 @@
 <script lang="ts">
   import Link from "../interactive/Link.svelte";
+  import MarkdownBold from "./MarkdownBold.svelte";
   import MarkdownCodeSpan from "./MarkdownCodeSpan.svelte";
+  import MarkdownEmphasis from "./MarkdownEmphasis.svelte";
   import MarkdownImage from "./MarkdownImage.svelte";
   import MarkdownText from "./MarkdownText.svelte";
   import Paragraph from "../common/Paragraph.svelte";
@@ -22,7 +24,9 @@
         link: Link,
         text: MarkdownText,
         codespan: MarkdownCodeSpan,
-        image: MarkdownImage
+        image: MarkdownImage,
+        em: MarkdownEmphasis,
+        strong: MarkdownBold
       }}
     />
   </span>
