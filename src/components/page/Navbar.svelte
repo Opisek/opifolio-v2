@@ -91,6 +91,10 @@
     }
   }
 
+  nav.top {
+    background-color: $primaryBackground;
+  }
+
   div.overlay {
     opacity: 0;
     position: absolute;
