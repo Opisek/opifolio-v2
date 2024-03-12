@@ -16,7 +16,7 @@
 	@import "../../styles/dimensions.scss";
 
 	:global(.katex) {
-		font-size: $fontSize;
+		font-size: $fontSize !important;
 	}
 </style>
 
