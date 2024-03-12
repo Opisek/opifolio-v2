@@ -41,7 +41,7 @@
     flex-direction: row;
     gap: $gapSmaller;
     align-items: center;
-    font-weight: $fontWeightBold;
+    font-weight: $fontWeightSemiBold;
   }
 </style>
 
