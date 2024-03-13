@@ -14,8 +14,8 @@ export const GET: RequestHandler = async ({ params }) => {
     let file;
     if (!fs.existsSync(`/app/posts/${postID}/images/${imageID}.webp`)) {
       file = await sharp(`/app/posts/${postID}/images/${imageID}`)
-        .webp({ quality: 70 })
-        .resize(500, 500, { fit: 'inside' })
+        .webp({ quality: 90 })
+        .resize(750, 750, { fit: 'inside' })
         .toBuffer();
       await fsp.writeFile(`/app/posts/${postID}/images/${imageID}.webp`, file);
     } else {
