@@ -8,8 +8,8 @@
   export let active: boolean = false;
   export let filtersPane: boolean = false;
 
-  const hue = parseInt(hash.sha1().update(tag).digest("hex").slice(0, 2), 16) / 255 * 360;
-  const colour = `hsl(${hue}, 10%, 22%)`;
+  $: hue = parseInt(hash.sha1().update(tag).digest("hex").slice(0, 2), 16) / 255 * 360;
+  $: colour = `hsl(${hue}, 10%, 22%)`;
 
   function click(event: MouseEvent) {
     if (!filtersPane) return;
