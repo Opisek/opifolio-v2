@@ -134,7 +134,7 @@
     align-items: left;
     justify-content: start;
 
-    overflow-x: hidden;
+    overflow: hidden;
   }
 </style>
 
