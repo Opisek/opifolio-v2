@@ -103,6 +103,7 @@
     @media screen and (min-width: $screenNormal) {
       grid-template-columns: 100% auto; 
       grid-template-areas: "article outline";
+      width: calc(100% - $paddingLarger);
     }
   }
 
