@@ -1,5 +1,11 @@
 <script lang="ts">
   import { page } from "$app/stores";
+    import SvelteMarkdown from "svelte-markdown";
+    import Link from "../interactive/Link.svelte";
+    import MarkdownText from "./MarkdownText.svelte";
+    import MarkdownCodeSpan from "./MarkdownCodeSpan.svelte";
+    import MarkdownEmphasis from "./MarkdownEmphasis.svelte";
+    import MarkdownBold from "./MarkdownBold.svelte";
 
   export let href: string;
   export let text: string;
@@ -36,5 +42,15 @@
 
 <figure>
   <img src={href} alt={text}/>
-  <figcaption>{text}</figcaption>
+  <figcaption>
+    <SvelteMarkdown isInline source={text}
+      renderers={{
+        link: Link,
+        text: MarkdownText,
+        codespan: MarkdownCodeSpan,
+        em: MarkdownEmphasis,
+        strong: MarkdownBold
+      }}
+    />
+  </figcaption>
 </figure>
