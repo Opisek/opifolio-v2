@@ -16,7 +16,15 @@
   import { browser } from "$app/environment";
 
   let posts: PostData[] = [];
-  (async () => {if (browser) posts = await (await fetch("/api/posts?limit=5")).json()})();
+  let postsLoaded: boolean = false;
+  let fetchError: boolean = false;
+  (async () => {
+    if (!browser) return
+    const response = await fetch("/api/posts?limit=3");
+    postsLoaded = true;
+    if (response.ok) posts = await response.json();
+    else fetchError = true;
+  })();
 </script>
 
 <Splash src={portraitImage} alt="Portrait Photo">
@@ -35,7 +43,11 @@
 
 <Title id="posts">Recent Posts</Title>
 <Row>
-  {#if posts.length == 0}
+  {#if !postsLoaded}
+    Loading posts...
+  {:else if fetchError}
+    Could not load posts at this moment
+  {:else if posts.length == 0}
     No posts yet
   {:else}
     {#each posts as post}
