@@ -199,36 +199,41 @@ export function searchPosts(query: string | null, tag: string | null, amount: nu
   if (Number.isNaN(amount) || amount > 10 || amount < 1) amount = 10;
   if (Number.isNaN(offset) || offset < 0) offset = 0;
 
-  let subclause = "";
-  if (query != null) {
-    subclause += `
-      SELECT dbid
-      FROM posts_fts
-      WHERE posts_fts MATCH @query
-    `;
-  }
-  if (tag != null) {
-    if (subclause != "") subclause += "INTERSECT"
-    subclause += `
-      SELECT dbid
-      FROM tags
-      WHERE tag=@tag
-    `;
-  }
-  if (subclause == "") {
-    subclause = `
-      SELECT dbid
-      FROM posts 
+  let subclause =
+    query == null
+    ? `
+      SELECT posts.*
+      FROM posts
+      ORDER BY timestamp DESC
     `
+    : `
+      SELECT posts.*
+      FROM posts_fts
+      JOIN posts ON posts.dbid = posts_fts.rowid
+      WHERE posts_fts MATCH @query
+      ORDER BY rank, timestamp DESC
+    `;
+  
+  let condition = `
+    WHERE public = true
+  `
+  if (tag != null) {
+    condition += `
+      AND EXISTS (
+        SELECT *
+        FROM tags
+        WHERE tags.dbid = filtered.dbid
+        AND tag = @tag
+      )
+    `;
   }
 
   const sql = `
     SELECT humanid AS id, title, summary, thumbnail, author, timestamp
     FROM (
       ${subclause}
-    ) ids
-    JOIN posts ON posts.dbid = ids.dbid
-    WHERE public = true
+    ) filtered
+    ${condition}
     LIMIT @amount
     OFFSET @offset;
   `;
