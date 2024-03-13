@@ -11,7 +11,6 @@
   export let visible = false;
 
   let scrollY: number;
-  let width: number;
 
   function show() {
     visible = true;
@@ -143,10 +142,21 @@
   div.mobile.active {
     transform: translateX(0);
   }
+
+  nav.mobileNav {
+    @media screen and (min-width: $screenNarrow) {
+      display: none;
+    }
+  }
+
+  nav.desktopNav {
+    @media screen and (max-width: $screenNarrow) {
+      display: none;
+    }
+  }
 </style>
 
-<nav class:top={scrollY == 0} class:mobile={width < 1000}>
-  {#if width < 1000}
+<nav class:top={scrollY == 0} class="mobileNav">
     <InlineButton on:click={show} spin={180} alt="Navigation Menu">
       <OpenIcon/>
     </InlineButton>
@@ -159,20 +169,20 @@
         <slot name="primary"></slot>
       </Column>
     </div>
-  {:else}
-    <div class="overlay"></div>
-    <div class="left">
-      <slot name="primary"></slot>
-    </div>
-    <div class="right">
-      <slot name="secondary"></slot>
-    </div>
-  {/if}
+</nav>
+
+<nav class:top={scrollY == 0} class="desktopNav">
+  <div class="overlay"></div>
+  <div class="left">
+    <slot name="primary"></slot>
+  </div>
+  <div class="right">
+    <slot name="secondary"></slot>
+  </div>
 </nav>
 
 <svelte:window
   bind:scrollY={scrollY}
-  bind:innerWidth={width}
   on:touchstart={touchStart}
   on:touchend={touchEnd}
 />
