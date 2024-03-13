@@ -31,7 +31,9 @@ function handlePostAddMetadata(path: string) {
   post.tags = post.tags.sort();
 
   post.id = id; 
-  post.thumbnail = `/blog/${post.id}/images/${post.thumbnail}.webp`;
+  if (!post.thumbnail.startsWith("http")) {
+    post.thumbnail = `/blog/${post.id}/images/${post.thumbnail}.webp`;
+  }
 
   // Insert post metadata and potentially markdown
   const isNewEntry = !db.existsPost(id) && fs.existsSync(`/app/posts/${id}/post.md`);
