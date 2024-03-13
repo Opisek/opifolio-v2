@@ -1,5 +1,7 @@
 import Database from "better-sqlite3";
 
+export const DEFAULT_LIMIT = 10;
+
 const db = new Database();
 
 function getID(humanid: string): number {
@@ -167,7 +169,8 @@ export function getPosts(amount: number, offset: number) {
     FROM posts
     WHERE public = true
     ORDER BY timestamp DESC
-    LIMIT @amount OFFSET @offset;
+    LIMIT @amount
+    OFFSET @offset;
   `).all({ amount, offset });
 
   return result.map(post => parsePost(post as PostData));
@@ -192,7 +195,10 @@ export function existsPost(humanid: string) {
   `).get({ humanid }) as { count: number }).count > 0;
 }
 
-export function searchPosts(query: string | null, tag: string | null) {
+export function searchPosts(query: string | null, tag: string | null, amount: number, offset: number) {
+  if (Number.isNaN(amount) || amount > 10 || amount < 1) amount = 10;
+  if (Number.isNaN(offset) || offset < 0) offset = 0;
+
   let subclause = "";
   if (query != null) {
     subclause += `
@@ -222,10 +228,12 @@ export function searchPosts(query: string | null, tag: string | null) {
       ${subclause}
     ) ids
     JOIN posts ON posts.dbid = ids.dbid
-    WHERE public = true;
+    WHERE public = true
+    LIMIT @amount
+    OFFSET @offset;
   `;
 
-  const result = db.prepare(sql).all({ query, tag });
+  const result = db.prepare(sql).all({ query, tag, amount, offset });
 
   return result.map(post => parsePost(post as PostData));
 }

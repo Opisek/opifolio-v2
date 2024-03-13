@@ -1,9 +1,7 @@
-import { getPosts } from '$lib/server/db.js';
-
-const DEFAULT_AMOUNT = 10;
+import { getPosts, DEFAULT_LIMIT } from '$lib/server/db.js';
 
 export function GET({ url }) {
-  const amount = Number.parseInt(url.searchParams.get('amount') || DEFAULT_AMOUNT.toString());
+  const amount = Number.parseInt(url.searchParams.get('amount') || DEFAULT_LIMIT.toString());
   const offset = Number.parseInt(url.searchParams.get('offset') || "0");
 
   const posts = getPosts(amount, offset);
