@@ -12,7 +12,13 @@
   
   export let markdown: string;
   const escaped = markdown.replaceAll("\\$", "&#92;&#36;") // to enable TeX escaping
-  const sanitized = sanitizeHtml(escaped, { disallowedTagsMode: "recursiveEscape" });
+  const sanitized = sanitizeHtml(escaped, {
+    disallowedTagsMode: "recursiveEscape",
+    parser: {
+      lowerCaseTags: false,
+      lowerCaseAttributeNames: false
+    }
+  });
   const parseable = sanitized
     .replaceAll(/^&gt;/gm, ">") // sanitization breaks markdown quotes
     .replaceAll("\\$", "&#92;&#36;") // to enable TeX escaping
