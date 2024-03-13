@@ -91,12 +91,18 @@
   }
 
   section {
+    display: grid;
+    grid-template-rows: auto;
+    gap: $gap;
+    align-items: start;
+
+    @media screen and (max-width: $screenNormal) {
+      grid-template-columns: 100%; 
+      grid-template-areas: "article";
+    }
     @media screen and (min-width: $screenNormal) {
-      display: grid;
-      grid-template-columns: 1fr auto; 
+      grid-template-columns: 100% auto; 
       grid-template-areas: "article outline";
-      gap: $gap;
-      align-items: start;
     }
   }
 
@@ -126,6 +132,8 @@
     gap: $gapSmall;
     align-items: left;
     justify-content: start;
+
+    overflow-x: hidden;
   }
 </style>
 
