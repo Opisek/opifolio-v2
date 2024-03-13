@@ -54,10 +54,10 @@
   span {
     position: absolute;
     width: 100%;
-    height: calc(100% + #{3.5 * $borderWidth});
+    height: calc(100% + #{4 * $borderWidth});
     content: " ";
     display: block;
-    top: -1.3 * $borderWidth;
+    top: -0.5 * 4 * $borderWidth;
     left: 0;
     border-radius: $borderRadius;
     z-index: -1;
