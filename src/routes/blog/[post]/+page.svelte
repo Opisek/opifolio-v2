@@ -135,6 +135,8 @@
     justify-content: start;
 
     overflow: hidden;
+
+    margin-bottom: $borderWidth;
   }
 </style>
 
