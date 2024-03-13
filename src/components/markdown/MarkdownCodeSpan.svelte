@@ -12,7 +12,7 @@
     padding: $paddingSmaller;
     width: fit-content;
     border-radius: $borderRadius;
-    white-space: pre-wrap;
+    white-space: pre;
     font-family: "DM Mono", monospace;
     font-size: $fontSizeCode;
   }

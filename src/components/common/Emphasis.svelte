@@ -3,7 +3,7 @@
 
   em {
     font-style: italic;
-    font-weight: $fontWeightEmphasis;
+    //font-weight: $fontWeightEmphasis;
     letter-spacing: $fontSpacingEmphasis;
   }
 </style>

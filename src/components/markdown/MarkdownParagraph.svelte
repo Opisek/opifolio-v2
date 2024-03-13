@@ -1,9 +1,9 @@
 <script lang="ts">
-  import Link from "../interactive/Link.svelte";
   import MarkdownBold from "./MarkdownBold.svelte";
   import MarkdownCodeSpan from "./MarkdownCodeSpan.svelte";
   import MarkdownEmphasis from "./MarkdownEmphasis.svelte";
   import MarkdownImage from "./MarkdownImage.svelte";
+  import MarkdownLink from "./MarkdownLink.svelte";
   import MarkdownText from "./MarkdownText.svelte";
   import Paragraph from "../common/Paragraph.svelte";
   import SvelteMarkdown from "svelte-markdown";
@@ -21,7 +21,7 @@
   <span>
     <SvelteMarkdown isInline source={text} 
       renderers={{
-        link: Link,
+        link: MarkdownLink,
         text: MarkdownText,
         codespan: MarkdownCodeSpan,
         image: MarkdownImage,
