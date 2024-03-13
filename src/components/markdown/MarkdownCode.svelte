@@ -48,7 +48,7 @@
     }
   }
   
-  span.code {
+  code {
     white-space: pre;
     font-family: "DM Mono", monospace;
     font-size: $fontSizeCode;
@@ -122,7 +122,7 @@
       <CopyIcon/>
     </InlineButton>
   </div>
-  <span class="code">
+  <code>
     {@html highlighted}
-  </span>
+  </code>
 </div>

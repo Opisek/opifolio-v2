@@ -6,7 +6,7 @@
   @import "../../styles/colors.scss";
   @import "../../styles/dimensions.scss";
   
-  span {
+  code {
     color: $codeForeground;
     background-color: $codeBackground;
     padding: $paddingSmaller;
@@ -18,6 +18,6 @@
   }
 </style>
 
-<span>
+<code>
   {@html text.replaceAll("&amp;", "&")}
-</span>
+</code>
