@@ -55,7 +55,8 @@ export function initialize() {
       summary,
       markdown,
       content=posts,
-      content_rowid=dbid
+      content_rowid=dbid,
+      tokenize="trigram case_sensitive 0 remove_diacritics 1"
     );
   `)
   db.exec(`
