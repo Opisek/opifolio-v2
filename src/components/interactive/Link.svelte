@@ -5,11 +5,12 @@
 </script>
 
 <style lang="scss">
+  @import "../../styles/colors.scss";
   @import "../../styles/dimensions.scss";
 
   a {
     position: relative;
-    color: inherit;
+    color: $emphasisForeground;
     text-decoration: inherit;
     cursor: pointer;
   }

@@ -64,7 +64,7 @@
   }
 
   a.headingLink:hover {
-    color: $primaryForeground;
+    color: $emphasisForeground;
   }
 
   a.active {

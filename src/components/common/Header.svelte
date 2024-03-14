@@ -4,12 +4,14 @@
 </script>
 
 <style lang="scss">
+  @import "../../styles/colors.scss";
   @import "../../styles/dimensions.scss";
   @import "../../styles/media.scss";
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Crete round', serif;
     font-weight: $fontWeightTitle;
+    color: $emphasisForeground;
     margin: 0;
   }
 

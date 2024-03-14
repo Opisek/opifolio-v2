@@ -27,7 +27,7 @@
     text-decoration: inherit;
     padding: $paddingSmaller;
     border-radius: $borderRadius;
-    color: $secondaryForeground;
+    color: $emphasisForeground;
     font-size: $fontSizeSmall;
     cursor: pointer;
     text-align: center;

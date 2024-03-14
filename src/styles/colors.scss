@@ -1,42 +1,44 @@
 $primaryBackground: #282528;
-$primaryForeground:#F0F8FF;
+$primaryForeground:#cfd3d6;
 $secondaryBackground: #3b373b;
-$secondaryForeground:#F0F8FF;
+$secondaryForeground: $primaryForeground;
 
 $darkerBackground: #222022;
-$darkerForeground:#F0F8FF;
+$darkerForeground: $primaryForeground;
 
 $evenDarkerBackground: #1e1d1e;
-$evenDarkerForeground:#F0F8FF;
+$evenDarkerForeground: $primaryForeground;
+
+$emphasisForeground:#F0F8FF;
 
 $navbarBackground: #282528b9;
 $navbarBackgroundOpaque: #282528e5;
 
-$fadedForeground: rgb(185, 184, 184);
+$fadedForeground: #9b9fa3;
 
 $codeBackground: #222022;
-$codeForeground: #F0F8FF;
+$codeForeground: $emphasisForeground;
 
 // Admonitions
 $colors: (
   "warning": (
     "background": #ef9f15,
-    "foreground": #282528
+    "foreground": $primaryBackground
   ),
   "error": (
     "background": #c91d1a,
-    "foreground": #F0F8FF
+    "foreground": $emphasisForeground 
   ),
   "success": (
     "background": #36aa2e,
-    "foreground": #F0F8FF
+    "foreground": $emphasisForeground
   ),
   "example": (
     "background": #911ac9,
-    "foreground": #F0F8FF
+    "foreground": $emphasisForeground
   ),
   "info": (
     "background": #1a7dc9,
-    "foreground": #F0F8FF
+    "foreground": $emphasisForeground
   )
 )
