@@ -1,7 +1,10 @@
 $primaryBackground: #282528;
 $primaryForeground:#cfd3d6;
+
+$emphasisForeground:#F0F8FF;
+
 $secondaryBackground: #3b373b;
-$secondaryForeground: $primaryForeground;
+$secondaryForeground: $emphasisForeground;
 
 $darkerBackground: #222022;
 $darkerForeground: $primaryForeground;
@@ -9,7 +12,6 @@ $darkerForeground: $primaryForeground;
 $evenDarkerBackground: #1e1d1e;
 $evenDarkerForeground: $primaryForeground;
 
-$emphasisForeground:#F0F8FF;
 
 $navbarBackground: #282528b9;
 $navbarBackgroundOpaque: #282528e5;
