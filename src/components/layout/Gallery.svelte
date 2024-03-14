@@ -7,38 +7,24 @@
   @import "../../styles/dimensions.scss";
   @import "../../styles/media.scss";
 
-  //div {
-  //  display: flex;
-  //  flex-direction: row;
-  //  flex-wrap: wrap;
-
-  //  flex-grow: 1;
-
-  //  justify-content: center;
-  //  align-items: stretch;
-  //  
-  //  height: fit-content;
-  //  grid-gap: $gapSmall;
-
-  //  @media screen and (max-width: $screenNarrow) {
-  //    flex-direction: column;
-  //  }
-  //}
-
   div {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax($cardWidth, 1fr));
-    grid-auto-rows: 1fr;
-
+    grid-gap: $gapSmall;
+    justify-content: center;
     width: 100%;
 
-    justify-content: center;
-    align-items: stretch;
-    
-    grid-gap: $gapSmall;
+    @media screen and (min-width: $screenNarrow) {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax($cardWidth, 1fr));
+      grid-auto-rows: 1fr;
+
+      align-items: stretch;
+    }
 
     @media screen and (max-width: $screenNarrow) {
-      grid-template-columns: 1fr;
+      display: flex;
+      flex-direction: column;
+
+      align-items: center;
     }
   } 
 </style>
