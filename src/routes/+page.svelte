@@ -6,6 +6,7 @@
 
   import Button from "../components/interactive/Button.svelte";
   import Card from "../components/common/Card.svelte";
+  import Gallery from "../components/layout/Gallery.svelte";
   import ImageLink from "../components/interactive/ImageLink.svelte";
   import Link from "../components/interactive/Link.svelte";
   import Paragraph from "../components/common/Paragraph.svelte";
@@ -14,13 +15,14 @@
   import Title from "../components/common/Title.svelte";
 
   import { browser } from "$app/environment";
+    import Center from "../components/layout/Center.svelte";
 
   let posts: PostData[] = [];
   let postsLoaded: boolean = false;
   let fetchError: boolean = false;
   (async () => {
     if (!browser) return
-    const response = await fetch("/api/posts?limit=3");
+    const response = await fetch("/api/posts?limit=6");
     postsLoaded = true;
     if (response.ok) posts = await response.json();
     else fetchError = true;
@@ -42,20 +44,22 @@
 </Splash>
 
 <Title id="posts" nomargin={true}>Recent Posts</Title>
-<Row>
-  {#if !postsLoaded}
-    Loading posts...
-  {:else if fetchError}
-    Could not load posts at this moment
-  {:else if posts.length == 0}
-    No posts yet
-  {:else}
+{#if !postsLoaded}
+  Loading posts...
+{:else if fetchError}
+  Could not load posts at this moment
+{:else if posts.length == 0}
+  No posts yet
+{:else}
+  <Gallery>
     {#each posts as post}
       <Card post={post} compact={true}/>
     {/each}
+  </Gallery>
+  <Center>
     <Button href="/blog">See all posts</Button>
-  {/if}
-</Row>
+  </Center>
+{/if}
 
 <Title id="social">Social Media</Title>
 <Row mobileAlign="left">

@@ -15,6 +15,8 @@
 
   a {
     display: grid;
+    position: relative;
+    background-color: $darkerBackground;
 
     grid-template-columns: $thumbnailWidth auto auto;
     grid-template-rows: auto auto auto;
@@ -23,7 +25,6 @@
     grid-column-gap: 2 * $gapSmaller;
     grid-row-gap: $gapSmaller;
 
-    background-color: $darkerBackground;
     padding: $paddingSmall;
     border-radius: $borderRadius;
     text-decoration: inherit;
@@ -36,20 +37,20 @@
     }
   }
 
+  a:hover {
+    background-color: $primaryBackground;
+  }
+
   a.compact {
-    width: $cardWidth;
+    min-width: $cardWidth;
     grid-template-columns: $thumbnailWidthSmall 1fr;
-    grid-template-rows: auto auto auto;
+    grid-template-rows: auto 1fr auto;
     grid-template-areas: "thumbnail title" "summary summary" "details details";
 
     @media screen and (max-width: $screenNarrow){
       width: 100%;
       grid-template-areas: "title title" "summary summary" "details details";
     }
-  }
-
-  a:hover {
-    transform: scale(103%);
   }
 
   div.thumbnailWrapper {
@@ -114,6 +115,49 @@
       font-size: $fontSizeSmall;
     }
   }
+
+  a > * {
+    z-index: 3;
+  }
+  
+  div.background {
+    position: absolute;
+    border-radius: $borderRadius;
+    background-color: $darkerBackground;
+    z-index: 2;
+
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+  }
+
+  a:hover > div.background {
+    height: calc(100% - #{2 * $borderWidth});
+    width: calc(100% - #{2 * $borderWidth});
+    left: $borderWidth;
+    top: $borderWidth;
+    background-color: $primaryBackground;
+  }
+
+  div.border {
+    position: absolute;
+    border-radius: $borderRadius;
+    background-color: $secondaryBackground;
+    z-index: 1;
+
+    height: calc(100% - #{2 * $borderWidth});
+    width: calc(100% - #{2 * $borderWidth});
+    left: $borderWidth;
+    top: $borderWidth;
+  }
+
+  a:hover > div.border {
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+  }
 </style>
 
 <a href={`blog/${post.id}`} class:compact={compact}>
@@ -151,4 +195,6 @@
       </DotRow>
     {/if}
   </aside>
+  <div class="border"/>
+  <div class="background"/>
 </a>
