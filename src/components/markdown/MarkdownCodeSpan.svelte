@@ -5,6 +5,7 @@
 <style lang="scss">
   @import "../../styles/colors.scss";
   @import "../../styles/dimensions.scss";
+  @import "../../styles/media.scss";
   
   code {
     color: $codeForeground;
@@ -15,6 +16,10 @@
     white-space: pre;
     font-family: "DM Mono", monospace;
     font-size: $fontSizeCode;
+
+    @media screen and (min-width: $screenNarrow) {
+      font-size: $fontSizeCodeMobile;
+    }
   }
 </style>
 

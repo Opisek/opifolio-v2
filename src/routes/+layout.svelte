@@ -65,6 +65,10 @@
     display: grid;
     grid-template-rows: auto 1fr;
     transition: none;
+
+    @media screen and (max-width: $screenNarrow) {
+      font-size: $fontSizeMobile;
+    }
   }
 
   :global(body.top) {

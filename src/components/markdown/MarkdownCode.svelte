@@ -61,6 +61,7 @@
 
     @media screen and (min-width: $screenNarrow) {
       padding-right: 10%;
+      font-size: $fontSizeCodeMobile;
     }
   }
 
