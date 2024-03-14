@@ -27,37 +27,33 @@
     text-decoration: inherit;
     padding: $paddingSmaller;
     border-radius: $borderRadius;
-    color: $emphasisForeground;
+    color: $secondaryForeground;
     font-size: $fontSizeSmall;
     cursor: pointer;
     text-align: center;
-    width: fit-content;
-    height: fit-content;
     word-wrap: none;
     white-space: nowrap;
     border-style: solid;
     border-width: $borderWidth;
     background-color: transparent;
     z-index: 1;
-    margin: 0;
   }
 
   div {
-    width: fit-content;
-    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
     z-index: 10;
     background-color: inherit;
-    margin: 2 * $borderWidth 0;
   }
 
   span {
     position: absolute;
     width: 100%;
-    height: calc(100% + #{4 * $borderWidth});
+    height: 100%;
     content: " ";
-    display: block;
-    top: -0.5 * 4 * $borderWidth;
+    top: 0;
     left: 0;
     border-radius: $borderRadius;
     z-index: -1;
@@ -71,7 +67,7 @@
     width: 0;
     height: 0;
     left: 50%;
-    top: calc(50% + #{0.5 * $borderWidth});
+    top: 50%;
   }
 </style>
 
