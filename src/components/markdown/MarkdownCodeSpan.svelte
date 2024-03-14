@@ -17,7 +17,7 @@
     font-family: "DM Mono", monospace;
     font-size: $fontSizeCode;
 
-    @media screen and (min-width: $screenNarrow) {
+    @media screen and (max-width: $screenNarrow) {
       font-size: $fontSizeCodeMobile;
     }
   }

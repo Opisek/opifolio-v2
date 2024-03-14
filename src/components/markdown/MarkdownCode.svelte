@@ -15,6 +15,7 @@
   let toastTimeout: ReturnType<typeof setTimeout> | null = null;
 
   function copy() {
+    console.log("copy")
     navigator.clipboard.writeText(unescaped);
 
     toastVisible = true;
@@ -61,6 +62,9 @@
 
     @media screen and (min-width: $screenNarrow) {
       padding-right: 10%;
+    }
+
+    @media screen and (max-width: $screenNarrow) {
       font-size: $fontSizeCodeMobile;
     }
   }
