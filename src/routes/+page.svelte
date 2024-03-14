@@ -41,7 +41,7 @@
   </Row>
 </Splash>
 
-<Title id="posts">Recent Posts</Title>
+<Title id="posts" nomargin={true}>Recent Posts</Title>
 <Row>
   {#if !postsLoaded}
     Loading posts...
