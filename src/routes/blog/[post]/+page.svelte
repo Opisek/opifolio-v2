@@ -4,6 +4,7 @@
   import Floater from "../../../components/interactive/Floater.svelte";
   import Markdown from "../../../components/markdown/Markdown.svelte";
   import Outline from "../../../components/interactive/Outline.svelte";
+  import Sidebar from "../../../components/page/Sidebar.svelte";
   import Tag from "../../../components/interactive/Tag.svelte";
   import Title from "../../../components/common/Title.svelte";
 
@@ -102,24 +103,8 @@
     }
     @media screen and (min-width: $screenNormal) {
       grid-template-columns: 100% auto; 
-      grid-template-areas: "article outline";
+      grid-template-areas: "article sidebar";
       width: calc(100% - $paddingLarger);
-    }
-  }
-
-  aside {
-    grid-area: outline;
-    position: sticky;
-    margin-top: -$navbarHeight - $paddingSmall;
-    padding-top: $navbarHeight + $paddingSmall;
-    top: 0;
-
-    display: flex;
-    flex-direction: column;
-    gap: $gapSmaller;
-
-    @media screen and (max-width: $screenNormal) {
-      display: none;
     }
   }
 
@@ -167,10 +152,10 @@
 
 <section>
   <!-- Outline -->
-  <aside>
+  <Sidebar>
     <b>Contents</b>
     <Outline headings={headings}/>
-  </aside>
+  </Sidebar>
 
   <!-- Rendered Markdown -->
   <article on:touchend={close}>

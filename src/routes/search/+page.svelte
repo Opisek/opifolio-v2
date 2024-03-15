@@ -5,6 +5,7 @@
   import Title from "../../components/common/Title.svelte";
 
   import { page } from "$app/stores";
+    import Sidebar from "../../components/page/Sidebar.svelte";
 
   let innerWidth: number;
 
@@ -30,7 +31,7 @@
     @media screen and (min-width: $screenNormal) {
       display: grid;
       grid-template-columns: 1fr auto; 
-      grid-template-areas: "posts outline";
+      grid-template-areas: "posts sidebar";
       gap: $gap;
       align-items: start;
     }
@@ -39,25 +40,6 @@
   div.posts {
     grid-area: posts;
   }
-
-  aside {
-    grid-area: outline;
-    position: sticky;
-    margin-top: -$navbarHeight - $paddingSmall;
-    padding-top: $navbarHeight + $paddingSmall;
-    top: 0;
-    max-width: 20vw;
-
-    display: flex;
-    flex-direction: column;
-    gap: $gapSmaller;
-
-    background-color: $primaryBackground;
-
-    @media screen and (max-width: $screenNormal) {
-      display: none;
-    }
-  }
 </style>
 
 <Title>Search Posts</Title>
@@ -65,10 +47,10 @@
   <div class="posts" on:touchend={close}>
     <PostColumn posts={data.posts} />
   </div>
-  <aside>
+  <Sidebar>
     <b>Filters</b>
     <Filters currentTag={tag} tags={data.tags}/>
-  </aside>
+  </Sidebar>
 </section>
 
 <Floater alt="Filter" bind:visible>
