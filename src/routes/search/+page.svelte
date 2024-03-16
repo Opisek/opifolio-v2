@@ -1,11 +1,10 @@
 <script lang="ts">
   import Filters from "../../components/interactive/Filters.svelte";
-  import Floater from "../../components/interactive/Floater.svelte";
   import PostColumn from "../../components/layout/PostColumn.svelte";
+  import Sidebar from "../../components/page/Sidebar.svelte";
   import Title from "../../components/common/Title.svelte";
 
   import { page } from "$app/stores";
-    import Sidebar from "../../components/page/Sidebar.svelte";
 
   let innerWidth: number;
 
@@ -39,6 +38,13 @@
 
   div.posts {
     grid-area: posts;
+
+    // min height so floater doesn't go to the middle of the page
+    // TODO: figure out proper heights
+    min-height: calc(100vh - $navbarHeight - 2 * $paddingLarge - $padding);
+    @media screen and (max-width: $screenNarrow) {
+      min-height: calc(100vh - $navbarHeightSmall - 5 * $padding - $paddingSmaller);
+    }
   }
 </style>
 
@@ -47,14 +53,11 @@
   <div class="posts" on:touchend={close}>
     <PostColumn posts={data.posts} />
   </div>
-  <Sidebar>
-    <b>Filters</b>
+
+  <Sidebar title="Filters" bind:visible>
     <Filters currentTag={tag} tags={data.tags}/>
   </Sidebar>
 </section>
 
-<Floater alt="Filter" bind:visible>
-  <Filters currentTag={tag} tags={data.tags}/>
-</Floater>
 
 <svelte:window bind:innerWidth/>

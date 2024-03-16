@@ -44,7 +44,7 @@
     justify-content: center;
     align-items: center;
     position: relative;
-    z-index: 10;
+    z-index: 3;
     background-color: inherit;
   }
 

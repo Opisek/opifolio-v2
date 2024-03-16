@@ -9,8 +9,10 @@
   import Title from "../../../components/common/Title.svelte";
 
   import { page } from "$app/stores";
+  import { browser } from "$app/environment";
   
   let innerWidth: number;
+  let innerHeight: number;
 
   export let data: { post: PostData };
   const post = data.post;
@@ -30,6 +32,11 @@
   function close() {
     visible = false;
   }
+
+  let section: HTMLElement;
+  let article: HTMLElement;
+  $: minHeight = browser ? (article ? article.getBoundingClientRect().height : 0) > innerHeight ? 0 : innerHeight - (article ? article.getBoundingClientRect().top : 0) : 0;
+  $: console.log(innerHeight, article ? article.scrollHeight : undefined);
 </script>
 
 <style lang="scss">
@@ -100,6 +107,7 @@
     @media screen and (max-width: $screenNormal) {
       grid-template-columns: 100%; 
       grid-template-areas: "article";
+      grid-template-rows: 1fr auto;
     }
     @media screen and (min-width: $screenNormal) {
       grid-template-columns: 100% auto; 
@@ -150,24 +158,17 @@
 
 <Divider/>
 
-<section>
-  <!-- Outline -->
-  <Sidebar>
-    <b>Contents</b>
-    <Outline headings={headings}/>
-  </Sidebar>
-
-  <!-- Rendered Markdown -->
-  <article on:touchend={close}>
+<section bind:this={section} style="min-height:{minHeight}px">
+  <article on:touchend={close} bind:this={article}>
     <Markdown markdown={post.markdown} parsed={parsed}/>
   </article>
+
+  <Sidebar title="Contents" bind:visible>
+    <Outline headings={headings} clickCallback={close}/>
+  </Sidebar>
 </section>
 
-<Floater alt="Table of Contents" bind:visible>
-  <Outline headings={headings} clickCallback={close}/>
-</Floater>
-
-<svelte:window bind:innerWidth/>
+<svelte:window bind:innerWidth bind:innerHeight/>
 
 <svelte:head>
   <meta property="og:title" content={post.title}/>

@@ -1,3 +1,11 @@
+<script lang="ts">
+  import Bold from "../common/Bold.svelte";
+import Floater from "../interactive/Floater.svelte";
+
+  export let title: string;
+  export let visible: boolean = false;
+</script>
+
 <style lang="scss">
   @import "../../styles/colors.scss";
   @import "../../styles/dimensions.scss";
@@ -27,5 +35,11 @@
 </style>
 
 <aside>
+  <Bold>
+    {title}
+  </Bold>
   <slot/>
 </aside>
+<Floater alt={title} bind:visible>
+  <slot/>
+</Floater>
