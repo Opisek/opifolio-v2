@@ -13,6 +13,9 @@
   function goBack() {
     history.back();
   }
+
+  //@ts-ignore
+  document.addEventListener('DOMContentLoaded', function () { plausible($page.status, { props: { path: document.location.pathname } }); });
 </script>
 
 <Splash src={error} style="square">
@@ -31,7 +34,3 @@
     {/if}
   </Row>
 </Splash>
-
-<svelte:head>
-  <script>document.addEventListener('DOMContentLoaded', function () { plausible($page.status, { props: { path: document.location.pathname } }); });</script>
-</svelte:head>
