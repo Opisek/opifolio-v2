@@ -31,3 +31,7 @@
     {/if}
   </Row>
 </Splash>
+
+<svelte:head>
+  <script>document.addEventListener('DOMContentLoaded', function () { plausible($page.status, { props: { path: document.location.pathname } }); });</script>
+</svelte:head>
