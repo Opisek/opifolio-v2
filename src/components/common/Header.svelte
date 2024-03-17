@@ -16,8 +16,10 @@
     margin: $paddingSmall 0 0 0;
   }
 
-  h1:first-child, h2:first-child, h3:first-child, h4:first-child, h5:first-child, h6:first-child, .nomargin {
-    margin: 0;
+  h1:first-child, h2:first-child, h3:first-child, h4:first-child, h5:first-child, h6:first-child,
+  .nomargin,
+  :global(h1) + h2, :global(h2) + h3, :global(h3) + h4, :global(h4) + h5, :global(h5) + h6 {
+    margin: 0 !important;
   }
 
   h1 {
