@@ -6,3 +6,6 @@ config
 /posts
 package-lock.json
 .env
+Makefile
+docker-compose.yml.prod
+docker-compose.yml.test
