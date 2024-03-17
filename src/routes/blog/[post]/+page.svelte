@@ -54,9 +54,9 @@
     align-items: center;
 
     @media screen and (max-width: $screenNarrow) {
-      grid-template-columns: 1fr $thumbnailWidthSmall;
+      grid-template-columns: 1fr $thumbnailWidth;
       grid-template-rows: auto auto auto;
-      grid-template-areas: "title thumbnail" "info info" "tags tags";
+      grid-template-areas: "title title" "info thumbnail" "tags thumbnail";
     }
   }
 
@@ -102,11 +102,6 @@
     height: $thumbnailWidth;
     border-radius: 50%;
     object-fit: cover;
-
-    @media screen and (max-width: $screenNarrow) {
-      width: $thumbnailWidthSmall;
-      height: $thumbnailWidthSmall;
-    }
   }
 
   section {
