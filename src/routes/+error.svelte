@@ -15,7 +15,7 @@
   }
 
   //@ts-ignore
-  document.addEventListener('DOMContentLoaded', function () { plausible($page.status, { props: { path: document.location.pathname } }); });
+  if (browser) document.addEventListener('DOMContentLoaded', function () { plausible($page.status, { props: { path: document.location.pathname } }); });
 </script>
 
 <Splash src={error} style="square">
