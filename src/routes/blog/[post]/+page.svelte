@@ -1,12 +1,12 @@
 <script lang="ts">
   import Divider from "../../../components/common/Divider.svelte";
   import DotRow from "../../../components/layout/DotRow.svelte";
-  import Floater from "../../../components/interactive/Floater.svelte";
   import Markdown from "../../../components/markdown/Markdown.svelte";
   import Outline from "../../../components/interactive/Outline.svelte";
   import Sidebar from "../../../components/page/Sidebar.svelte";
   import Tag from "../../../components/interactive/Tag.svelte";
   import Title from "../../../components/common/Title.svelte";
+  import EyeIcon from "lucide-svelte/icons/eye";
 
   import { page } from "$app/stores";
   import { browser } from "$app/environment";
@@ -36,7 +36,6 @@
   let section: HTMLElement;
   let article: HTMLElement;
   $: minHeight = browser ? (article ? article.getBoundingClientRect().height : 0) > innerHeight ? 0 : innerHeight - (article ? article.getBoundingClientRect().top : 0) : 0;
-  $: console.log(innerHeight, article ? article.scrollHeight : undefined);
 </script>
 
 <style lang="scss">
@@ -68,6 +67,18 @@
   div.info {
     grid-area: info;
     color: $fadedForeground;
+  }
+
+  span.views {
+    display: flex;
+    align-items: center;
+    gap: $gapTiny;
+    flex-wrap: nowrap;
+  }
+  span.viewsIcon {
+    height: 100%;
+    display: flex;
+    align-items: center;
   }
 
   div.tags {
@@ -144,6 +155,12 @@
     <DotRow>
       <span>{post.author}</span>
       <span>{post.timestamp.toLocaleDateString()}</span>
+      <span class="views">
+        <span class="viewsIcon">
+          <EyeIcon/>
+        </span>
+        {post.views}
+      </span>
     </DotRow>
   </div>
   <div class="tags">

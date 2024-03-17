@@ -7,5 +7,6 @@ type PostData = {
   author: string,
   timestamp: Date,
   public: boolean,
-  tags: string[]
+  tags: string[],
+  views: number
 }

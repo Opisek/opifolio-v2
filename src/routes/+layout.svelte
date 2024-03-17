@@ -9,6 +9,8 @@
   import { browser } from "$app/environment";
   import { page } from "$app/stores";
 
+  import { PUBLIC_PLAUSIBLE_DOMAIN } from "$env/static/public";
+
   // Fix SvelteKit scrolling issue
   beforeNavigate(async () => {
     if (!browser) return;
@@ -132,3 +134,7 @@
 </div>
 
 <svelte:window on:scroll={scroll}/>
+<svelte:head>
+  <script defer data-domain="{PUBLIC_PLAUSIBLE_DOMAIN}" data-api="/api/event" src="/js/viewcount.js"></script>
+  <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
+</svelte:head>

@@ -17,8 +17,10 @@
 
     span :global(> *:after) {
       @media screen and (min-width: $screenNarrow) {
-        margin-left: $paddingSmaller;
         content: "•";
+        margin-left: $paddingSmaller;
+        position: relative;
+        top: -0.03em;
       }
     }
     span :global(> :last-child:after) {
