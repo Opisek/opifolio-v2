@@ -48,3 +48,7 @@
   <Paragraph>TeX Rendering</Paragraph>
   <Link href="https://katex.org">KaTeX</Link>
 </DotRow>
+<DotRow>
+  <Paragraph>Privacy-Focused View Counting</Paragraph>
+  <Link href="https://plausible.io/">Plausible</Link>
+</DotRow>
