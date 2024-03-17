@@ -1,8 +1,13 @@
 import * as db from "$lib/server/db";
 import chokidar from "chokidar";
+import type { Handle } from "@sveltejs/kit";
 
 import * as fs from "fs";
 import * as fsp from "fs/promises";
+
+//
+// Posts Database
+//
 
 db.initialize();
 
@@ -69,3 +74,24 @@ chokidar.watch("/app/posts")
   .on("add", handlePostAdd)
   .on("change", handlePostAdd)
   .on("unlink", handlePostDelete);
+
+//
+// CORS
+//
+
+export const handle: Handle = async ({ resolve, event }) => {
+  if (event.request.method === "OPTIONS") {
+    return new Response(null, {
+      headers: {
+        "Access-Control-Allow-Origin": "https://stats.opisek.net",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "*",
+      }
+    });
+  }
+
+  const response = await resolve(event);
+  if (response) response.headers.set("Access-Control-Allow-Origin", "https://stats.opisek.net");
+  return response;
+};
+  
