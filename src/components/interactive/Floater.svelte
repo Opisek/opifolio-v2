@@ -51,7 +51,7 @@
   div.floater {
     pointer-events: all;
     transform: translateY(100%);
-    padding: 0 $paddingSmall $paddingSmall $paddingSmall;
+    padding: $paddingSmaller $paddingSmall $paddingSmall $paddingSmall;
     background-color: $evenDarkerBackground;
   }
 
