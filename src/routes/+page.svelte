@@ -45,11 +45,17 @@
 
 <Title id="posts" nomargin={true}>Recent Posts</Title>
 {#if !postsLoaded}
-  Loading posts...
+  <Center>
+    Loading posts...
+  </Center>
 {:else if fetchError}
-  Could not load posts at this moment
+  <Center>
+    Could not load posts at this moment
+  </Center>
 {:else if posts.length == 0}
-  No posts yet
+  <Center>
+    No posts yet
+  </Center>
 {:else}
   <Gallery>
     {#each posts as post}
