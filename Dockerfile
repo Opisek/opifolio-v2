@@ -13,7 +13,7 @@ COPY static static
 COPY svelte.config.js .
 COPY tsconfig.json .
 COPY vite.config.ts .
-RUN ls
+COPY .env .
 RUN npm run build
 
 # runtime
