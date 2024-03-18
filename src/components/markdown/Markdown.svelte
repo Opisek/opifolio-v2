@@ -15,6 +15,9 @@
   import MarkdownText from "./MarkdownText.svelte";
   import SvelteMarkdown from "svelte-markdown";
   import sanitizeHtml from "sanitize-html";
+    import MarkdownBold from "./MarkdownBold.svelte";
+    import MarkdownEmphasis from "./MarkdownEmphasis.svelte";
+    import MarkdownCodeSpan from "./MarkdownCodeSpan.svelte";
   
   export let markdown: string;
   const escaped = markdown.replaceAll("\\$", "&#92;&#36;") // to enable TeX escaping
@@ -37,11 +40,14 @@
   renderers={{
     blockquote: MarkdownQuote,
     code: MarkdownCode,
+    codespan: MarkdownCodeSpan,
+    em: MarkdownEmphasis,
     heading: MarkdownHeading,
     hr: Divider,
     list: MarkdownList,
     listitem: MarkdownListItem,
     paragraph: MarkdownParagraph,
+    strong: MarkdownBold,
     table: MarkdownTable,
     tablebody: MarkdownTableBody,
     tablecell: MarkdownTableCell,
