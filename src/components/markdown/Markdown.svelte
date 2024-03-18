@@ -7,6 +7,12 @@
   import MarkdownListItem from "./MarkdownListItem.svelte";
   import MarkdownParagraph from "./MarkdownParagraph.svelte";
   import MarkdownQuote from "./MarkdownQuote.svelte";
+  import MarkdownTable from "./MarkdownTable.svelte";
+  import MarkdownTableBody from "./MarkdownTableBody.svelte";
+  import MarkdownTableCell from "./MarkdownTableCell.svelte";
+  import MarkdownTableHead from "./MarkdownTableHead.svelte";
+  import MarkdownTableRow from "./MarkdownTableRow.svelte";
+  import MarkdownText from "./MarkdownText.svelte";
   import SvelteMarkdown from "svelte-markdown";
   import sanitizeHtml from "sanitize-html";
   
@@ -29,13 +35,19 @@
 <SvelteMarkdown
   source={parseable} 
   renderers={{
-    heading: MarkdownHeading,
-    paragraph: MarkdownParagraph,
-    code: MarkdownCode,
     blockquote: MarkdownQuote,
+    code: MarkdownCode,
+    heading: MarkdownHeading,
     hr: Divider,
     list: MarkdownList,
-    listitem: MarkdownListItem
+    listitem: MarkdownListItem,
+    paragraph: MarkdownParagraph,
+    table: MarkdownTable,
+    tablebody: MarkdownTableBody,
+    tablecell: MarkdownTableCell,
+    tablehead: MarkdownTableHead,
+    tablerow: MarkdownTableRow,
+    text: MarkdownText,
   }}
   on:parsed={parsed}
 />
