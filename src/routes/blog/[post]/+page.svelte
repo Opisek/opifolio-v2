@@ -137,6 +137,8 @@
     overflow: hidden;
 
     margin-bottom: $borderWidth;
+
+    white-space: pre-wrap;
   }
 </style>
 

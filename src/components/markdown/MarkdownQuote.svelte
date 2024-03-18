@@ -25,22 +25,12 @@
   }
 </script>
 
-<style lang="scss">
-  span {
-    white-space: pre-wrap;
-  }
-</style>
-
 {#if isAdmonition}
   <Admonition type={admonitionType} title={admonitionTitle}>
-    <span>
-      <MarkdownText text={lines.join("\n")}/>
-    </span>
+    <MarkdownText text={lines.join("\n")}/>
   </Admonition>
 {:else}
   <Quote>
-    <span>
-      <MarkdownText text={text}/>
-    </span>
+    <MarkdownText text={text}/>
   </Quote>
 {/if}

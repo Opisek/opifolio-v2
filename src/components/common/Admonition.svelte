@@ -64,5 +64,7 @@
       {type.charAt(0).toUpperCase() + type.slice(1)}
     {/if}
   </span>
-  <slot>Lorem Ipsum</slot>
+  <span>
+    <slot>Lorem Ipsum</slot>
+  </span>
 </div>

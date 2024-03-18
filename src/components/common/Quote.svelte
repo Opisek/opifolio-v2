@@ -2,7 +2,7 @@
   @import "../../styles/colors.scss";
   @import "../../styles/dimensions.scss";
 
-  div {
+  span {
     @import "../../styles/media.scss";
 
     color: $fadedForeground;
@@ -15,6 +15,6 @@
   }
 </style>
 
-<div>
+<span>
   <slot>Lorem Impsum</slot>
-</div>
+</span>

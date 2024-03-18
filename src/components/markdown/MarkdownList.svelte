@@ -12,7 +12,7 @@
 </style>
 
 {#if ordered}
-  <ol {start}><slot></slot></ol>
+  <ol {start}><slot/></ol>
 {:else}
-  <ul><slot></slot></ul>
+  <ul><slot/></ul>
 {/if}

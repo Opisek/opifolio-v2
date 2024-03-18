@@ -1,10 +1,7 @@
 <script lang="ts">
   import Emphasis from "../common/Emphasis.svelte";
-  import MarkdownInline from "./MarkdownInline.svelte";
-
-  export let text: string;
 </script>
 
 <Emphasis>
-  <MarkdownInline text={text}/>
+  <slot/>
 </Emphasis>

@@ -1,8 +1,13 @@
 
 <script lang="ts">
   import Divider from "../common/Divider.svelte";
+  import MarkdownBold from "./MarkdownBold.svelte";
   import MarkdownCode from "./MarkdownCode.svelte";
+  import MarkdownCodeSpan from "./MarkdownCodeSpan.svelte";
+  import MarkdownEmphasis from "./MarkdownEmphasis.svelte";
   import MarkdownHeading from "./MarkdownHeading.svelte";
+  import MarkdownImage from "./MarkdownImage.svelte";
+  import MarkdownLink from "./MarkdownLink.svelte";
   import MarkdownList from "./MarkdownList.svelte";
   import MarkdownListItem from "./MarkdownListItem.svelte";
   import MarkdownParagraph from "./MarkdownParagraph.svelte";
@@ -15,9 +20,6 @@
   import MarkdownText from "./MarkdownText.svelte";
   import SvelteMarkdown from "svelte-markdown";
   import sanitizeHtml from "sanitize-html";
-    import MarkdownBold from "./MarkdownBold.svelte";
-    import MarkdownEmphasis from "./MarkdownEmphasis.svelte";
-    import MarkdownCodeSpan from "./MarkdownCodeSpan.svelte";
   
   export let markdown: string;
   const escaped = markdown.replaceAll("\\$", "&#92;&#36;") // to enable TeX escaping
@@ -44,6 +46,7 @@
     em: MarkdownEmphasis,
     heading: MarkdownHeading,
     hr: Divider,
+    image: MarkdownImage,
     list: MarkdownList,
     listitem: MarkdownListItem,
     paragraph: MarkdownParagraph,
@@ -54,6 +57,7 @@
     tablehead: MarkdownTableHead,
     tablerow: MarkdownTableRow,
     text: MarkdownText,
+    link: MarkdownLink
   }}
   on:parsed={parsed}
 />
