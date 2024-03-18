@@ -10,9 +10,9 @@
   code {
     color: $codeForeground;
     background-color: $codeBackground;
-    padding: $paddingSmaller;
+    padding: $paddingTiny;
     width: fit-content;
-    border-radius: $borderRadius;
+    border-radius: $borderRadiusSmall;
     white-space: pre;
     font-family: "DM Mono", monospace;
     font-size: $fontSizeCode;
