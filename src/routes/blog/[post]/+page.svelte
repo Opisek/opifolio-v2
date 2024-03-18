@@ -8,8 +8,9 @@
   import Title from "../../../components/common/Title.svelte";
   import EyeIcon from "lucide-svelte/icons/eye";
 
-  import { page } from "$app/stores";
   import { browser } from "$app/environment";
+  import { formatHeadingId } from "../../../lib/common/format";
+  import { page } from "$app/stores";
   
   let innerWidth: number;
   let innerHeight: number;
@@ -23,7 +24,7 @@
       .filter((x: any) => x.type === "heading")
       .map((x: any) => {return {
         title: x.text,
-        tag: encodeURIComponent(x.text.toLowerCase().replaceAll(" ", "-")),
+        tag: formatHeadingId(x.text),
         depth: x.depth
       }});
   }
