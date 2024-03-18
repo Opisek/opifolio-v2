@@ -23,7 +23,7 @@
       .filter((x: any) => x.type === "heading")
       .map((x: any) => {return {
         title: x.text,
-        tag: x.text.toLowerCase().replace(" ", "-"),
+        tag: encodeURIComponent(x.text.toLowerCase().replaceAll(" ", "-")),
         depth: x.depth
       }});
   }
@@ -176,7 +176,7 @@
   </article>
 
   <Sidebar title="Contents" bind:visible>
-    <Outline headings={headings} clickCallback={close}/>
+    <Outline headings={headings} clickCallback={close} isMarkdown={true}/>
   </Sidebar>
 </section>
 

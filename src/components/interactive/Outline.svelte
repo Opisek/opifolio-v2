@@ -1,8 +1,10 @@
 <script lang="ts">
-    import { browser } from "$app/environment";
-  import { afterNavigate } from "$app/navigation";
-  import { tick } from "svelte";
+  import MarkdownInline from "../markdown/MarkdownInline.svelte";
 
+  import { browser } from "$app/environment";
+  import { afterNavigate } from "$app/navigation";
+
+  export let isMarkdown: boolean = false;
   export let headings: HeadingData[];
   export let clickCallback = (() => {});
   
@@ -67,6 +69,10 @@
     color: $emphasisForeground;
   }
 
+  a.headingLink :global(> *) {
+    color: inherit;
+  }
+
   a.active {
     @media screen and (max-width: $screenNormal) {
       font-weight: $fontWeightBold;
@@ -96,7 +102,11 @@
       href={"#" + heading.tag}
       on:click={clickCallback}
     >
-      {heading.title}
+      {#if isMarkdown}
+        <MarkdownInline text={heading.title}/>
+      {:else}
+        {heading.title}
+      {/if}
     </a>
   {/each}
 </div>
