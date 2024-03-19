@@ -12,20 +12,13 @@
   });
 
   function changePage(page: number): void {
+    if (page < 1) page = 1;
+
     const searchParams = new URLSearchParams(url.searchParams);
     searchParams.set("page", page.toString());
     const search = searchParams.toString() ? `?${searchParams.toString()}` : "";
     
     requestAnimationFrame(() => goto(`${url.pathname}${search}`));
-  }
-
-  function goBack(): void {
-    if (currentPage <= 1) return;
-    changePage(currentPage - 1);
-  }
-
-  function goNext(): void {
-    changePage(currentPage + 1);
   }
 </script>
 
@@ -52,7 +45,7 @@
 
   button.disabled {
     cursor: not-allowed;
-    color: $fadedForeground;
+    color: $disabledForeground;
   }
 
   input {
@@ -78,11 +71,11 @@
 </style>
 
 <div>
-  <button on:click={goBack} aria-label="Previous Page" class:disabled={currentPage <= 1}>
+  <button aria-label="Previous Page" class:disabled={currentPage <= 1} on:click={() => changePage(currentPage - 1)}>
     <ChevronLeft />
   </button>
-  <input bind:value={currentPage} type="number" min="1" aria-label="Current Page"/>
-  <button on:click={goNext} aria-label="Next Page">
+  <input bind:value={currentPage} type="number" min="1" aria-label="Current Page" on:change={() => changePage(currentPage)}/>
+  <button aria-label="Next Page" on:click={() => changePage(currentPage + 1)}>
     <ChevronRight />
   </button>
 </div>
