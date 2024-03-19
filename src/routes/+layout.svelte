@@ -37,12 +37,6 @@
   :global(*) { 
     box-sizing: border-box;
     transition: $animationSpeed ease-out;
-
-    scroll-margin-top: $navbarHeight * 0.5;
-
-    @media screen and (max-width: $screenNarrow) {
-      scroll-margin-top: $navbarHeightSmall * 0.75;
-    }
   }
 
   :global(html) {

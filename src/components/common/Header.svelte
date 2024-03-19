@@ -14,6 +14,11 @@
     font-weight: $fontWeightTitle;
     color: $emphasisForeground;
     margin: $paddingSmall 0 0 0;
+
+    scroll-margin-top: calc($navbarHeight / 1em * $fontSize);
+    @media screen and (max-width: $screenNarrow) {
+      scroll-margin-top: calc($navbarHeightSmall / 1em * $fontSize);
+    }
   }
 
   h1:first-child, h2:first-child, h3:first-child, h4:first-child, h5:first-child, h6:first-child,
@@ -22,24 +27,20 @@
     margin: 0 !important;
   }
 
-  h1 {
-    font-size: $fontSizeTitle;
-    @media screen and (max-width: $screenNarrow) {
-      font-size: $fontSizeTitleSmall;
-    }
-  }
+  $fontSizes: (
+    $fontSizeTitle,
+    $fontSizeTitleSmall,
+    $fontSizeTitleSmaller,
+    $fontSize
+  );
 
-  h2 {
-    font-size: $fontSizeTitleSmall;
-    @media screen and (max-width: $screenNarrow) {
-      font-size: $fontSizeTitleSmaller;
-    }
-  }
+  @for $i from 1 through length($fontSizes) - 1 {
+    h#{$i} {
+      font-size: nth($fontSizes, $i);
 
-  h3 {
-    font-size: $fontSizeTitleSmaller;
-    @media screen and (max-width: $screenNarrow) {
-      font-size: $fontSize;
+      @media screen and (max-width: $screenNarrow) {
+        font-size: nth($fontSizes, $i + 1);
+      }
     }
   }
 </style>
