@@ -41,7 +41,9 @@
 
     // min height so floater doesn't go to the middle of the page
     // TODO: figure out proper heights
-    min-height: calc(100vh - $navbarHeight - 2 * $paddingLarge - $padding);
+    @media screen and (min-width: $screenNarrow) and (max-width: $screenNormal) {
+      min-height: calc(100vh - $navbarHeight - 2 * $paddingLarge - $padding);
+    }
     @media screen and (max-width: $screenNarrow) {
       min-height: calc(100vh - $navbarHeightSmall - 5 * $padding - $paddingSmaller);
     }
