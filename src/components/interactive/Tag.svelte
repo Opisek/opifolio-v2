@@ -14,8 +14,14 @@
   function click(event: MouseEvent) {
     if (!filtersPane) return;
     event.preventDefault();
-    const query = $page.url.searchParams.get('query');
-    requestAnimationFrame(() => goto(`/search?tag=${encodeURIComponent(tag)}${query ? `&query=${encodeURIComponent(query)}` : ""}`));
+
+    const searchParams = new URLSearchParams($page.url.searchParams);
+    if (active) searchParams.delete("tag");
+    else searchParams.set("tag", tag);
+    searchParams.delete("page");
+    const search = searchParams.toString() ? `?${searchParams.toString()}` : "";
+
+    requestAnimationFrame(() => goto(`/search${search}`));
   }
 </script>
 

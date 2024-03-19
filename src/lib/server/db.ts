@@ -138,12 +138,12 @@ export function deletePost(humanid: string) {
   `).run({ humanid });
 }
 
-export function getPostAmount() {
-  return db.prepare(`
-    SELECT COUNT(*)
+export function getPostAmount(): number {
+  return (db.prepare(`
+    SELECT COUNT(*) as count
     FROM posts
     WHERE public = true;
-  `).get();
+  `).get() as { count: number }).count as number; 
 }
 
 function parsePost(post: PostData): PostData {
@@ -161,9 +161,10 @@ function parsePost(post: PostData): PostData {
   return parsedPost;
 }
 
-export function getPosts(amount: number, offset: number) {
+export function getPosts(amount: number, page: number) {
   if (Number.isNaN(amount) || amount > 10 || amount < 1) amount = 10;
-  if (Number.isNaN(offset) || offset < 0) offset = 0;
+  if (Number.isNaN(page) || page < 1) page = 1;
+  const offset = (page - 1) * amount;
 
   const result = db.prepare(`
     SELECT humanid AS id, title, summary, thumbnail, author, timestamp
@@ -196,9 +197,10 @@ export function existsPost(humanid: string) {
   `).get({ humanid }) as { count: number }).count > 0;
 }
 
-export function searchPosts(query: string | null, tag: string | null, amount: number, offset: number) {
+export function searchPosts(query: string | null, tag: string | null, amount: number, page: number) {
   if (Number.isNaN(amount) || amount > 10 || amount < 1) amount = 10;
-  if (Number.isNaN(offset) || offset < 0) offset = 0;
+  if (Number.isNaN(page) || page < 1) page = 1;
+  const offset = (page - 1) * amount;
 
   let subclause =
     query == null

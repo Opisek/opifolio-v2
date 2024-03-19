@@ -1,11 +1,19 @@
+import { redirect } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ fetch, url }) => {
-  let params = url.search;
-  params += `${params == "" ? "?" : "&"}limit=10&offset=0`;
+  const [ posts, tags ] = await Promise.all([
+    fetch(`/api/search${url.search}`).then(res => res.json()),
+    fetch("/api/tags").then(res => res.json())
+  ]);
 
-  const posts = fetch(`/api/search${params}`).then(res => res.json());
-  const tags = fetch("/api/tags").then(res => res.json());
+  if (posts.length == 0) {
+    const currentPage = Number.parseInt(url.searchParams.get("page") || "1");
+    if (currentPage > 1) {
+      url.searchParams.set("page", (currentPage - 1).toString());
+      throw redirect(302, url.toString());
+    }
+  }
 
   return {
     posts: await posts,

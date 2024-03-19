@@ -45,6 +45,10 @@
     @media screen and (max-width: $screenNarrow) {
       min-height: calc(100vh - $navbarHeightSmall - 5 * $padding - $paddingSmaller);
     }
+
+    display: flex;
+    flex-direction: column;
+    gap: $gapSmall;
   }
 </style>
 

@@ -11,8 +11,12 @@
     const query = (inputElement.value || "").trim();
     if (query == "") requestAnimationFrame(() => inputElement.focus());
     else {
-      const tag = $page.url.searchParams.get('tag');
-      requestAnimationFrame(() => goto(`/search?query=${encodeURIComponent(query)}${tag ? `&tag=${encodeURIComponent(tag)}` : ""}`));
+      const searchParams = new URLSearchParams($page.url.searchParams);
+      searchParams.set("query", query);
+      searchParams.delete("page");
+      const search = searchParams.toString() ? `?${searchParams.toString()}` : "";
+
+      requestAnimationFrame(() => goto(`/search${search}`));
     }
   }
 
