@@ -58,7 +58,7 @@
     outline: 0;
     margin: 0;
     padding: paddingSmall;
-    -moz-appearance: textfield;
+    appearance: textfield;
     text-align: center;
     width: 3em;
   }
