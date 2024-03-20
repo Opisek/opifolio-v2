@@ -95,6 +95,7 @@
   span {
     position: absolute;
     left: -$gapSmall;
+    pointer-events: none;
   }
 
   span.hidden {
