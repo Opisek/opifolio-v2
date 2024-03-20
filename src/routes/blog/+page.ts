@@ -5,22 +5,20 @@ import { goto } from '$app/navigation';
 
 export const load: PageLoad = async ({ fetch, url }) => {
   const currentPage = Number.parseInt(url.searchParams.get("page") || "1");
-  const response = await fetch(`/api/posts?page=${currentPage}`);
 
-  if (response.ok) {
-    const json = await response.json();
+  const [ posts, count ] = await Promise.all([
+    fetch(`/api/posts?page=${currentPage}`).then(res => res.json()),
+    fetch(`/api/posts/pageCount`).then(res => res.json())
+  ]);
 
-    if (json.length == 0 && currentPage > 1) {
-      const countResponse = await fetch(`/api/posts/pageCount`);
-      const lastPage = await countResponse.json();
-
-      const url = `/blog?page=${lastPage || 1}`;
-      if (browser) goto(url, { replaceState: true });
-      else throw redirect(302, url);
-    } else {
-      return { posts: json };
-    }
+  if (posts.length == 0 && currentPage > 1) {
+    const url = `/blog?page=${count || 1}`;
+    if (browser) goto(url, { replaceState: true });
+    else throw redirect(302, url);
   } else {
-    error(503, "Failed to load posts");
+    return {
+      posts: posts,
+      count: count
+    };
   }
 }

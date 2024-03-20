@@ -10,7 +10,8 @@
 
   export let data: {
     posts: PostData[],
-    tags: string[]
+    tags: string[],
+    count: number
   };
 
   export let visible: boolean = false;
@@ -57,7 +58,7 @@
 <Title>Search Posts</Title>
 <section>
   <div class="posts" on:touchend={close}>
-    <PostColumn posts={data.posts} />
+    <PostColumn posts={data.posts} pageCount={data.count} />
   </div>
 
   <Sidebar title="Filters" bind:visible>

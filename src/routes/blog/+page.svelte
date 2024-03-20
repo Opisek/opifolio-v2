@@ -2,8 +2,11 @@
   import PostColumn from "../../components/layout/PostColumn.svelte";
   import Title from "../../components/common/Title.svelte";
 
-  export let data: { posts: PostData[] };
+  export let data: {
+    posts: PostData[],
+    count: number
+  };
 </script>
 
 <Title>Blog Posts</Title>
-<PostColumn posts={data.posts} />
+<PostColumn posts={data.posts} pageCount={data.count} />
