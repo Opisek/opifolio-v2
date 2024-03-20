@@ -46,6 +46,8 @@
       margin: 0 $paddingSmall;
       width: calc(100% - 2 * #{$paddingSmall});
     }
+
+    white-space: initial;
   }
   
   code {
