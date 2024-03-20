@@ -1,5 +1,5 @@
 import { getPost } from '$lib/server/db.js';
-import { PLAUSIBLE_API_KEY, PLAUSIBLE_API_URL, PLAUSIBLE_DATE_START } from "$env/static/private";
+import { PLAUSIBLE_API_KEY, PLAUSIBLE_API_URL } from "$env/static/private";
 import { PUBLIC_PLAUSIBLE_DOMAIN } from '$env/static/public';
 
 export async function GET({ params }) {
