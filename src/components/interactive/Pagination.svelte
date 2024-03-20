@@ -4,18 +4,24 @@
   import { ChevronLeft, ChevronRight } from 'lucide-svelte';
 
   export let currentPage: number = 1;
+  let lastPage: number = 1;
   export let pageCount: number;
 
   $: url = $page.url;
 
   afterNavigate(async () => {
     currentPage = Number.parseInt(url.searchParams.get("page") || "1");
+    lastPage = currentPage;
     if (currentPage < 1) changePage(1);
   });
 
-  function changePage(page: number, isButton: boolean = false): void {
+  function changePage(page: number): void {
     page = Math.min(Math.max(page, 1), pageCount);
-    if (page == currentPage && isButton) return;
+    if (page == lastPage) {
+      currentPage = page;
+      return;
+    }
+    lastPage = page;
 
     const searchParams = new URLSearchParams(url.searchParams);
     searchParams.set("page", page.toString());
@@ -26,7 +32,7 @@
 
   function buttonPress(event: MouseEvent, page: number): void {
     event.preventDefault();
-    changePage(page, true);
+    changePage(page);
   }
 </script>
 
