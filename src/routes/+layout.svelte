@@ -58,8 +58,6 @@
     font-size: $fontSize;
     font-weight: $fontWeight;
     color: $primaryForeground;
-    display: grid;
-    grid-template-rows: auto 1fr;
     transition: none;
 
     @media screen and (max-width: $screenNarrow) {
