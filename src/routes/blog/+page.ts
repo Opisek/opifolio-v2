@@ -11,7 +11,7 @@ export const load: PageLoad = async ({ fetch, url }) => {
     const json = await response.json();
 
     if (json.length == 0 && currentPage > 1) {
-      const countResponse = await fetch(`/api/posts/count`);
+      const countResponse = await fetch(`/api/posts/pageCount`);
       const lastPage = await countResponse.json();
 
       const url = `/blog?page=${lastPage || 1}`;

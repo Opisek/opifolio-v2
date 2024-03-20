@@ -6,16 +6,16 @@ import { goto } from '$app/navigation';
 export const load: PageLoad = async ({ fetch, url }) => {
   const [ posts, tags ] = await Promise.all([
     fetch(`/api/search${url.search}`).then(res => res.json()),
-    fetch("/api/tags").then(res => res.json())
+    fetch("/api/tags").then(res => res.json()) // TODO: caching
   ]);
 
   if (posts.length == 0) {
-    const currentPage = Number.parseInt(url.searchParams.get("page") || "1");
-    if (currentPage > 1) {
-      url.searchParams.set("page", (currentPage - 1).toString());
-      if (browser) goto(url.toString(), { replaceState: true });
-      else throw redirect(302, url.toString());
-    }
+    const countResponse = await fetch(`/api/search/pageCount${url.search}`);
+    const lastPage = await countResponse.json();
+
+    url.searchParams.set("page", lastPage.toString());
+    if (browser) goto(url.toString(), { replaceState: true });
+    else throw redirect(302, url.toString());
   }
 
   return {

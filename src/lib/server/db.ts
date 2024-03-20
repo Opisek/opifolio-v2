@@ -197,7 +197,7 @@ export function existsPost(humanid: string) {
   `).get({ humanid }) as { count: number }).count > 0;
 }
 
-export function searchPosts(query: string | null, tag: string | null, amount: number, page: number) {
+export function searchPosts(query: string | null, tag: string | null, amount: number, page: number, onlyAmount: boolean = false): PostData[] | { count: number } {
   if (Number.isNaN(amount) || amount > 10 || amount < 1) amount = 10;
   if (Number.isNaN(page) || page < 1) page = 1;
   const offset = (page - 1) * amount;
@@ -232,18 +232,18 @@ export function searchPosts(query: string | null, tag: string | null, amount: nu
   }
 
   const sql = `
-    SELECT humanid AS id, title, summary, thumbnail, author, timestamp
+    SELECT ${onlyAmount ? "COUNT(*) as count" : "humanid AS id, title, summary, thumbnail, author, timestamp"}
     FROM (
       ${subclause}
     ) filtered
     ${condition}
-    LIMIT @amount
-    OFFSET @offset;
+    ${onlyAmount ? "" : "LIMIT @amount OFFSET @offset"};
   `;
 
   const result = db.prepare(sql).all({ query, tag, amount, offset });
 
-  return result.map(post => parsePost(post as PostData));
+  if (onlyAmount) return result[0] as { count: number };
+  else return result.map(post => parsePost(post as PostData));
 }
 
 export function getTags() {
