@@ -7,6 +7,8 @@
   export let isMarkdown: boolean = false;
   export let headings: HeadingData[];
   export let clickCallback = (() => {});
+
+  let indicator: HTMLElement;
   
   let currentHeading: string = "";
   $: headingsMap = Object.fromEntries(
@@ -33,12 +35,18 @@
         tag: "",
         dist: -1
       }).tag;
-    
+
     if (closestHeading != currentHeading) {
       if (currentHeading != "") headingsMap[currentHeading].current = false;
+      if (closestHeading != "") headingsMap[closestHeading].current = true;
+      if (browser) {
+        requestAnimationFrame(() => {
+          const offset = document.getElementById("currentHeadingLink")?.offsetTop || 0;
+          indicator.style.top = `${offset}px`;
+        })
+      }
     }
     currentHeading = closestHeading;
-    if (currentHeading != "") headingsMap[currentHeading].current = true;
   }
 
   afterNavigate(async () => {
@@ -53,52 +61,47 @@
   @import "../../styles/dimensions.scss";
   @import "../../styles/media.scss";
 
-  div.outline {
+  div {
     display: flex;
     flex-direction: column;
+    position: relative;
+    color: $fadedForeground;
   }
 
-  a.headingLink {
-    color: $fadedForeground;
+  a {
     cursor: pointer;
+    color: inherit;
     text-decoration: inherit;
     width: max-content;
   }
 
-  a.headingLink:hover {
+  a:hover {
     color: $emphasisForeground;
   }
 
-  a.headingLink :global(> *) {
+  a :global(> *) {
     color: inherit;
   }
 
-  a.active {
-    @media screen and (max-width: $screenNormal) {
-      font-weight: $fontWeightBold;
-    }
+  span {
+    position: absolute;
+    left: -$gapSmall;
   }
 
-  @media screen and (min-width: $screenNormal) {
-    a:before {
-      content: "• ";
-      position: absolute;
-      left: -1em;
-      opacity: 0;
-      transition: $animationSpeed opacity ease-out;
-    }
-    a.active:before {
-      opacity: 1;
-    }
+  span.hidden {
+    opacity: 0;
   }
+
+  div:has(#currentHeadingLink:hover) > span {
+    color: $emphasisForeground;
+  } 
 </style>
 
-<div class="outline">
+<div>
   {#each headings as heading}
     <a
-      class="headingLink"
-      class:active={headingsMap[heading.tag].current}
       style:margin-left={(heading.depth - 1).toString() + "em"}
+      id={headingsMap[heading.tag].current ? "currentHeadingLink" : null}
       href={"#" + heading.tag}
       on:click={clickCallback}
     >
@@ -109,6 +112,10 @@
       {/if}
     </a>
   {/each}
+  <span
+    class:hidden={currentHeading == ""}
+    bind:this={indicator}
+  >•</span>
 </div>
 
-<svelte:window on:scroll={scroll} bind:scrollY/>
+<svelte:window on:scroll={scroll} on:resize={scroll} bind:scrollY/>
