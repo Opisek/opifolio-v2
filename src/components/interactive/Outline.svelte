@@ -9,6 +9,7 @@
   export let clickCallback = (() => {});
 
   let indicator: HTMLElement;
+  let windowHeight: number;
   
   let currentHeading: string = "";
   $: headingsMap = Object.fromEntries(
@@ -24,17 +25,26 @@
   );
 
   export let scrollY: number = 0;
-  function scroll() {
-    const closestHeading = headings
-      .map(x => { return {
-        tag: x.tag,
-        dist: headingsMap[x.tag].element.offsetTop - 100
-      }})
-      .filter((x) => x.dist < scrollY)
-      .reduce((acc, cur) => acc.dist > cur.dist ? acc : cur, {
-        tag: "",
-        dist: -1
-      }).tag;
+  $: update(scrollY);
+  function update(scrollY: number) {
+    const bodyHeight = browser ? document.body.clientHeight : Number.MAX_VALUE;
+    const reachedEnd = scrollY >= bodyHeight - windowHeight;
+    
+    let closestHeading;
+    if (reachedEnd) {
+      closestHeading = headings.length == 0 ? "" : headings[headings.length - 1].tag;
+    } else {
+      closestHeading = headings
+        .map(x => { return {
+          tag: x.tag,
+          dist: headingsMap[x.tag].element.offsetTop - 100
+        }})
+        .filter((x) => x.dist < scrollY)
+        .reduce((acc, cur) => acc.dist > cur.dist ? acc : cur, {
+          tag: "",
+          dist: -1
+        }).tag;
+    }
 
     if (closestHeading != currentHeading) {
       if (currentHeading != "") headingsMap[currentHeading].current = false;
@@ -52,7 +62,6 @@
   afterNavigate(async () => {
     if (!browser) return;
     scrollY = window.scrollY;
-    scroll();
   });
 </script>
 
@@ -118,4 +127,4 @@
   >•</span>
 </div>
 
-<svelte:window on:scroll={scroll} on:resize={scroll} bind:scrollY/>
+<svelte:window bind:scrollY bind:innerHeight={windowHeight}/>
