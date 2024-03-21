@@ -1,11 +1,12 @@
 import * as db from "$lib/server/db";
 import chokidar from "chokidar";
-import type { Handle } from "@sveltejs/kit";
 
 import * as fs from "fs";
 import * as fsp from "fs/promises";
 
-db.initialize();
+//
+// Posts
+//
 
 function getPostId(file: string): string | null {
   const parts = file.split("/");
@@ -70,3 +71,30 @@ chokidar.watch("/app/posts")
   .on("add", handlePostAdd)
   .on("change", handlePostAdd)
   .on("unlink", handlePostDelete);
+
+//
+// Redirets
+//
+
+function handleRedirectUpdate(path: string) {
+  if (path != "/app/config/redirects.json") return;
+
+  let redirects: RedirectData[];
+  try {
+    redirects = JSON.parse(fs.readFileSync(path, "utf-8"));
+  } catch (e) {
+    throw new Error(`Failed to parse redirects: ${e}`);
+  }
+
+  const allRedirects = new Set<string>();
+  redirects.forEach((redirect) => {
+    db.insertRedirect(redirect);
+    allRedirects.add(redirect.url);
+  });
+
+  db.getAllRedirectUrls().filter(url => !allRedirects.has(url)).forEach(url => db.deleteRedirect(url));
+}
+
+chokidar.watch("/app/config")
+  .on("add", handleRedirectUpdate)
+  .on("change", handleRedirectUpdate);

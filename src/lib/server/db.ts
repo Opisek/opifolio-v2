@@ -4,15 +4,28 @@ export const DEFAULT_LIMIT = 10;
 
 const db = new Database();
 
-function getID(humanid: string): number {
-  return (db.prepare(`
-    SELECT dbid, humanid
-    FROM posts
-    WHERE humanid = @humanid;
-  `).get({ humanid }) as { dbid: number }).dbid;
+const begin = db.prepare('BEGIN');
+const commit = db.prepare('COMMIT');
+const rollback = db.prepare('ROLLBACK');
+// TODO: i would like to use a decorator but ehhhhh not allowed on functions for some reason
+function asTransaction<Args extends any[], Ret>(func: ((...args: Args) => Ret)): ((...args: Args) => Ret) {
+  return function (...args) {
+    begin.run();
+    try {
+      const res = func(...args);
+      commit.run();
+      return res;
+    } finally {
+      if (db.inTransaction) {
+        rollback.run();
+        console.error("Could not commit transaction");
+      }
+    }
+  };
 }
 
-export function initialize() {
+// Initalize
+asTransaction(() => {
   // DB Settings
   db.pragma("journal_mode = WAL");
 
@@ -49,7 +62,7 @@ export function initialize() {
   
   // Search
   db.exec(`
-    CREATE VIRTUAL TABLE IF NOT EXISTS posts_fts USING fts5(
+    CREATE VIRTUAL TABLE IF NOT EXISTS posts_fts USING fts5 (
       dbid,
       title,
       summary,
@@ -82,9 +95,62 @@ export function initialize() {
       VALUES (NEW.dbid, NEW.title, NEW.summary, NEW.markdown);
     END;
   `)
+
+  // Redirects
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS redirects_data (
+      id INTEGER PRIMARY KEY,
+      url VARCHAR(255) UNIQUE,
+      code INTEGER
+    );
+  `)
+  db.exec(`
+    CREATE INDEX IF NOT EXISTS redirects_data_url ON redirects_data(url);
+  `);
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS redirects_aliases (
+      alias VARCHAR(255) PRIMARY KEY,
+      id INTEGER,
+      FOREIGN KEY(id) REFERENCES redirects_data(id) ON DELETE CASCADE ON UPDATE CASCADE
+    )
+  `)
+})();
+
+//
+// Posts
+//
+
+const getPostTagsStatement = db.prepare(`
+  SELECT tag
+  FROM tags
+  WHERE dbid = @dbid
+  ORDER BY tag;
+`);
+function parsePost(post: PostData): PostData {
+  const parsedPost = post as PostData;
+
+  parsedPost.tags = getPostTagsStatement.all({ dbid: getID(post.id) }).map((tag) => (tag as { tag: string }).tag);
+
+  parsedPost.timestamp = new Date(parsedPost.timestamp as unknown as number * 1000);
+
+  return parsedPost;
 }
 
-export function insertPost(post: PostData) {
+const getPostIDStatement = db.prepare(`
+  SELECT dbid
+  FROM posts
+  WHERE humanid = @humanid;
+`);
+function getID(humanid: string): number {
+  return (getPostIDStatement.get({ humanid }) as { dbid: number }).dbid;
+}
+
+const insertPostTagsStatement = db.prepare(`
+  INSERT INTO tags (dbid, tag)
+  VALUES (@dbid, @tag)
+  ON CONFLICT(dbid, tag) DO NOTHING;
+`);
+export const insertPost = (post: PostData): void => asTransaction((post: PostData) => {
   const fields = {
     humanid: post.id,
     title: post.title,
@@ -111,93 +177,80 @@ export function insertPost(post: PostData) {
     ${replace};
   `;
 
-  db.prepare(sql).run(fields);
+  const result = db.prepare(sql).run(fields);
+  const dbid = result.lastInsertRowid;
 
-  const dbid = getID(post.id);
   post.tags.forEach((tag) => {
-    db.prepare(`
-      INSERT INTO tags (dbid, tag)
-      VALUES (@dbid, @tag)
-      ON CONFLICT(dbid, tag) DO NOTHING;
-    `).run({ dbid, tag });
+    insertPostTagsStatement.run({ dbid, tag });
   });
+})(post);
+
+const insertMarkdownStatement = db.prepare(`
+  UPDATE posts
+  SET markdown = @markdown
+  WHERE humanid = @humanid;
+`);
+export const insertMarkdown = (humanid: string, markdown: string): void => {
+  insertMarkdownStatement.run({ humanid, markdown });
 }
 
-export function insertMarkdown(humanid: string, markdown: string) {
-  db.prepare(`
-    UPDATE posts
-    SET markdown = @markdown
-    WHERE humanid = @humanid;
-  `).run({ humanid, markdown });
+const deletePostStatement = db.prepare(`
+  DELETE FROM posts
+  WHERE humanid = @humanid;
+`);
+export const deletePost = (humanid: string): void => {
+  deletePostStatement.run({ humanid });
 }
 
-export function deletePost(humanid: string) {
-  db.prepare(`
-    DELETE FROM posts
-    WHERE humanid = @humanid;
-  `).run({ humanid });
+const getPostAmountStatement = db.prepare(`
+  SELECT COUNT(*) as count
+  FROM posts
+  WHERE public = true;
+`);
+export const getPostAmount = (): number => {
+  return (getPostAmountStatement.get() as { count: number }).count as number; 
 }
 
-export function getPostAmount(): number {
-  return (db.prepare(`
-    SELECT COUNT(*) as count
-    FROM posts
-    WHERE public = true;
-  `).get() as { count: number }).count as number; 
-}
-
-function parsePost(post: PostData): PostData {
-  const parsedPost = post as PostData;
-
-  parsedPost.tags = db.prepare(`
-    SELECT tag
-    FROM tags
-    WHERE dbid = @dbid
-    ORDER BY tag;
-  `).all({ dbid: getID(post.id) }).map((tag) => (tag as { tag: string }).tag);
-
-  parsedPost.timestamp = new Date(parsedPost.timestamp as unknown as number * 1000);
-
-  return parsedPost;
-}
-
-export function getPosts(amount: number, page: number) {
+const getPostsStatement = db.prepare(`
+  SELECT humanid AS id, title, summary, thumbnail, author, timestamp
+  FROM posts
+  WHERE public = true
+  ORDER BY timestamp DESC
+  LIMIT @amount
+  OFFSET @offset;
+`)
+export const getPosts = (amount: number, page: number): PostData[] => {
   if (Number.isNaN(amount) || amount > 10 || amount < 1) amount = 10;
   if (Number.isNaN(page) || page < 1) page = 1;
   const offset = (page - 1) * amount;
 
-  const result = db.prepare(`
-    SELECT humanid AS id, title, summary, thumbnail, author, timestamp
-    FROM posts
-    WHERE public = true
-    ORDER BY timestamp DESC
-    LIMIT @amount
-    OFFSET @offset;
-  `).all({ amount, offset });
+  const result = getPostsStatement.all({ amount, offset });
 
   return result.map(post => parsePost(post as PostData));
 }
 
-export function getPost(humanid: string) {
-  const post = db.prepare(`
-    SELECT humanid AS id, title, summary, thumbnail, author, timestamp, markdown
-    FROM posts
-    WHERE humanid = @humanid;
-  `).get({ humanid });
+const getPostStatement = db.prepare(`
+  SELECT humanid AS id, title, summary, thumbnail, author, timestamp, markdown
+  FROM posts
+  WHERE humanid = @humanid;
+`); // TODO: consider getting dbid too for tags
+export function getPost(humanid: string): PostData | null {
+  const post = getPostStatement.get({ humanid });
 
   if (!post) return null;
   return parsePost(post as PostData);  
 }
 
-export function existsPost(humanid: string) {
-  return (db.prepare(`
-    SELECT COUNT(*) as count
-    FROM posts
-    WHERE humanid = @humanid;
-  `).get({ humanid }) as { count: number }).count > 0;
+const existsPostsStatement = db.prepare(`
+  SELECT COUNT(*) as count
+  FROM posts
+  WHERE humanid = @humanid;
+`);
+export const existsPost = (humanid: string): boolean => {
+  return (existsPostsStatement.get({ humanid }) as { count: number }).count > 0;
 }
 
-export function searchPosts(query: string | null, tag: string | null, amount: number, page: number, onlyAmount: boolean = false): PostData[] | { count: number } {
+export const searchPosts = (query: string | null, tag: string | null, amount: number, page: number, onlyAmount: boolean = false): PostData[] | { count: number } => {
   if (Number.isNaN(amount) || amount > 10 || amount < 1) amount = 10;
   if (Number.isNaN(page) || page < 1) page = 1;
   const offset = (page - 1) * amount;
@@ -246,12 +299,65 @@ export function searchPosts(query: string | null, tag: string | null, amount: nu
   else return result.map(post => parsePost(post as PostData));
 }
 
-export function getTags() {
-  return db.prepare(`
-    SELECT DISTINCT tag
-    FROM tags
-    JOIN posts ON posts.dbid = tags.dbid
-    WHERE public = true
-    ORDER BY tag;
-  `).all().map((tag) => (tag as { tag: string }).tag);
+const getTagsStatement = db.prepare(`
+  SELECT DISTINCT tag
+  FROM tags
+  JOIN posts ON posts.dbid = tags.dbid
+  WHERE public = true
+  ORDER BY tag;
+`);
+export const getTags = (): string[] => {
+  return getTagsStatement.all().map((tag) => (tag as { tag: string }).tag);
+}
+
+//
+// Redirects
+//
+
+const insertRedirectDataStatement = db.prepare(`
+  INSERT INTO redirects_data (url, code)
+  VALUES (@url, @code)
+  ON CONFLICT(url) DO UPDATE
+  SET code = @code;
+`);
+const insertRedirectAliasStatement = db.prepare(`
+  INSERT INTO redirects_aliases (alias, id)
+  VALUES (@alias, @id)
+  ON CONFLICT(alias) DO UPDATE
+  SET id = @id;
+`);
+export const insertRedirect = (data: RedirectData): void => {
+  const result = insertRedirectDataStatement.run(data);
+
+  const id = result.lastInsertRowid;
+
+  data.pages.forEach((page) => {
+    insertRedirectAliasStatement.run({ alias: page, id: id });
+  });
+}
+
+const getAllRedirectUrlsStatement = db.prepare(`
+  SELECT url
+  FROM redirects_data;
+`);
+export const getAllRedirectUrls = (): string[] => {
+  return getAllRedirectUrlsStatement.all().map((row) => (row as { url: string }).url);
+}
+
+const deleteRedirectStatement = db.prepare(`
+  DELETE FROM redirects_data
+  WHERE url = @url;
+`);
+export const deleteRedirect = (url: string): void => {
+  deleteRedirectStatement.run({ url });
+}
+
+const getRedirectStatement = db.prepare(`
+  SELECT url, code
+  FROM redirects_data
+  JOIN redirects_aliases ON redirects_data.id = redirects_aliases.id
+  WHERE alias = @alias;
+`);
+export function getRedirect(alias: string): RedirectData| null {
+  return getRedirectStatement.get({ alias }) as RedirectData | null ;
 }
