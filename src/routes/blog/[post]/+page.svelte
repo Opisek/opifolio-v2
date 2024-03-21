@@ -134,7 +134,7 @@
     align-items: left;
     justify-content: start;
 
-    overflow: hidden;
+    overflow: show;
 
     margin-bottom: $borderWidth;
 
