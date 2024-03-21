@@ -136,10 +136,19 @@ function parsePost(post: PostData): PostData {
   return parsedPost;
 }
 
-const insertPostTagsStatement = db.prepare(`
+const insertPostInsertTagStatement = db.prepare(`
   INSERT INTO tags (dbid, tag)
-  VALUES (@dbid, @tag)
-  ON CONFLICT(dbid, tag) DO NOTHING;
+  VALUES (@dbid, @tag);
+`);
+const insertPostGetPostTagsStatement = db.prepare(`
+  SELECT tag
+  FROM tags
+  WHERE dbid = @dbid;
+`);
+const insertPostDeleteTagStatement = db.prepare(`
+  DELETE FROM tags
+  WHERE dbid = @dbid
+  AND tag = @tag;
 `);
 export const insertPost = (post: PostData): void => asTransaction((post: PostData) => {
   const fields = {
@@ -165,15 +174,22 @@ export const insertPost = (post: PostData): void => asTransaction((post: PostDat
     INSERT INTO posts (humanid, title, summary, thumbnail, author, timestamp, public, markdown)
     VALUES (@humanid, @title, @summary, @thumbnail, @author, @timestamp, @public, @markdown)
     ON CONFLICT(humanid) DO UPDATE
-    ${replace};
+    ${replace}
+    RETURNING dbid;
   `;
 
-  const result = db.prepare(sql).run(fields);
-  const dbid = result.lastInsertRowid;
+  const dbid = (db.prepare(sql).get(fields) as { dbid: number }).dbid;
 
-  post.tags.forEach((tag) => {
-    insertPostTagsStatement.run({ dbid, tag });
-  });
+  const wantedTags = new Set(post.tags);
+  const currentTags = (insertPostGetPostTagsStatement.all({ dbid }) as { tag: string }[]).map((tag) => tag.tag);
+
+  currentTags
+    .filter((tag) => !wantedTags.has(tag))
+    .forEach((tag) => insertPostDeleteTagStatement.run({ dbid, tag }));
+
+  post.tags
+    .filter(tag => !currentTags.includes(tag))
+    .forEach((tag) => insertPostInsertTagStatement.run({ dbid, tag }));
 })(post);
 
 const insertMarkdownStatement = db.prepare(`
@@ -290,7 +306,7 @@ export const searchPosts = (query: string | null, tag: string | null, amount: nu
   else return result.map(post => parsePost(post as PostData));
 }
 
-const getTagsStatement = db.prepare(`
+const getAllTagsStatement = db.prepare(`
   SELECT DISTINCT tag
   FROM tags
   JOIN posts ON posts.dbid = tags.dbid
@@ -298,7 +314,7 @@ const getTagsStatement = db.prepare(`
   ORDER BY tag;
 `);
 export const getTags = (): string[] => {
-  return getTagsStatement.all().map((tag) => (tag as { tag: string }).tag);
+  return getAllTagsStatement.all().map((tag) => (tag as { tag: string }).tag);
 }
 
 //
@@ -309,7 +325,8 @@ const insertRedirectDataStatement = db.prepare(`
   INSERT INTO redirects_data (url, code)
   VALUES (@url, @code)
   ON CONFLICT(url) DO UPDATE
-  SET code = @code;
+  SET code = @code
+  RETURNING id;
 `);
 const insertRedirectAliasStatement = db.prepare(`
   INSERT INTO redirects_aliases (alias, id)
@@ -318,9 +335,7 @@ const insertRedirectAliasStatement = db.prepare(`
   SET id = @id;
 `);
 export const insertRedirect = (data: RedirectData): void => {
-  const result = insertRedirectDataStatement.run(data);
-
-  const id = result.lastInsertRowid;
+  const id = (insertRedirectDataStatement.get(data) as { id: number }).id;
 
   data.pages.forEach((page) => {
     insertRedirectAliasStatement.run({ alias: page, id: id });
