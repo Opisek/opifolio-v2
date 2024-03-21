@@ -4,6 +4,18 @@ import chokidar from "chokidar";
 import * as fs from "fs";
 import * as fsp from "fs/promises";
 
+async function getFileContents(path: string): Promise<string> {
+  return new Promise((resolve) => {
+    setTimeout(async () => {
+      for (let i = 0; i < 10; i++) {
+        const contents = await fsp.readFile(path, "utf-8").catch(error => console.error(`Could not read file ${path}: ${error}`))
+        if (contents && contents.length > 0) resolve(contents);
+      }
+      resolve("");
+    }, 100);
+  });
+}
+
 //
 // Posts
 //
@@ -14,16 +26,18 @@ function getPostId(file: string): string | null {
   return parts[3];
 }
 
-function handlePostAddMetadata(path: string) {
+async function handlePostAddMetadata(path: string) {
   // Parse post ID
   const id = getPostId(path);
   if (id == null) return;
 
   // Parse post metadata
   let post: PostData;
+  const contents = await getFileContents(path);
   try {
-    post = JSON.parse(fs.readFileSync(path, "utf-8"));
-  } catch (_) {
+    post = JSON.parse(contents);
+  } catch (error) {
+    console.error(`Failed to parse post metadata for post ${id}:\n${error}`);
     return;
   }
   if (["author", "summary", "thumbnail", "author", "timestamp"].some((key) => !(key in post))) return;
@@ -43,7 +57,7 @@ function handlePostAddMetadata(path: string) {
   if (isNewEntry) handlePostAddMarkdown(`/app/posts/${id}/post.md`);
 }
 
-function handlePostAddMarkdown(path: string) {
+async function handlePostAddMarkdown(path: string) {
   // Parse post ID
   const id = getPostId(path);
   if (id == null) return;
@@ -52,7 +66,8 @@ function handlePostAddMarkdown(path: string) {
   if (!db.existsPost(id)) return;
 
   // Update post markdown
-  db.insertMarkdown(id, fs.readFileSync(path, "utf-8"));
+  const contents = await getFileContents(path);
+  db.insertMarkdown(id, contents);
 }
 
 function handlePostAdd(path: string) {
@@ -76,14 +91,17 @@ chokidar.watch("/app/posts")
 // Redirets
 //
 
-function handleRedirectUpdate(path: string) {
+async function handleRedirectUpdate(path: string) {
   if (path != "/app/config/redirects.json") return;
+
+  const contents = await getFileContents(path);
 
   let redirects: RedirectData[];
   try {
-    redirects = JSON.parse(fs.readFileSync(path, "utf-8"));
+    redirects = JSON.parse(contents);
   } catch (e) {
-    throw new Error(`Failed to parse redirects: ${e}`);
+    console.error(`Failed to parse redirects:\n${e}`);
+    return;
   }
 
   const allRedirects = new Set<string>();
