@@ -129,20 +129,11 @@ const getPostTagsStatement = db.prepare(`
 function parsePost(post: PostData): PostData {
   const parsedPost = post as PostData;
 
-  parsedPost.tags = getPostTagsStatement.all({ dbid: getID(post.id) }).map((tag) => (tag as { tag: string }).tag);
+  parsedPost.tags = getPostTagsStatement.all({ dbid: post.dbid }).map((tag) => (tag as { tag: string }).tag);
 
   parsedPost.timestamp = new Date(parsedPost.timestamp as unknown as number * 1000);
 
   return parsedPost;
-}
-
-const getPostIDStatement = db.prepare(`
-  SELECT dbid
-  FROM posts
-  WHERE humanid = @humanid;
-`);
-function getID(humanid: string): number {
-  return (getPostIDStatement.get({ humanid }) as { dbid: number }).dbid;
 }
 
 const insertPostTagsStatement = db.prepare(`
@@ -230,7 +221,7 @@ export const getPosts = (amount: number, page: number): PostData[] => {
 }
 
 const getPostStatement = db.prepare(`
-  SELECT humanid AS id, title, summary, thumbnail, author, timestamp, markdown
+  SELECT dbid, humanid AS id, title, summary, thumbnail, author, timestamp, markdown
   FROM posts
   WHERE humanid = @humanid;
 `); // TODO: consider getting dbid too for tags
