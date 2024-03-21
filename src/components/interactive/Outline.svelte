@@ -96,6 +96,10 @@
     position: absolute;
     left: -$gapSmall;
     pointer-events: none;
+    
+    @media screen and (max-width: $screenNormal) {
+      display: none; 
+    }
   }
 
   span.hidden {
@@ -105,6 +109,12 @@
   div:has(#currentHeadingLink:hover) > span {
     color: $emphasisForeground;
   } 
+
+  #currentHeadingLink {
+    @media screen and (max-width: $screenNormal) {
+      font-weight: $fontWeightBold;
+    }
+  }
 </style>
 
 <div>
