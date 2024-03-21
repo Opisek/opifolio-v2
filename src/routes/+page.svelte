@@ -6,6 +6,7 @@
 
   import Button from "../components/interactive/Button.svelte";
   import Card from "../components/common/Card.svelte";
+  import Center from "../components/layout/Center.svelte";
   import Gallery from "../components/layout/Gallery.svelte";
   import ImageLink from "../components/interactive/ImageLink.svelte";
   import Link from "../components/interactive/Link.svelte";
@@ -15,7 +16,8 @@
   import Title from "../components/common/Title.svelte";
 
   import { browser } from "$app/environment";
-    import Center from "../components/layout/Center.svelte";
+  import { formatImageHref } from "../lib/common/format";
+  import { page } from "$app/stores";
 
   let posts: PostData[] = [];
   let postsLoaded: boolean = false;
@@ -77,4 +79,5 @@
 <svelte:head>
   <meta property="og:title" content="Kacper Darowski's Tech Blog and Portfolio"/>
   <meta property="og:description" content="Tech blog about DIY IoT, self-hosting, open source and more"/>
+  <meta property="og:image" content="{formatImageHref($page.url, portraitImage)}"/>
 </svelte:head>

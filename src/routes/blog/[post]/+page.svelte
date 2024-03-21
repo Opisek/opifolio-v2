@@ -9,7 +9,7 @@
   import EyeIcon from "lucide-svelte/icons/eye";
 
   import { browser } from "$app/environment";
-  import { formatHeadingId } from "../../../lib/common/format";
+  import { formatHeadingId, formatImageHref } from "../../../lib/common/format";
   import { page } from "$app/stores";
   
   let innerWidth: number;
@@ -188,5 +188,5 @@
 <svelte:head>
   <meta property="og:title" content={post.title}/>
   <meta property="og:description" content={post.summary}/>
-  <meta property="og:image" content={$page.url.protocol + "//" + $page.url.host + post.thumbnail}/>
+  <meta property="og:image" content={formatImageHref($page.url, post.thumbnail)}/>
 </svelte:head>

@@ -5,3 +5,7 @@ export function formatHeadingId(heading: string): string {
       .replaceAll(/[^a-z0-9-]/g, "")
   );
 }
+
+export function formatImageHref(url: URL , image: string): string {
+  return url.protocol + "//" + url.host + image
+}
