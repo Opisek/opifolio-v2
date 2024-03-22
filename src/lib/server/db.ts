@@ -133,6 +133,8 @@ function parsePost(post: PostData): PostData {
 
   parsedPost.timestamp = new Date(parsedPost.timestamp as unknown as number * 1000);
 
+  delete parsedPost.dbid;
+
   return parsedPost;
 }
 
@@ -219,7 +221,7 @@ export const getPostAmount = (): number => {
 }
 
 const getPostsStatement = db.prepare(`
-  SELECT humanid AS id, title, summary, thumbnail, author, timestamp
+  SELECT dbid, humanid AS id, title, summary, thumbnail, author, timestamp
   FROM posts
   WHERE public = true
   ORDER BY timestamp DESC
