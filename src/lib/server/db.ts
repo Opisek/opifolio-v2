@@ -294,7 +294,7 @@ export const searchPosts = (query: string | null, tag: string | null, amount: nu
   }
 
   const sql = `
-    SELECT ${onlyAmount ? "COUNT(*) as count" : "humanid AS id, title, summary, thumbnail, author, timestamp"}
+    SELECT ${onlyAmount ? "COUNT(*) as count" : "dbid, humanid AS id, title, summary, thumbnail, author, timestamp"}
     FROM (
       ${subclause}
     ) filtered
