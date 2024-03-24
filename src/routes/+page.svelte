@@ -77,6 +77,10 @@
 </Row>
 
 <svelte:head>
+  <title>Kacper Darowski | Opisek</title>
+  <meta name="author" content="Kacper Darowski" />
+  <meta name="description" content="Kacper Darowski's Tech Blog and Portfolio" />
+  <meta name="keywords" content="Tech, Programming, Open Source, Smarthome, IoT, DIY, Self-Hosted" />
   <meta property="og:title" content="Kacper Darowski's Tech Blog and Portfolio"/>
   <meta property="og:description" content="Tech blog about DIY IoT, self-hosting, open source and more"/>
   <meta property="og:image" content="{formatImageHref($page.url, portraitImage)}"/>

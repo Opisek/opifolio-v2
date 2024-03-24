@@ -17,6 +17,7 @@
 
   export let data: { post: PostData };
   const post = data.post;
+  const keywords = (post.keywords as string[]).concat(post.tags);
 
   let headings: HeadingData[] = [];
   function parsed(markdown: any) {
@@ -186,7 +187,17 @@
 <svelte:window bind:innerWidth bind:innerHeight/>
 
 <svelte:head>
-  <meta property="og:title" content={post.title}/>
-  <meta property="og:description" content={post.summary}/>
-  <meta property="og:image" content={formatImageHref($page.url, post.thumbnail)}/>
+  <title>{post.title}</title>
+  <meta name="author" content="Kacper Darowski" />
+  <meta name="description" content="Kacper Darowski's Tech Blog and Portfolio" />
+  <meta name="keywords" content={keywords.join(", ")} />
+  <meta property="og:title" content={post.title} />
+  <meta property="og:description" content={post.summary} />
+  <meta property="og:image" content={formatImageHref($page.url, post.thumbnail)} />
+  <meta property="og:type" content="article" />
+  <meta property="og:article:published_time" content={post.timestamp.toISOString()} />
+  <meta property="og:article:author" content="Kacper Darowski" />
+  {#each keywords as keyword}
+    <meta property="og:article:tag" content={keyword} />
+  {/each}
 </svelte:head>

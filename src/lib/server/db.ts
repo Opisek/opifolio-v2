@@ -40,7 +40,8 @@ asTransaction(() => {
       author VARCHAR(64),
       timestamp DATETIME,
       public BOOLEAN,
-      markdown TEXT
+      markdown TEXT,
+      keywords TEXT
     );
   `);
   db.exec(`
@@ -67,6 +68,7 @@ asTransaction(() => {
       title,
       summary,
       markdown,
+      keywords,
       content=posts,
       content_rowid=dbid,
       tokenize="trigram case_sensitive 0 remove_diacritics 1"
@@ -75,24 +77,24 @@ asTransaction(() => {
   db.exec(`
     CREATE TRIGGER IF NOT EXISTS posts_after_update
     AFTER UPDATE ON posts BEGIN
-      INSERT INTO posts_fts(posts_fts, rowid, title, summary, markdown)
-      VALUES ('delete', OLD.dbid, OLD.title, OLD.summary, OLD.markdown);
-      INSERT INTO posts_fts(rowid, title, summary, markdown)
-      VALUES (NEW.dbid, NEW.title, NEW.summary, NEW.markdown);
+      INSERT INTO posts_fts(posts_fts, rowid, title, summary, markdown, keywords)
+      VALUES ('delete', OLD.dbid, OLD.title, OLD.summary, OLD.markdown, OLD.keywords);
+      INSERT INTO posts_fts(rowid, title, summary, markdown, keywords)
+      VALUES (NEW.dbid, NEW.title, NEW.summary, NEW.markdown, NEW.keywords);
     END;
   `)
   db.exec(`
     CREATE TRIGGER IF NOT EXISTS posts_after_delete
     AFTER DELETE ON posts BEGIN
-      INSERT INTO posts_fts(posts_fts, rowid, title, summary, markdown)
-      VALUES ('delete', OLD.dbid, OLD.title, OLD.summary, OLD.markdown);
+      INSERT INTO posts_fts(posts_fts, rowid, title, summary, markdown, keywords)
+      VALUES ('delete', OLD.dbid, OLD.title, OLD.summary, OLD.markdown, OLD.keywords);
     END;
   `)
   db.exec(`
     CREATE TRIGGER IF NOT EXISTS posts_after_insert
     AFTER INSERT ON posts BEGIN
-      INSERT INTO posts_fts(rowid, title, summary, markdown)
-      VALUES (NEW.dbid, NEW.title, NEW.summary, NEW.markdown);
+      INSERT INTO posts_fts(rowid, title, summary, markdown, keywords)
+      VALUES (NEW.dbid, NEW.title, NEW.summary, NEW.markdown, NEW.keywords);
     END;
   `)
 
@@ -133,6 +135,13 @@ function parsePost(post: PostData): PostData {
 
   parsedPost.timestamp = new Date(parsedPost.timestamp as unknown as number * 1000);
 
+  try {
+    if (parsedPost.keywords) parsedPost.keywords = JSON.parse(parsedPost.keywords as string);
+    else parsedPost.keywords = [];
+  } catch (_) {
+    parsedPost.keywords = [];
+  }
+
   delete parsedPost.dbid;
 
   return parsedPost;
@@ -161,7 +170,8 @@ export const insertPost = (post: PostData): void => asTransaction((post: PostDat
     author: post.author,
     timestamp: post.timestamp,
     public: post.public ? 1 : 0,
-    markdown: post.markdown
+    markdown: post.markdown,
+    keywords: JSON.stringify(post.keywords) 
   };
 
   let replace = "";
@@ -173,8 +183,8 @@ export const insertPost = (post: PostData): void => asTransaction((post: PostDat
   });
 
   const sql = `
-    INSERT INTO posts (humanid, title, summary, thumbnail, author, timestamp, public, markdown)
-    VALUES (@humanid, @title, @summary, @thumbnail, @author, @timestamp, @public, @markdown)
+    INSERT INTO posts (humanid, title, summary, thumbnail, author, timestamp, public, markdown, keywords)
+    VALUES (@humanid, @title, @summary, @thumbnail, @author, @timestamp, @public, @markdown, @keywords)
     ON CONFLICT(humanid) DO UPDATE
     ${replace}
     RETURNING dbid;
@@ -239,10 +249,10 @@ export const getPosts = (amount: number, page: number): PostData[] => {
 }
 
 const getPostStatement = db.prepare(`
-  SELECT dbid, humanid AS id, title, summary, thumbnail, author, timestamp, markdown
+  SELECT dbid, humanid AS id, title, summary, thumbnail, author, timestamp, markdown, keywords
   FROM posts
   WHERE humanid = @humanid;
-`); // TODO: consider getting dbid too for tags
+`);
 export function getPost(humanid: string): PostData | null {
   const post = getPostStatement.get({ humanid });
 

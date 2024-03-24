@@ -34,3 +34,11 @@
     {/if}
   </Row>
 </Splash>
+
+<svelte:head>
+  <title>Error {$page.status}</title>
+  <meta name="author" content="Kacper Darowski" />
+  <meta name="description" content="Kacper Darowski's Tech Blog and Portfolio" />
+  <meta name="keywords" content="Tech, Programming, Open Source, Smarthome, IoT, DIY, Self-Hosted" />
+  <meta name="robots" content="noindex" />
+</svelte:head>

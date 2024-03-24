@@ -52,3 +52,10 @@
   <Paragraph>Privacy-Focused View Counting</Paragraph>
   <Link href="https://plausible.io/">Plausible</Link>
 </DotRow>
+
+<svelte:head>
+  <title>Credits</title>
+  <meta name="author" content="Kacper Darowski" />
+  <meta name="description" content="Kacper Darowski's Tech Blog and Portfolio" />
+  <meta name="keywords" content="Tech, Programming, Open Source, Smarthome, IoT, DIY, Self-Hosted" />
+</svelte:head>

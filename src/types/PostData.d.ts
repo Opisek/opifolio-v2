@@ -9,5 +9,6 @@ type PostData = {
   timestamp: Date,
   public: boolean,
   tags: string[],
-  views?: number
+  keywords: string[] | string,
+  views?: number,
 }
