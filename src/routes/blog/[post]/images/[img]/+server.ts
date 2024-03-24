@@ -6,6 +6,8 @@ import fsp from "node:fs/promises";
 
 import sharp from 'sharp';
 
+import { DEFAULT_HEIGHT, DEFAULT_WIDTH } from '../../../../../lib/common/values';
+
 export const GET: RequestHandler = async ({ params }) => {
 	const postID = params.post;
 	const imageID = params.img.slice(0, -5);
@@ -15,7 +17,7 @@ export const GET: RequestHandler = async ({ params }) => {
     if (!fs.existsSync(`/app/posts/${postID}/images/${imageID}.webp`)) {
       file = await sharp(`/app/posts/${postID}/images/${imageID}`)
         .webp({ quality: 90 })
-        .resize(750, 750, { fit: 'inside' })
+        .resize(DEFAULT_HEIGHT, DEFAULT_WIDTH, { fit: 'inside' })
         .toBuffer();
       await fsp.writeFile(`/app/posts/${postID}/images/${imageID}.webp`, file);
     } else {

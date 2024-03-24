@@ -1,4 +1,6 @@
 <script lang="ts">
+  import LazyImage from "./LazyImage.svelte";
+
   export let src: string;
   export let alt: string = "Image";
   
@@ -12,7 +14,7 @@
     text-align: center;
   }
 
-  img {
+  div :global(> img) {
     width: 100%;
     height: auto;
     position: relative;
@@ -22,11 +24,11 @@
     max-width: 20vw;
   }
 
-  img.circle {
+  div :global(> img.circle) {
     border-radius: 50%;
   }
 </style>
 
 <div>
-  <img src={src} alt={alt} class:circle={style == "circle"}/>
+  <LazyImage src={src} alt={alt} class={style}/>
 </div>

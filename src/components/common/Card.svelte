@@ -1,6 +1,7 @@
 <script lang="ts">
   import DotRow from "../layout/DotRow.svelte";
   import Header from "./Header.svelte";
+  import LazyImage from "./LazyImage.svelte";
   import Tag from "../interactive/Tag.svelte";
   import TagRow from "../layout/TagRow.svelte";
 
@@ -66,7 +67,7 @@
     }
   }
   
-  img {
+  div.thumbnailWrapper :global(> img) {
     width: $thumbnailWidth;
     height: $thumbnailWidth;
     border-radius: 50%;
@@ -78,7 +79,7 @@
     }
   }
 
-  img.compact {
+  div.thumbnailWrapper :global(> img.compact) {
     width: $thumbnailWidthSmall;
     height: $thumbnailWidthSmall;
   }
@@ -162,7 +163,7 @@
 
 <a href={`blog/${post.id}`} class:compact={compact}>
   <div class="thumbnailWrapper" class:compact={compact}>
-    <img src={post.thumbnail} alt="Thumbnail" class:compact={compact}/>
+    <LazyImage src={post.thumbnail} alt="Thumbnail" class={compact ? "compact" : ""}/>
   </div>
   <div class="titleWrapper">
     <Header level={compact ? 4 : 3}>

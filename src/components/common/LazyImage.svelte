@@ -1,0 +1,37 @@
+<script lang="ts">
+  import { lazyLoad } from "../../lib/client/lazyLoad";
+
+  import { DEFAULT_HEIGHT, DEFAULT_WIDTH } from "../../lib/common/values";
+
+  export let src: string;
+  export let alt: string;
+
+  let loaded = false;
+
+  const search = new URLSearchParams(src);
+  const widthRaw = search.get("w");
+  const width = widthRaw ? Number.parseInt(widthRaw) | DEFAULT_WIDTH : DEFAULT_WIDTH;
+  const heightRaw = search.get("h");
+  const height = heightRaw ? Number.parseInt(heightRaw) | DEFAULT_HEIGHT : DEFAULT_HEIGHT;
+
+  function onload() {
+    loaded = true;
+  }
+</script>
+
+<style lang="scss">
+  @import "../../styles/dimensions.scss";
+
+  img.loading {
+    opacity: 0;
+    transform: translateY($paddingSmall);
+  }
+</style>
+
+<img
+  alt={alt}
+  on:load={onload}
+  use:lazyLoad={src}
+  class:loading={!loaded}
+  {...$$restProps}
+/>

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import LazyImage from "../common/LazyImage.svelte";
   import MarkdownInline from "./MarkdownInline.svelte";
 
   import { page } from "$app/stores";
@@ -25,7 +26,7 @@
     margin: $paddingSmall 0;
   }
 
-  img {
+  figure :global(> img) {
     max-width: 30vw;
     max-height: 30vh;
 
@@ -37,7 +38,7 @@
 </style>
 
 <figure>
-  <img src={href} alt={text}/>
+  <LazyImage src={href} alt={text}/>
   <figcaption>
     <MarkdownInline text={text}/>
   </figcaption>

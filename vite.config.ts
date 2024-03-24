@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import { imagetools } from "vite-imagetools";
 import { sveltekit } from "@sveltejs/kit/vite";
+import { DEFAULT_HEIGHT, DEFAULT_WIDTH } from "./src/lib/common/values";
 
 export default defineConfig({
 	plugins: [
@@ -8,8 +9,8 @@ export default defineConfig({
 		imagetools({
 			defaultDirectives: () => {
 				return new URLSearchParams({
-					w: "500",
-					h: "500",
+					w: DEFAULT_WIDTH.toString(),
+					h: DEFAULT_HEIGHT.toString(),
 					format: "webp",
 					quality: "70",
 					withoutEnlargement: "true",

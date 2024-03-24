@@ -1,4 +1,6 @@
 <script lang="ts">
+  import LazyImage from "../common/LazyImage.svelte";
+
   export let src: string;
 
   export let href: string;
@@ -52,7 +54,7 @@
     }
   }
 
-  img {
+  div :global(> img) {
     max-height: 100%;
     max-width: 100%;
 
@@ -109,7 +111,7 @@
 <a href={href}>
   <figure>
     <div>
-      <img src={src} alt={site}/>
+      <LazyImage src={src} alt={site}/>
     </div>
     <figcaption>
       <b>{site}</b>

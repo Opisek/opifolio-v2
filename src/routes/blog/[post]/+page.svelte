@@ -1,12 +1,13 @@
 <script lang="ts">
   import Divider from "../../../components/common/Divider.svelte";
   import DotRow from "../../../components/layout/DotRow.svelte";
+  import EyeIcon from "lucide-svelte/icons/eye";
+  import LazyImage from "../../../components/common/LazyImage.svelte";
   import Markdown from "../../../components/markdown/Markdown.svelte";
   import Outline from "../../../components/interactive/Outline.svelte";
   import Sidebar from "../../../components/page/Sidebar.svelte";
   import Tag from "../../../components/interactive/Tag.svelte";
   import Title from "../../../components/common/Title.svelte";
-  import EyeIcon from "lucide-svelte/icons/eye";
 
   import { browser } from "$app/environment";
   import { formatHeadingId, formatImageHref } from "../../../lib/common/format";
@@ -99,7 +100,7 @@
     align-items: center;
   }
 
-  img {
+  div.thumbnail :global(> img) {
     width: $thumbnailWidth;
     height: $thumbnailWidth;
     border-radius: 50%;
@@ -168,7 +169,7 @@
     {/each}
   </div>
   <div class="thumbnail">
-    <img src={post.thumbnail} alt="Thumbnail"/>
+    <LazyImage src={post.thumbnail} alt="Thumbnail"/>
   </div>
 </div>
 

@@ -1,6 +1,6 @@
 <script lang="ts">
-  //import Image from "../components/Image.svelte";
   import Column from "../layout/Column.svelte";
+  import LazyImage from "../common/LazyImage.svelte";
 
   export let src: string;
   export let alt: string = "Image";
@@ -40,6 +40,11 @@
     height: 100%;
     width: 100%;
     text-align: center;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     
     @media screen and (max-width: $screenNarrow) {
       width: 100%;
@@ -50,14 +55,11 @@
     } 
   }
 
-  img {
+  div :global(> img) {
     @media screen and (min-width: $screenNarrow) {
       max-width: calc(min(25vw, 20em));
       width: 100%;
       height: max-content;
-      position: relative;
-      top: 50%;
-      transform: translateY(-50%);
     }
 
     @media screen and (max-width: $screenNarrow) {
@@ -65,14 +67,14 @@
     }
   }
 
-  img.circle {
+  div :global(> img.circle) {
     border-radius: 50%;
   }
 </style>
 
 <section>
   <div>
-    <img src={src} alt={alt} class:circle={style === "circle"}/>
+    <LazyImage src={src} alt={alt} class={style} height={500}/>
   </div>
   <Column>
     <slot>
