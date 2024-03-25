@@ -169,7 +169,7 @@
     {/each}
   </div>
   <div class="thumbnail">
-    <LazyImage src={post.thumbnail} alt="Thumbnail"/>
+    <LazyImage src={post.thumbnail} alt="Thumbnail" lazy={false}/>
   </div>
 </div>
 

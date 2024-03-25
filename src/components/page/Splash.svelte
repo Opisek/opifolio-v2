@@ -74,7 +74,7 @@
 
 <section>
   <div>
-    <LazyImage src={src} alt={alt} class={style} height={500}/>
+    <LazyImage src={src} alt={alt} class={style} height={500} lazy={false}/>
   </div>
   <Column>
     <slot>

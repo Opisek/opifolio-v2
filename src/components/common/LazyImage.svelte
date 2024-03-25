@@ -3,6 +3,8 @@
 
   import { DEFAULT_HEIGHT, DEFAULT_WIDTH } from "../../lib/common/values";
 
+  export let lazy: boolean = true;
+
   export let src: string;
   export let alt: string;
 
@@ -28,10 +30,18 @@
   }
 </style>
 
-<img
-  alt={alt}
-  on:load={onload}
-  use:lazyLoad={src}
-  class:loading={!loaded}
-  {...$$restProps}
-/>
+{#if lazy}
+  <img
+    alt={alt}
+    on:load={onload}
+    use:lazyLoad={src}
+    class:loading={!loaded}
+    {...$$restProps}
+  />
+{:else}
+  <img
+    alt={alt}
+    src={src}
+    {...$$restProps}
+  />
+{/if}
