@@ -21,7 +21,7 @@
     cursor: pointer;
   }
 
-  @each $deg in 45, 90, 180, 360 {
+  @each $deg in 90, 180, 360, -90 {
     button.spin#{$deg}:hover {
       transform: rotate(#{$deg}deg);
       transition: $animationSpeed ease-out;
