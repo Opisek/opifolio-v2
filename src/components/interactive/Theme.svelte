@@ -5,7 +5,6 @@
   import { theme } from "../../lib/client/theme";
   import { browser } from "$app/environment";
 
-
   $: updateTheme($theme);
   function updateTheme(theme: string) {
     if (!browser) return;
