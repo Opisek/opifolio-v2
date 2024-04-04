@@ -36,7 +36,7 @@
   }
 </style>
 
-<InlineButton on:click={toggle} spin={$theme == "dark" ? -90 : 360} alt="Theme">
+<InlineButton on:click={toggle} spin={$theme == "dark" ? 90 : 360} alt="Theme">
   <span class:dark={$theme == "dark"} class:light={$theme == "light"}>
     <MoonIcon/>
     <SunIcon/>
