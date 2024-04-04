@@ -7,7 +7,7 @@
 
   let inputElement: HTMLInputElement;
 
-  function sumbit() {
+  function submit() {
     const query = (inputElement.value || "").trim();
     if (query == "") requestAnimationFrame(() => inputElement.focus());
     else {
@@ -52,9 +52,9 @@
   }
 </style>
 
-<form on:submit={sumbit}>
+<form on:submit={submit}>
   <input type="text" placeholder="Search" bind:this={inputElement}/>
-  <InlineButton on:click={sumbit} spin={360} alt="Search">
+  <InlineButton on:click={submit} spin={360} alt="Search">
     <SearchIcon/>
   </InlineButton>
 </form>

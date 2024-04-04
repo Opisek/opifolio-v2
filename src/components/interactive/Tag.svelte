@@ -3,13 +3,14 @@
 
   import { goto } from "$app/navigation";
   import { page } from "$app/stores";
+  import { theme } from "$lib/client/theme" 
 
   export let tag: string;
   export let active: boolean = false;
   export let filtersPane: boolean = false;
 
   $: hue = parseInt(hash.sha1().update(tag).digest("hex").slice(0, 2), 16) / 255 * 360;
-  $: colour = `hsl(${hue}, 10%, 22%)`;
+  $: colour = `hsl(${hue}, 10%, ${$theme == "dark" ? "22%" : "80%"})`;
 
   function click(event: MouseEvent) {
     if (!filtersPane) return;

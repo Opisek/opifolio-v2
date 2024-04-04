@@ -1,25 +1,33 @@
-$primaryBackground: #282528;
-$primaryForeground:#cfd3d6;
+@use "sass:meta";
 
-$emphasisForeground:#F0F8FF;
+:global(html[data-theme="dark"]) {
+  @include meta.load-css("./theme/dark.css");
+}
+:global(html[data-theme="light"]) {
+  @include meta.load-css("./theme/light.css");
+}
 
-$secondaryBackground: #3b373b;
+$primaryBackground: var(--primaryBackground);
+$primaryForeground: var(--primaryForeground);
+
+$emphasisForeground: var(--emphasisForeground);
+
+$secondaryBackground: var(--secondaryBackground);
 $secondaryForeground: $emphasisForeground;
 
-$darkerBackground: #222022;
+$darkerBackground: var(--darkerBackground);
 $darkerForeground: $primaryForeground;
 
-$evenDarkerBackground: #1e1d1e;
+$evenDarkerBackground: var(--evenDarkerBackground);
 $evenDarkerForeground: $primaryForeground;
 
+$navbarBackground: var(--navbarBackground);
+$navbarBackgroundOpaque: $primaryBackground;
 
-$navbarBackground: #282528b9;
-$navbarBackgroundOpaque: #282528e5;
+$fadedForeground: var(--fadedForeground);
+$disabledForeground: var(--disabledForeground);
 
-$fadedForeground: #9b9fa3;
-$disabledForeground: #505458;
-
-$codeBackground: #222022;
+$codeBackground: var(--codeBackground);
 $codeForeground: $emphasisForeground;
 
 // Admonitions

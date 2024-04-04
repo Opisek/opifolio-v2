@@ -1,0 +1,12 @@
+:global(body) {
+  --primaryBackground: hsl(300, 15%, 94%);
+  --primaryForeground: hsl(240, 2%, 20%);
+  --emphasisForeground: hsl(240, 2%, 15%);
+  --secondaryBackground: hsl(300, 10%, 90%); 
+  --darkerBackground: hsl(300, 10%, 90%);
+  --evenDarkerBackground: hsl(300, 10%, 84%);
+  --navbarBackground: hsla(300, 15%, 94%, 0.725);
+  --fadedForeground: hsl(240, 2%, 50%);
+  --disabledForeground: hsl(240, 2%, 80%);
+  --codeBackground: hsl(300, 5%, 85%);
+}

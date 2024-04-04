@@ -29,10 +29,8 @@
 
 <style lang="scss">
   @import "../../styles/colors.scss";
-  @import "../../styles/codeHighlight.css";
   @import "../../styles/dimensions.scss";
   @import "../../styles/media.scss";
-
 
   div.codeBlock {
     color: $codeForeground;
@@ -79,10 +77,6 @@
     border-radius: $borderRadius;
     position: relative;
     left: calc(100% + #{$paddingSmaller});
-
-    @media screen and (min-width: $screenNarrow) {
-      background-color: $darkerBackground;
-    }
   }
 
   span.toast.active {
@@ -132,7 +126,3 @@
     {@html highlighted}
   </code>
 </div>
-
-<svelte:head>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet">
-</svelte:head>

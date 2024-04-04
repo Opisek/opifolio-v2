@@ -12,6 +12,7 @@
   import { browser } from "$app/environment";
   import { formatHeadingId, formatImageHref } from "../../../lib/common/format";
   import { page } from "$app/stores";
+  import { theme } from "../../../lib/client/theme";
   
   let innerWidth: number;
   let innerHeight: number;
@@ -201,4 +202,11 @@
   {#each keywords as keyword}
     <meta property="og:article:tag" content={keyword} />
   {/each}
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet">
+  {#if $theme=="light"}
+    <link href="/theme/code-light.css" rel="stylesheet">
+  {:else}
+    <link href="/theme/code-dark.css" rel="stylesheet">
+  {/if}
 </svelte:head>
