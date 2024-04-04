@@ -83,5 +83,5 @@
   <meta name="keywords" content="Tech, Programming, Open Source, Smarthome, IoT, DIY, Self-Hosted" />
   <meta property="og:title" content="Kacper Darowski's Tech Blog and Portfolio"/>
   <meta property="og:description" content="Tech blog about DIY IoT, self-hosting, open source and more"/>
-  <meta property="og:image" content="{formatImageHref($page.url, portraitImage)}"/>
+  <meta property="og:image" content={portraitImage}/>
 </svelte:head>
