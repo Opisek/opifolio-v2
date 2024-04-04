@@ -21,24 +21,21 @@
     cursor: pointer;
   }
 
-  button.spin180:hover{
-    transform: rotate(180deg);
-    transition: $animationSpeed ease-out;
-  }
-
-  button.spin360:hover{
-    transform: rotate(360deg);
-    transition: $animationSpeed ease-out;
+  @each $deg in 45, 90, 180, 360 {
+    button.spin#{$deg}:hover {
+      transform: rotate(#{$deg}deg);
+      transition: $animationSpeed ease-out;
+    }
   }
 </style>
 
 {#if alt != ""}
-  <button on:click class:spin180={spin==180} class:spin360={spin==360} aria-label={alt}>
+  <button on:click class={`spin${spin}`} aria-label={alt}>
     <slot>
     </slot>
   </button>
 {:else}
-  <button on:click class:spin180={spin==180} class:spin360={spin==360}>
+  <button on:click class={`spin${spin}`}>
     <slot>
     </slot>
   </button>
