@@ -90,8 +90,8 @@
     }
 
     @media screen and (max-width: $screenNarrow) {
-      color: $primaryBackground;
-      background-color: $primaryForeground;
+      color: $secondaryBackground;
+      background-color: $secondaryForeground;
       transform: scale(110%);
     }
   }
