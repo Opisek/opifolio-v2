@@ -1,12 +1,12 @@
 :global(body) {
-  --primaryBackground: hsl(300, 4%, 15%);
-  --primaryForeground: hsl(206, 8%, 80%);
-  --emphasisForeground: hsl(206, 8%, 100%);
-  --secondaryBackground: hsl(300, 4%, 22%); 
-  --darkerBackground: hsl(300, 4%, 13%);
-  --evenDarkerBackground: hsl(300, 4%, 12%);
-  --navbarBackground: hsla(300, 4%, 15%, 0.725);
-  --fadedForeground: hsl(206, 8%, 60%);
-  --disabledForeground: hsl(206, 8%, 35%);
-  --codeBackground: hsl(300, 3%, 13%);
+  --primaryBackground: hsl(220, 10%, 12%); 
+  --primaryForeground: hsl(220, 10%, 80%);
+  --emphasisForeground: hsl(0, 0%, 100%);
+  --secondaryBackground: hsl(220, 10%, 22%); 
+  --darkerBackground: hsl(220, 15%, 10%);
+  --evenDarkerBackground: var(--darkerBackground);
+  --navbarBackground: hsla(220, 10%, 12%, 0.725); 
+  --fadedForeground: hsl(220, 10%, 60%);
+  --disabledForeground: hsl(220, 10%, 30%);
+  --codeBackground: var(--darkerBackground);
 }
