@@ -1,6 +1,7 @@
 <script lang="ts">
   import portraitImage from "$lib/assets/portrait.png";
   import githubLogo from "$lib/assets/logos/github.svg";
+  import githubLogoLight from "$lib/assets/logos/github-light.svg";
   import linkedinLogo from "$lib/assets/logos/linkedin.svg";
   import youtubeLogo from "$lib/assets/logos/youtube.svg";
 
@@ -15,9 +16,8 @@
   import Splash from "../components/page/Splash.svelte";
   import Title from "../components/common/Title.svelte";
 
+  import { theme } from "../lib/client/theme";
   import { browser } from "$app/environment";
-  import { formatImageHref } from "../lib/common/format";
-  import { page } from "$app/stores";
 
   let posts: PostData[] = [];
   let postsLoaded: boolean = false;
@@ -29,6 +29,10 @@
     if (response.ok) posts = await response.json();
     else fetchError = true;
   })();
+
+  let githubLogoThemed: string;
+  $: githubLogoThemed = $theme == "dark" ? githubLogoLight : githubLogo;
+  $: console.log(githubLogoThemed);
 </script>
 
 <Splash src={portraitImage} alt="Portrait Photo">
@@ -71,7 +75,7 @@
 
 <Title id="social">Social Media</Title>
 <Row mobileAlign="left">
-  <ImageLink src={githubLogo} site="GitHub" handle="Opisek" href="github"/>
+  <ImageLink src={githubLogoThemed} site="GitHub" handle="Opisek" href="github"/>
   <ImageLink src={linkedinLogo} site="LinkedIn" handle="Kacper Darowski" href="linkedin"/>
   <ImageLink src={youtubeLogo} site="YouTube" handle="Opisek" href="youtube"/>
 </Row>

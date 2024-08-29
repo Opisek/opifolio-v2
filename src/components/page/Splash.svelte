@@ -2,12 +2,13 @@
   import Column from "../layout/Column.svelte";
   import LazyImage from "../common/LazyImage.svelte";
 
-  export let src: string;
+  export let src: string = "";
   export let alt: string = "Image";
   export let style: string = "circle";
 </script>
 
 <style lang="scss">
+  @import "../../styles/colors.scss";
   @import "../../styles/dimensions.scss";
   @import "../../styles/media.scss";
 
@@ -45,6 +46,7 @@
     align-items: center;
     justify-content: center;
 
+    color: $emphasisForeground;
     
     @media screen and (max-width: $screenNarrow) {
       width: 100%;
@@ -74,7 +76,9 @@
 
 <section>
   <div>
-    <LazyImage src={src} alt={alt} class={style} height={500} lazy={false}/>
+    <slot name="image">
+      <LazyImage src={src} alt={alt} class={style} height={500} lazy={false}/>
+    </slot>
   </div>
   <Column>
     <slot>

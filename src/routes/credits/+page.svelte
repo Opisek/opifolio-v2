@@ -12,10 +12,6 @@
   <Paragraph>Icons</Paragraph>
   <Link href="https://lucide.dev/">Lucide</Link>
 </DotRow>
-<DotRow>
-  <Paragraph>Error Splash, Crane Splash</Paragraph>
-  <Link href="https://www.flaticon.com/authors/freepik">Freepik</Link>
-</DotRow>
 
 <Subtitle>Fonts</Subtitle>
 <DotRow>

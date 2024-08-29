@@ -1,9 +1,9 @@
 <script lang="ts">
   import DotRow from "../layout/DotRow.svelte";
-  import Header from "./Header.svelte";
   import LazyImage from "./LazyImage.svelte";
   import Tag from "../interactive/Tag.svelte";
   import TagRow from "../layout/TagRow.svelte";
+  import PseudoHeader from "./PseudoHeader.svelte";
 
   export let post: PostData;
   export let compact: boolean = false;
@@ -166,9 +166,9 @@
     <LazyImage src={post.thumbnail} alt="Thumbnail" class={compact ? "compact" : ""}/>
   </div>
   <div class="titleWrapper">
-    <Header level={compact ? 4 : 3}>
+    <PseudoHeader>
       {post.title}
-    </Header>
+    </PseudoHeader>
   </div>
   {#if !compact}
     <TagRow right={true}>

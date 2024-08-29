@@ -19,6 +19,17 @@
   function onload() {
     loaded = true;
   }
+
+  // TODO: this approach does not transition the image smoothly
+  // TODO: figure out a way to have nice transitions here
+  $: changeSrc(src);
+  function changeSrc(src: string) {
+    lazy = !lazy;
+    setTimeout(() => {
+      lazy = !lazy;
+    }, 0);
+ }
+
 </script>
 
 <style lang="scss">
