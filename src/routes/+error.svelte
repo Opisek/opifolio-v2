@@ -1,5 +1,5 @@
 <script lang="ts">
-  import error from "$lib/assets/icons/error.png";
+  import ErrorIcon from "lucide-svelte/icons/bug";
 
   import Splash from "../components/page/Splash.svelte";
   import Title from "../components/common/Title.svelte";
@@ -18,7 +18,11 @@
   if (browser) document.addEventListener('DOMContentLoaded', function () { plausible($page.status, { props: { path: document.location.pathname } }); });
 </script>
 
-<Splash src={error} style="square">
+<Splash style="square">
+  <svelte:fragment slot="image">
+    <ErrorIcon size="10em" />
+  </svelte:fragment>
+
   <Title>Error {$page.status}</Title>
     <Paragraph>
       {#if $page.error}
