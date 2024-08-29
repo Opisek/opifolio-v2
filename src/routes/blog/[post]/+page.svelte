@@ -60,7 +60,13 @@
     @media screen and (max-width: $screenNarrow) {
       grid-template-columns: 1fr $thumbnailWidth;
       grid-template-rows: auto auto auto;
-      grid-template-areas: "title title" "info thumbnail" "tags thumbnail";
+      grid-template-areas: "title thumbnail" "info thumbnail" "tags thumbnail";
+    }
+
+    @media screen and (max-width: $screenVeryNarrow) {
+      grid-template-columns: 1fr $thumbnailWidth;
+      grid-template-rows: auto auto auto;
+      grid-template-areas: "title title" "info info" "tags thumbnail";
     }
   }
 
