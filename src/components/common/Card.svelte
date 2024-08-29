@@ -1,11 +1,9 @@
 <script lang="ts">
   import DotRow from "../layout/DotRow.svelte";
-  import Header from "./Header.svelte";
   import LazyImage from "./LazyImage.svelte";
   import Tag from "../interactive/Tag.svelte";
   import TagRow from "../layout/TagRow.svelte";
-    import Bold from "./Bold.svelte";
-    import PseudoHeader from "./PseudoHeader.svelte";
+  import PseudoHeader from "./PseudoHeader.svelte";
 
   export let post: PostData;
   export let compact: boolean = false;
