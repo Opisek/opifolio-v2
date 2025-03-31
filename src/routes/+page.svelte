@@ -32,7 +32,6 @@
 
   let githubLogoThemed: string;
   $: githubLogoThemed = $theme == "dark" ? githubLogoLight : githubLogo;
-  $: console.log(githubLogoThemed);
 </script>
 
 <Splash src={portraitImage} alt="Portrait Photo">
